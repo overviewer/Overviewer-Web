@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% load markup %}
+{% load typogrify %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block navigation %}
+{% if page.get_absolute_url != '/' %}
+
+<div class="span-16 quiet small noprint">
+{% for parent in page.get_ancestors %}
+{% if not forloop.first %}
+&raquo;
+{% endif %}
+<a href="{{ parent.get_absolute_url }}" class="nowrap">{{ parent.title }}</a>
+{% endfor %}
+&raquo;
+{{ page.title }}
+<br />
+<span class="alt">{{ page.subtitle }}</span>
+</div>
+
+<div class="quiet span-8 small rightalign noprint last">
+{% with next=page.get_next_sibling prev=page.get_previous_sibling %}
+{% if prev %}
+<a href="{{ prev.get_absolute_url }}" class="nowrap">&laquo;&nbsp;{{ prev.title}}</a>
+{% endif %}
+{% if prev and next %}
+<br />
+{% endif %}
+{% if next %}
+<a href="{{ next.get_absolute_url }}" class="nowrap">&laquo;&nbsp;{{ next.title}}</a>
+{% endif %}
+{% endwith %}
+</div>
+
+{% else %}
+
+<div class="quiet small span-24 noprint last">
+</div>
+
+{% endif %}
+{% endblock navigation %}
+
+{% block body %}
+{{ page.body|markdown:"extra,toc,codehilite"|typogrify }}
+{% endblock body %}
+
+{% block alternates %}
+This page is available in the following formats:
+{% for alternate in alternates %}
+{% if alternate.current %}
+[<strong>{{ alternate.name|upper }}</strong>]
+{% else %}
+[<a href="{{ alternate.url }}">{{ alternate.name|upper }}</a>]
+{% endif %}
+{% endfor %}
+{% endblock %}
+
+{% block license %}
+This work is available under the <a rel="license" href="{{ page.license.url }}">{{ page.license.name }}</a>.
+{% endblock %}
+
+{% block licensebutton %}
+{% if page.license.image %}
+<a href="{{ page.license.url }}"><img alt="{{ page.license.name }}" src="{{ page.license.image }}" /></a>
+{% endif %}
+{% endblock licensebutton %}

@@ -1,0 +1,30 @@
+/* custom overrides for gamma-level.com */
+
+/* doesn't work in older browsers, but I want compliance dammit! */
+.codehilite pre
+{
+    white-space: pre-wrap;
+}
+
+/* for the sibling nav */
+.rightalign
+{
+    text-align: right;
+}
+.nowrap
+{
+    white-space: nowrap;
+}
+
+/* for the copyright notice */
+.centeralign
+{
+    text-align: center;
+}
+
+/* because it's cool */
+.alt
+{
+	font-style: italic;
+}
+

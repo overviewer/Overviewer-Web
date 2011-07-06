@@ -1,0 +1,15 @@
+{% autoescape off %}
+Title: {{ page.title }}
+{% if page.subtitle %}Subtitle: {{ page.subtitle }}{% endif %}
+
+{% with parent=page.parent next=page.get_next_sibling prev=page.get_previous_sibling %}{% if parent %}Parent: "{{ parent.title }}" {{ parent.get_absolute_url }}{% endif %}
+{% if prev %}Previous: "{{ prev.title }}" {{ prev.get_absolute_url }}{% endif %}
+{% if next %}Next: "{{ next.title }}" {{ next.get_absolute_url }}{% endif %}{% endwith %}
+
+Alternates:
+{% for alt in alternates %}{{ alt.name|upper }}: {{ alt.url }}
+{% endfor %}
+[-- end metadata --]
+
+{{ page.body }}
+{% endautoescape %}
