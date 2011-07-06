@@ -24,13 +24,13 @@
 <div class="quiet span-8 small rightalign noprint last">
 {% with next=page.get_next_sibling prev=page.get_previous_sibling %}
 {% if prev %}
-<a href="{{ prev.get_absolute_url }}" class="nowrap">&laquo;&nbsp;{{ prev.title}}</a>
+<a href="{{ prev.get_absolute_url }}" class="nowrap">&laquo;&nbsp;{{ prev.title }}</a>
 {% endif %}
 {% if prev and next %}
 <br />
 {% endif %}
 {% if next %}
-<a href="{{ next.get_absolute_url }}" class="nowrap">&laquo;&nbsp;{{ next.title}}</a>
+<a href="{{ next.get_absolute_url }}" class="nowrap">{{ next.title }}&nbsp;&raquo;</a>
 {% endif %}
 {% endwith %}
 </div>
