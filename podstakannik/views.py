@@ -14,6 +14,10 @@ def page(request, url):
     def_ext = getattr(settings, 'PODSTAKANNIK_DEFAULT_EXTENSION', default_extension)
     extensions = getattr(settings, 'PODSTAKANNIK_EXTENSIONS', default_extensions)
     
+    # canonicalize url
+    url = filter(lambda s: s != '', url.split('/'))
+    url = '/' + '/'.join(url)
+    
     if '.' in url:
         url, ext = url.split('.', 1)
     else:
@@ -23,7 +27,7 @@ def page(request, url):
         raise Http404
     
     try:
-        p = Page.objects.get(url='/' + url)
+        p = Page.objects.get(url=url)
     except Page.DoesNotExist:
         raise Http404
     
