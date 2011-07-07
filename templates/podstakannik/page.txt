@@ -1,4 +1,4 @@
-{% autoescape off %}
+{% load psk %}{% autoescape off %}
 # Title: {{ page.title }}
 # {% if page.subtitle %}Subtitle: {{ page.subtitle }}{% endif %}
 # 
@@ -10,7 +10,7 @@
 {% for alt in alternates %}# {{ alt.name|upper }}: {{ alt.url }}
 {% endfor %}
 
-{{ page.body }}
+{{ page.body|markdown_page_tree }}
 
 ---
 
