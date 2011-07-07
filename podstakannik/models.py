@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.db import models
+from django import forms
 from mptt.models import MPTTModel, TreeForeignKey
 import reversion
 
@@ -102,3 +103,28 @@ class Page(MPTTModel, DirtyFieldsMixin):
         super(Page, self).save(*args, **kwargs)
     
 reversion.register(Page, fields=Page.userfields)
+
+class PageForm(forms.ModelForm):
+    class Meta:
+        model = Page
+        fields = Page.userfields + ['message']
+        
+    message = forms.CharField(max_length=200)
+
+    def save(self, **kwargs):
+        user = kwargs.get('user', None)
+        del kwargs['user']
+        commit = kwargs.get('commit', True)
+        kwargs['commit'] = False
+        m = super(PageForm, self).save(**kwargs)
+        
+        message = self.cleaned_data['message']
+        
+        #m.full_clean()
+        
+        if commit:
+            with reversion.revision:
+                reversion.revision.user = user
+                reversion.revision.comment = message
+                m.save()
+        return m

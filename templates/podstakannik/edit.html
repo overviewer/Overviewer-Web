@@ -1,0 +1,17 @@
+{% extends "podstakannik/page.html" %}
+
+{% block title %}editing {{ page.title }}{% endblock %}
+
+{% block body %}
+
+<h1>editing {{ page.title }}</h1>
+
+<form method="POST" action="">
+  {% csrf_token %}
+  <table>
+	{{ form }}
+  </table>
+  <input type="submit" value="Submit" />
+</form>
+
+{% endblock body %}

@@ -49,6 +49,7 @@
 {% endblock body %}
 
 {% block alternates %}
+{% if alternates %}
 This page is available in the following formats:
 {% for alternate in alternates %}
 {% if alternate.current %}
@@ -57,6 +58,9 @@ This page is available in the following formats:
 [<a href="{{ alternate.url }}">{{ alternate.name|upper }}</a>]
 {% endif %}
 {% endfor %}
+{% else %}
+This page is not available in other formats.
+{% endif %}
 {% endblock %}
 
 {% block license %}
