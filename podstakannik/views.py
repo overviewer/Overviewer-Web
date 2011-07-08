@@ -120,6 +120,19 @@ def move(request, url):
     
     return render_to_response('podstakannik/move.html', {'url_form' : url_form, 'node_form' : node_form, 'page' : p}, context_instance=RequestContext(request))
 
+def delete(request, url):
+    url, _ = canonicalize_url(url)
+    p = get_object_or_404(Page, url=url)
+    
+    if request.method == 'POST':
+        parent = p.parent
+        p.delete()
+        if parent:
+            return HttpResponseRedirect(parent.get_absolute_url())
+        return HttpResponseRedirect('/')
+
+    return render_to_response('podstakannik/delete.html', {'page' : p}, context_instance=RequestContext(request))
+
 def history(request, url):
     url, _ = canonicalize_url(url)
     p = get_object_or_404(Page, url=url)

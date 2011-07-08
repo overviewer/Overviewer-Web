@@ -1,19 +1,15 @@
 {% extends "podstakannik/page.html" %}
 
-{% block title %}Moving {{ page.title }}{% endblock %}
+{% block title %}Deleting {{ page.title }}{% endblock %}
 
 {% block body %}
 
-<h1>Moving {{ page.title }}</h1>
+<h1>Deleting {{ page.title }}</h1>
 <p>Go back to <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>.</p>
 
 <form method="POST" action="">
   {% csrf_token %}
-  <table>
-	{{ url_form }}
-	{{ node_form }}
-  </table>
-  <input type="submit" name="commit" value="Submit" />
+  <input type="submit" name="commit" value="DELETE" />
 </form>
 
 {% endblock body %}
