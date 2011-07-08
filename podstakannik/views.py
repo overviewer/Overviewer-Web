@@ -55,6 +55,7 @@ def page(request, url):
     
     return render_to_response('podstakannik/page.' + ext, {'page' : p, 'alternates' : extmap}, mimetype=mime)
 
+@reversion.revision.create_on_success
 def edit_or_add(request, url, add=False):
     url, _ = canonicalize_url(url)
     p = get_object_or_404(Page, url=url)
@@ -71,7 +72,9 @@ def edit_or_add(request, url, add=False):
                 preview = form.cleaned_data['body']
             else:
                 # save the valid data
-                p = form.save(user=request.user)
+                reversion.revision.comment = 'Initial version.' if add else form.cleaned_data['message']
+                reversion.revision.user = request.user
+                p = form.save()
                 return HttpResponseRedirect(p.get_absolute_url())
     else:
         if add:

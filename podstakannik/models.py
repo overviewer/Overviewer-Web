@@ -111,42 +111,14 @@ class PageAddForm(forms.ModelForm):
         model = Page
         fields = Page.userfields
     
-    def save_with_message(self, message, **kwargs):
-        user = kwargs.get('user', None)
-        if 'user' in kwargs:
-            del kwargs['user']
-        commit = kwargs.get('commit', True)
-        kwargs['commit'] = False
-        m = super(PageAddForm, self).save(**kwargs)
-        
-        #m.full_clean()
-        
-        if commit:
-            with reversion.revision:
-                if callable(message):
-                    message = message(m)
-                reversion.revision.user = user
-                reversion.revision.comment = message
-                m.save()
-        return m
-    
-    def save(self, **kwargs):
-        return self.save_with_message("Initial version.", **kwargs)
-
-class PageEditForm(PageAddForm):
-    class Meta(PageAddForm.Meta):
+class PageEditForm(forms.ModelForm):
+    class Meta:
+        model = Page
         fields = Page.contentfields + ['message']
         
     message = forms.CharField(max_length=200, required=False)
 
-    def save(self, **kwargs):
-        message = self.cleaned_data['message']
-        return self.save_with_message(message, **kwargs)
-
-class PageMoveForm(PageAddForm):
+class PageMoveForm(forms.ModelForm):
     class Meta:
         model = Page
         fields = filter(lambda s: s != 'parent', Page.locationfields)
-    
-    def save(self, **kwargs):
-        return super(PageMoveForm, self).save(**kwargs)
