@@ -60,7 +60,9 @@ class Page(MPTTModel, DirtyFieldsMixin):
     
     body = models.TextField(blank=True)
 
-    userfields = ['shortname', 'forceurl', 'title', 'subtitle', 'license', 'parent', 'body']
+    locationfields = ['shortname', 'forceurl', 'parent']
+    contentfields = ['title', 'subtitle', 'license', 'body']
+    userfields = locationfields + contentfields
     
     def __unicode__(self):
         return self.url
@@ -104,21 +106,17 @@ class Page(MPTTModel, DirtyFieldsMixin):
     
 reversion.register(Page, fields=Page.userfields)
 
-class PageForm(forms.ModelForm):
+class PageAddForm(forms.ModelForm):
     class Meta:
         model = Page
-        fields = Page.userfields + ['message']
-        
-    message = forms.CharField(max_length=200)
-
-    def save(self, **kwargs):
+        fields = Page.userfields
+    
+    def save_with_message(self, message, **kwargs):
         user = kwargs.get('user', None)
         del kwargs['user']
         commit = kwargs.get('commit', True)
         kwargs['commit'] = False
-        m = super(PageForm, self).save(**kwargs)
-        
-        message = self.cleaned_data['message']
+        m = super(PageAddForm, self).save(**kwargs)
         
         #m.full_clean()
         
@@ -128,3 +126,16 @@ class PageForm(forms.ModelForm):
                 reversion.revision.comment = message
                 m.save()
         return m
+    
+    def save(self, **kwargs):
+        return self.save_with_message("Initial commit.", **kwargs)
+
+class PageEditForm(PageAddForm):
+    class Meta(PageAddForm.Meta):
+        fields = Page.contentfields + ['message']
+        
+    message = forms.CharField(max_length=200, required=False)
+
+    def save(self, **kwargs):
+        message = self.cleaned_data['message']
+        return self.save_with_message(message, **kwargs)

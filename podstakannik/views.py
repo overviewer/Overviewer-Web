@@ -1,4 +1,4 @@
-from models import Page, PageForm
+from models import Page, PageAddForm, PageEditForm
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -45,14 +45,18 @@ def page(request, url):
 def edit(request, url):
     url, _ = canonicalize_url(url)
     p = get_object_or_404(Page, url=url)
+    preview = None
     
     if request.method == 'POST':
-        form = PageForm(request.POST, instance=p)
+        form = PageEditForm(request.POST, instance=p)
         if form.is_valid():
-            # save the valid data
-            p = form.save(user=request.user)
-            return HttpResponseRedirect(p.get_absolute_url())
+            if 'preview' in request.POST:
+                preview = form.cleaned_data['body']
+            else:
+                # save the valid data
+                p = form.save(user=request.user)
+                return HttpResponseRedirect(p.get_absolute_url())
     else:
-        form = PageForm(instance=p)
+        form = PageEditForm(instance=p)
     
-    return render_to_response('podstakannik/edit.html', {'form' : form, 'page' : p}, context_instance=RequestContext(request))
+    return render_to_response('podstakannik/edit.html', {'form' : form, 'page' : p, 'preview' : preview}, context_instance=RequestContext(request))

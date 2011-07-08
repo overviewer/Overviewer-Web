@@ -1,17 +1,28 @@
 {% extends "podstakannik/page.html" %}
 
+{% load psk %}
+{% load markup %}
+{% load typogrify %}
+
 {% block title %}editing {{ page.title }}{% endblock %}
 
 {% block body %}
 
 <h1>editing {{ page.title }}</h1>
+<p>Go back to <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>.</p>
 
 <form method="POST" action="">
   {% csrf_token %}
   <table>
 	{{ form }}
   </table>
-  <input type="submit" value="Submit" />
+  <input type="submit" name="commit" value="Submit" />
+  <input type="submit" name="preview" value="Preview" />
 </form>
+
+{% if preview %}
+<hr />
+{{ preview|markdown_page_tree|markdown:"extra,toc,codehilite"|typogrify }}
+{% endif %}
 
 {% endblock body %}
