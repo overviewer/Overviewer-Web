@@ -113,7 +113,8 @@ class PageAddForm(forms.ModelForm):
     
     def save_with_message(self, message, **kwargs):
         user = kwargs.get('user', None)
-        del kwargs['user']
+        if 'user' in kwargs:
+            del kwargs['user']
         commit = kwargs.get('commit', True)
         kwargs['commit'] = False
         m = super(PageAddForm, self).save(**kwargs)
@@ -122,6 +123,8 @@ class PageAddForm(forms.ModelForm):
         
         if commit:
             with reversion.revision:
+                if callable(message):
+                    message = message(m)
                 reversion.revision.user = user
                 reversion.revision.comment = message
                 m.save()
@@ -139,3 +142,11 @@ class PageEditForm(PageAddForm):
     def save(self, **kwargs):
         message = self.cleaned_data['message']
         return self.save_with_message(message, **kwargs)
+
+class PageMoveForm(PageAddForm):
+    class Meta:
+        model = Page
+        fields = filter(lambda s: s != 'parent', Page.locationfields)
+    
+    def save(self, **kwargs):
+        return super(PageMoveForm, self).save(**kwargs)

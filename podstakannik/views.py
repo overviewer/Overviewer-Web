@@ -1,5 +1,7 @@
-from models import Page, PageAddForm, PageEditForm
+from models import Page, PageAddForm, PageEditForm, PageMoveForm
 from reversion.models import Version
+import reversion
+from mptt.forms import MoveNodeForm
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -84,6 +86,36 @@ def edit(request, url):
 
 def add(request, url):
     return edit_or_add(request, url, True)
+
+@reversion.revision.create_on_success
+def move(request, url):
+    url, _ = canonicalize_url(url)
+    p = get_object_or_404(Page, url=url)
+    
+    if request.method == 'POST':
+        node_form = MoveNodeForm(p, request.POST)
+        if node_form.is_valid():
+            old_url = p.url
+            p = node_form.save()
+            url_form = PageMoveForm(request.POST, instance=p)
+            if url_form.is_valid():
+                p = url_form.save()
+                new_url = p.calculated_url
+                if old_url != new_url:
+                    message = "Moved from '%s' to '%s'." % (old_url, p.calculated_url)
+                else:
+                    message = "Moved without changing url."
+                reversion.revision.comment = message
+                reversion.revision.user = request.user
+                
+                return HttpResponseRedirect(p.get_absolute_url())
+        else:
+            url_form = PageMoveForm(request.POST, instance=p)
+    else:
+        url_form = PageMoveForm(instance=p)
+        node_form = MoveNodeForm(p)
+    
+    return render_to_response('podstakannik/move.html', {'url_form' : url_form, 'node_form' : node_form, 'page' : p}, context_instance=RequestContext(request))
 
 def history(request, url):
     url, _ = canonicalize_url(url)

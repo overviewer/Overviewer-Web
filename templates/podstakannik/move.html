@@ -1,0 +1,23 @@
+{% extends "podstakannik/page.html" %}
+
+{% load psk %}
+{% load markup %}
+{% load typogrify %}
+
+{% block title %}Moving {{ page.title }}{% endblock %}
+
+{% block body %}
+
+<h1>Moving {{ page.title }}</h1>
+<p>Go back to <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>.</p>
+
+<form method="POST" action="">
+  {% csrf_token %}
+  <table>
+	{{ url_form }}
+	{{ node_form }}
+  </table>
+  <input type="submit" name="commit" value="Submit" />
+</form>
+
+{% endblock body %}

@@ -4,7 +4,13 @@
 {% load markup %}
 {% load typogrify %}
 
-{% block title %}editing {{ page.title }}{% endblock %}
+{% block title %}
+{% if verb == 'edit' %}
+Editing {{ page.title }}
+{% else %}
+Add Page
+{% endif %}
+{% endblock title %}
 
 {% block body %}
 

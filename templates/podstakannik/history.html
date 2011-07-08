@@ -3,7 +3,7 @@
 {% load markup %}
 {% load typogrify %}
 
-{% block title %}history for {{ page.title }}{% endblock %}
+{% block title %}History for {{ page.title }}{% endblock %}
 
 {% block body %}
 {% filter markdown:"extra,toc,codehilite"|typogrify %}
