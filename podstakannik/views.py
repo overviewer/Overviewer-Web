@@ -56,6 +56,7 @@ def page(request, url):
 def edit_or_add(request, url, add=False):
     url, _ = canonicalize_url(url)
     p = get_object_or_404(Page, url=url)
+    verb = 'add' if add else 'edit'
     preview = None
     
     if request.method == 'POST':
@@ -76,7 +77,7 @@ def edit_or_add(request, url, add=False):
         else:
             form = PageEditForm(instance=p)
     
-    return render_to_response('podstakannik/edit.html', {'form' : form, 'page' : p, 'preview' : preview}, context_instance=RequestContext(request))
+    return render_to_response('podstakannik/edit.html', {'form' : form, 'page' : p, 'preview' : preview, 'verb' : verb}, context_instance=RequestContext(request))
 
 def edit(request, url):
     return edit_or_add(request, url, False)
