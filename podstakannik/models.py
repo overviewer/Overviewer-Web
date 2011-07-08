@@ -83,6 +83,22 @@ class Page(MPTTModel, DirtyFieldsMixin):
     def get_absolute_url(self):
         return reverse('podstakannik.views.page', args=(self.url[1:],))
     
+    @property
+    def history_url(self):
+        return reverse('podstakannik.views.history', args=(self.url[1:],))
+    @property
+    def add_url(self):
+        return reverse('podstakannik.views.add', args=(self.url[1:],))
+    @property
+    def edit_url(self):
+        return reverse('podstakannik.views.edit', args=(self.url[1:],))
+    @property
+    def move_url(self):
+        return reverse('podstakannik.views.move', args=(self.url[1:],))
+    @property
+    def delete_url(self):
+        return reverse('podstakannik.views.delete', args=(self.url[1:],))
+    
     # recalculate current url, and update recursively
     def recalculate_urls(self, parent_url=None):
         new_url = self.get_calculated_url(parent_url=parent_url)

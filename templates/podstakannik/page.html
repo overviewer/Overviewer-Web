@@ -6,6 +6,14 @@
 
 {% block title %}{{ page.title }}{% endblock %}
 
+{% block admin %}
+[<a href="{{ page.history_url }}">history</a>]
+{% if perms.podstakannik.add_page %}[<a href="{{ page.add_url }}">add</a>]{% endif %}
+{% if perms.podstakannik.change_page %}[<a href="{{ page.edit_url }}">edit</a>]{% endif %}
+{% if perms.podstakannik.add_page and perms.podstakannik.delete_page %}[<a href="{{ page.move_url }}">move</a>]{% endif %}
+{% if perms.podstakannik.delete_page %}[<a href="{{ page.delete_url }}">delete</a>]{% endif %}
+{% endblock admin %}
+
 {% block navigation %}
 {% if page.get_absolute_url != '/' %}
 
@@ -59,7 +67,7 @@ This page is available in the following formats:
 {% endif %}
 {% endfor %}
 {% else %}
-This page is not available in other formats.
+<!-- This page is not available in other formats. -->
 {% endif %}
 {% endblock %}
 

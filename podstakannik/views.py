@@ -4,6 +4,7 @@ import reversion
 from mptt.forms import MoveNodeForm
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
+from django.contrib.auth.decorators import permission_required
 from django.template import RequestContext
 from django.conf import settings
 
@@ -53,7 +54,7 @@ def page(request, url):
     
     mime = extensions[ext][1]
     
-    return render_to_response('podstakannik/page.' + ext, {'page' : p, 'alternates' : extmap}, mimetype=mime)
+    return render_to_response('podstakannik/page.' + ext, {'page' : p, 'alternates' : extmap}, mimetype=mime, context_instance=RequestContext(request))
 
 @reversion.revision.create_on_success
 def edit_or_add(request, url, add=False):
@@ -84,12 +85,16 @@ def edit_or_add(request, url, add=False):
     
     return render_to_response('podstakannik/edit.html', {'form' : form, 'page' : p, 'preview' : preview, 'verb' : verb}, context_instance=RequestContext(request))
 
+@permission_required('podstakannik.change_page')
 def edit(request, url):
     return edit_or_add(request, url, False)
 
+@permission_required('podstakannik.add_page')
 def add(request, url):
     return edit_or_add(request, url, True)
 
+@permission_required('podstakannik.add_page')
+@permission_required('podstakannik.delete_page')
 @reversion.revision.create_on_success
 def move(request, url):
     url, _ = canonicalize_url(url)
@@ -120,6 +125,7 @@ def move(request, url):
     
     return render_to_response('podstakannik/move.html', {'url_form' : url_form, 'node_form' : node_form, 'page' : p}, context_instance=RequestContext(request))
 
+@permission_required('podstakannik.delete_page')
 def delete(request, url):
     url, _ = canonicalize_url(url)
     p = get_object_or_404(Page, url=url)
@@ -139,4 +145,4 @@ def history(request, url):
     
     history = Version.objects.get_for_object(p).reverse()
     
-    return render_to_response('podstakannik/history.html', {'page' : p, 'history' : history})
+    return render_to_response('podstakannik/history.html', {'page' : p, 'history' : history}, context_instance=RequestContext(request))

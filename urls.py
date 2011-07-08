@@ -16,10 +16,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # fallback on podstakannik page
-    (r'^(?P<url>.*)/add$', 'podstakannik.views.add'),
-    (r'^(?P<url>.*)/edit$', 'podstakannik.views.edit'),
-    (r'^(?P<url>.*)/move$', 'podstakannik.views.move'),
-    (r'^(?P<url>.*)/delete$', 'podstakannik.views.delete'),
-    (r'^(?P<url>.*)/history$', 'podstakannik.views.history'),
+    (r'^(?P<url>.*).add$', 'podstakannik.views.add'),
+    (r'^(?P<url>.*).edit$', 'podstakannik.views.edit'),
+    (r'^(?P<url>.*).move$', 'podstakannik.views.move'),
+    (r'^(?P<url>.*).delete$', 'podstakannik.views.delete'),
+    (r'^(?P<url>.*).history$', 'podstakannik.views.history'),
     (r'^(?P<url>.*)$', 'podstakannik.views.page'),
 )

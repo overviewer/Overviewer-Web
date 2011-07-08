@@ -28,6 +28,14 @@
 
 {% block navigation %}{% endblock %}
 
+{% if user.is_authenticated %}
+<div class="quiet small span-24 rightalign noprint last">
+Logged in as {{ user.username }}.
+<br />
+{% block admin %}{% endblock %}
+</div>
+{% endif %}
+
 <div class="span-24 last">
 
 {% block body %}{% endblock %}
@@ -56,7 +64,6 @@ Copyright &copy; 2010, 2011 Aaron Griffith
 {% block alternates %}
 {% endblock %}
 
-<br />
 </div>
 
 {% block license %}
