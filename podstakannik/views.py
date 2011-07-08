@@ -1,4 +1,5 @@
 from models import Page, PageAddForm, PageEditForm
+from reversion.models import Version
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -28,7 +29,17 @@ def page(request, url):
     url, ext = canonicalize_url(url, def_ext)
     if not ext in extensions:
         raise Http404
-    p = get_object_or_404(Page, url=url)
+    
+    if 'revision' in request.GET:
+        try:
+            revision = int(request.GET['revision'])
+        except:
+            raise Http404
+        
+        ver = get_object_or_404(Version, revision=revision)
+        p = ver.get_object_version().object
+    else:
+        p = get_object_or_404(Page, url=url)
     
     extmap = []
     for other_ext in extensions:
@@ -60,3 +71,11 @@ def edit(request, url):
         form = PageEditForm(instance=p)
     
     return render_to_response('podstakannik/edit.html', {'form' : form, 'page' : p, 'preview' : preview}, context_instance=RequestContext(request))
+
+def history(request, url):
+    url, _ = canonicalize_url(url)
+    p = get_object_or_404(Page, url=url)
+    
+    history = Version.objects.get_for_object(p).reverse()
+    
+    return render_to_response('podstakannik/history.html', {'page' : p, 'history' : history})

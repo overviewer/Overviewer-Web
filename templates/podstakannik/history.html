@@ -1,0 +1,16 @@
+{% extends "podstakannik/page.html" %}
+
+{% load markup %}
+{% load typogrify %}
+
+{% block title %}history for {{ page.title }}{% endblock %}
+
+{% block body %}
+{% filter markdown:"extra,toc,codehilite"|typogrify %}
+# History for {{ page.title }}
+Go back to [{{ page.title }}]({{ page.get_absolute_url }}).
+
+{% for item in history %}
+ * [{{ item.revision.date_created }}]({{ page.get_absolute_url }}?revision={{ item.revision.id }}){% if item.revision.comment %} - {{ item.revision.comment }}{% endif %}{% endfor %}
+{% endfilter %}
+{% endblock body %}
