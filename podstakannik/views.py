@@ -53,13 +53,16 @@ def page(request, url):
     
     return render_to_response('podstakannik/page.' + ext, {'page' : p, 'alternates' : extmap}, mimetype=mime)
 
-def edit(request, url):
+def edit_or_add(request, url, add=False):
     url, _ = canonicalize_url(url)
     p = get_object_or_404(Page, url=url)
     preview = None
     
     if request.method == 'POST':
-        form = PageEditForm(request.POST, instance=p)
+        if add:
+            form = PageAddForm(request.POST)
+        else:
+            form = PageEditForm(request.POST, instance=p)
         if form.is_valid():
             if 'preview' in request.POST:
                 preview = form.cleaned_data['body']
@@ -68,9 +71,18 @@ def edit(request, url):
                 p = form.save(user=request.user)
                 return HttpResponseRedirect(p.get_absolute_url())
     else:
-        form = PageEditForm(instance=p)
+        if add:
+            form = PageAddForm(initial={'license' : p.license.id, 'parent' : p.id})
+        else:
+            form = PageEditForm(instance=p)
     
     return render_to_response('podstakannik/edit.html', {'form' : form, 'page' : p, 'preview' : preview}, context_instance=RequestContext(request))
+
+def edit(request, url):
+    return edit_or_add(request, url, False)
+
+def add(request, url):
+    return edit_or_add(request, url, True)
 
 def history(request, url):
     url, _ = canonicalize_url(url)

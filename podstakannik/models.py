@@ -128,7 +128,7 @@ class PageAddForm(forms.ModelForm):
         return m
     
     def save(self, **kwargs):
-        return self.save_with_message("Initial commit.", **kwargs)
+        return self.save_with_message("Initial version.", **kwargs)
 
 class PageEditForm(PageAddForm):
     class Meta(PageAddForm.Meta):
