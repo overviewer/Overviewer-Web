@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django import forms
 from mptt.models import MPTTModel, TreeForeignKey
+from reversion.models import Version
 import reversion
 
 # useful decorator to turn a 'string/with///bad/form//' into a canonical url
@@ -66,6 +67,22 @@ class Page(MPTTModel, DirtyFieldsMixin):
     
     def __unicode__(self):
         return self.url
+    
+    @property
+    def created(self):
+        try:
+            first = Version.objects.get_for_object(self)[0]
+            return first.revision.date_created
+        except:
+            return None
+    
+    @property
+    def modified(self):
+        try:
+            latest = Version.objects.get_for_object(self).reverse()[0]
+            return latest.revision.date_created
+        except:
+            return None
     
     @canonical_url
     def get_calculated_url(self, parent_url=None):
