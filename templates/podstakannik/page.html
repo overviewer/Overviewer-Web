@@ -8,6 +8,7 @@
 
 {% block admin %}
 [<a href="{{ page.history_url }}">history</a>]
+[<a href="{{ page.files_url }}">files</a>]
 {% if perms.podstakannik.add_page %}[<a href="{{ page.add_url }}">add</a>]{% endif %}
 {% if perms.podstakannik.change_page %}[<a href="{{ page.edit_url }}">edit</a>]{% endif %}
 {% if perms.podstakannik.add_page and perms.podstakannik.delete_page %}[<a href="{{ page.move_url }}">move</a>]{% endif %}

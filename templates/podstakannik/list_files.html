@@ -1,0 +1,19 @@
+{% extends "podstakannik/page.html" %}
+
+{% load markup %}
+{% load typogrify %}
+
+{% block title %}Files for {{ page.title }}{% endblock %}
+
+{% block admin %}
+{% endblock admin %}
+
+{% block body %}
+{% filter markdown:"extra,toc,codehilite"|typogrify %}
+# Files for {{ page.title }}
+Go back to [{{ page.title }}]({{ page.get_absolute_url }}).
+
+{% for file in files %}
+* [{{ file.name }}]({{ file.get_absolute_url }}) -- {{ file.size }} bytes, MD5: {{ file.md5 }}{% endfor %}
+{% endfilter %}
+{% endblock body %}

@@ -146,3 +146,12 @@ def history(request, url):
     history = Version.objects.get_for_object(p).reverse()
     
     return render_to_response('podstakannik/history.html', {'page' : p, 'history' : history}, context_instance=RequestContext(request))
+
+###################
+
+def list_files(request, url):
+    url, _ = canonicalize_url(url)
+    p = get_object_or_404(Page, url=url)
+    
+    files = p.file_set.all()
+    return render_to_response('podstakannik/list_files.html', {'page' : p, 'files' : files}, context_instance=RequestContext(request))

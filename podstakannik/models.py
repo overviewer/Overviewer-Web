@@ -1,9 +1,12 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 from django import forms
+from django.contrib.auth.models import User
 from mptt.models import MPTTModel, TreeForeignKey
 from reversion.models import Version
 import reversion
+
+from hashlib import md5
 
 # useful decorator to turn a 'string/with///bad/form//' into a canonical url
 # ('/string/with/bad/form')
@@ -104,6 +107,9 @@ class Page(MPTTModel, DirtyFieldsMixin):
     def history_url(self):
         return reverse('podstakannik.views.history', args=(self.url[1:],))
     @property
+    def files_url(self):
+        return reverse('podstakannik.views.list_files', args=(self.url[1:],))
+    @property
     def add_url(self):
         return reverse('podstakannik.views.add', args=(self.url[1:],))
     @property
@@ -135,9 +141,43 @@ class Page(MPTTModel, DirtyFieldsMixin):
         if 'shortname' in dirty_fields or 'forceurl' in dirty_fields:
             self.recalculate_urls()
         
-        super(Page, self).save(*args, **kwargs)
-    
+        super(Page, self).save(*args, **kwargs)    
 reversion.register(Page, fields=Page.userfields)
+
+class File(DirtyFieldsMixin):
+    owner = models.ForeignKey(User)
+    parent = models.ForeignKey(Page)
+    
+    name = models.CharField(max_length=50, blank=True)
+    file = models.FileField(upload_to='psk/%Y/%m/%d')
+    md5 = models.CharField(max_length=32, blank=True)
+    size = models.IntegerField(blank=True)
+    
+    userfields = ['owner', 'parent', 'name', 'file']
+    
+    def get_absolute_url(self):
+        return self.file.url
+    
+    def calculate_file_data(self):
+        f = self.file
+        f.open('rb')
+        m = md5()
+        while True:
+            d = f.read(8096)
+            if not d:
+                break
+            m.update(d)
+        self.md5 = m.hexdigest()
+        
+        self.size = self.file.size
+        if not self.name:
+            self.name = self.file.name
+    
+    def save(self, *args, **kwargs):
+        dirty_fields = self.get_dirty_fields()
+        if 'file' in dirty_fields:
+            self.calculate_file_data()
+        super(File, self).save(*args, **kwargs)
 
 class PageAddForm(forms.ModelForm):
     class Meta:
