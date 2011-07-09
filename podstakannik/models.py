@@ -155,6 +155,9 @@ class File(DirtyFieldsMixin):
     
     userfields = ['owner', 'parent', 'name', 'file']
     
+    class Meta:
+        ordering = ['parent', 'name']
+    
     @property
     def nice_size(self):
         # might as well be future-proof
