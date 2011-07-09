@@ -198,3 +198,8 @@ class PageMoveForm(forms.ModelForm):
     class Meta:
         model = Page
         fields = filter(lambda s: s != 'parent', Page.locationfields)
+
+class FileForm(forms.ModelForm):
+    class Meta:
+        model = File
+        fields = filter(lambda s: s != 'owner' and s != 'parent', File.userfields)

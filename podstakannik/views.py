@@ -1,4 +1,4 @@
-from models import Page, PageAddForm, PageEditForm, PageMoveForm, File
+from models import Page, PageAddForm, PageEditForm, PageMoveForm, File, FileForm
 from reversion.models import Version
 import reversion
 from mptt.forms import MoveNodeForm
@@ -153,8 +153,19 @@ def list_files(request, url):
     url, _ = canonicalize_url(url)
     p = get_object_or_404(Page, url=url)
     
+    if request.method == 'POST' and request.user.has_perm('podstakannik.add_file'):
+        form = FileForm(request.POST, request.FILES)
+        if form.is_valid():
+            m = form.save(commit=False)
+            m.owner = request.user
+            m.parent = p
+            m.save()
+            return HttpResponseRedirect(p.files_url)
+    else:
+        form = FileForm()
+    
     files = p.file_set.all()
-    return render_to_response('podstakannik/list_files.html', {'page' : p, 'files' : files}, context_instance=RequestContext(request))
+    return render_to_response('podstakannik/list_files.html', {'page' : p, 'files' : files, 'form' : form}, context_instance=RequestContext(request))
 
 def file(request, url, name):
     url, _ = canonicalize_url(url)

@@ -9,10 +9,23 @@
 {% endblock admin %}
 
 {% block body %}
-{% filter markdown:"extra,toc,codehilite"|typogrify %}
-# Files for {{ page.title }}
-Go back to [{{ page.title }}]({{ page.get_absolute_url }}).
+<h1>Files for {{ page.title }}</h1>
+<p>Go back to <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>.</P>
 
+{% if perms.podstakannik.add_file %}
+<hr />
+<h2>Upload</h2>
+<form method="POST" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+  <table>
+	{{ form }}
+  </table>
+  <p><input type="submit" name="commit" value="Submit" /></p>
+</form>
+<hr />
+{% endif %}
+
+{% filter markdown:"extra,toc,codehilite"|typogrify %}
 {% for file in files %}
 * [{{ file.name }}]({{ file.get_absolute_url }}) {% if perms.podstakannik.delete_file %}[<a href="{{ file.delete_url }}">delete</a>]{% endif %} -- {{ file.size }} bytes, MD5: {{ file.md5 }}{% endfor %}
 {% endfilter %}
