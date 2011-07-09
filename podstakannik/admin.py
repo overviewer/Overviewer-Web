@@ -10,6 +10,6 @@ class FileAdmin(admin.ModelAdmin):
     fields = File.userfields
     list_display = ('name', 'parent', 'size', 'md5')
 
-admin.site.register(Page, PageAdmin)
+#admin.site.register(Page, PageAdmin)
 admin.site.register(License)
-admin.site.register(File, FileAdmin)
+#admin.site.register(File, FileAdmin)
