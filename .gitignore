@@ -1,2 +1,5 @@
 *.pyc
 database.db
+
+roots/media/*
+roots/static/*
