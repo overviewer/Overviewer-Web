@@ -156,7 +156,10 @@ class File(DirtyFieldsMixin):
     userfields = ['owner', 'parent', 'name', 'file']
     
     def get_absolute_url(self):
-        return self.file.url
+        return reverse('podstakannik.views.file', args=(self.parent.url[1:], self.name))
+    @property
+    def delete_url(self):
+        return reverse('podstakannik.views.delete_file', args=(self.parent.url[1:], self.name))
     
     def calculate_file_data(self):
         f = self.file

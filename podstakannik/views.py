@@ -1,4 +1,4 @@
-from models import Page, PageAddForm, PageEditForm, PageMoveForm
+from models import Page, PageAddForm, PageEditForm, PageMoveForm, File
 from reversion.models import Version
 import reversion
 from mptt.forms import MoveNodeForm
@@ -155,3 +155,21 @@ def list_files(request, url):
     
     files = p.file_set.all()
     return render_to_response('podstakannik/list_files.html', {'page' : p, 'files' : files}, context_instance=RequestContext(request))
+
+def file(request, url, name):
+    url, _ = canonicalize_url(url)
+    f = get_object_or_404(File, name=name, parent__url=url)
+    
+    return HttpResponseRedirect(f.file.url)
+
+@permission_required('podstakannik.delete_file')
+def delete_file(request, url, name):
+    url, _ = canonicalize_url(url)
+    f = get_object_or_404(File, name=name, parent__url=url)
+    
+    if request.method == 'POST':
+        parent = f.parent
+        f.delete()
+        return HttpResponseRedirect(parent.files_url)
+
+    return render_to_response('podstakannik/delete.html', {'page' : f.parent, 'file' : f}, context_instance=RequestContext(request))

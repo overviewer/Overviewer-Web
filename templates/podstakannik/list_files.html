@@ -14,6 +14,6 @@
 Go back to [{{ page.title }}]({{ page.get_absolute_url }}).
 
 {% for file in files %}
-* [{{ file.name }}]({{ file.get_absolute_url }}) -- {{ file.size }} bytes, MD5: {{ file.md5 }}{% endfor %}
+* [{{ file.name }}]({{ file.get_absolute_url }}) {% if perms.podstakannik.delete_file %}[<a href="{{ file.delete_url }}">delete</a>]{% endif %} -- {{ file.size }} bytes, MD5: {{ file.md5 }}{% endfor %}
 {% endfilter %}
 {% endblock body %}
