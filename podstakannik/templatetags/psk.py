@@ -1,6 +1,7 @@
 import re
 from django import template
 from ..models import Page, File
+from fnmatch import fnmatch
 
 try:
     import markdown
@@ -20,6 +21,20 @@ def markdown_page_tree(p, indent=0):
     
     return ret
 
+def file_list(p, glob, fmt):
+    s = ""
+    for f in p.file_set.all():
+        if glob and not fnmatch(f.name, glob):
+            continue
+        data = {}
+        data['url'] = f.get_absolute_url()
+        data['name'] = f.name
+        data['md5'] = f.md5
+        data['size'] = f.nice_size
+        data['user'] = f.owner
+        s += fmt.format(**data) + "\n"
+    return s
+
 # match rules used in psk
 # format: (compiled_re, typelist, functiondict)
 #
@@ -29,16 +44,18 @@ def markdown_page_tree(p, indent=0):
 # accept the same number of arguments as there are match groups, and should
 # return a string used to replace the whole match
 rules = [
-    (re.compile(r"\[PAGE_TREE:? *([^\]]*)\]"),
+    (re.compile(r"\[\[PAGETREE:? *(.*)\]\]"),
      ('page',), {
             'markdown' : markdown_page_tree,
     }),
-
-    (re.compile(r"\[FILEMD5:? *([^\]]*)\]"),
+    (re.compile(r"\[\[FILELIST:? *(?:page:([^ ]*) +)?(?:glob:([^ ]*) +)?(.*)\]\]"),
+     ('page', 'string', 'string'), {'all' : file_list}),
+    
+    (re.compile(r"\[\[FILEMD5:? *(.*)\]\]"),
      ('file',), {'all' : lambda f: f.md5}),
-    (re.compile(r"\[FILESIZE:? *([^\]]*)\]"),
+    (re.compile(r"\[\[FILESIZE:? *(.*)\]\]"),
      ('file',), {'all' : lambda f: f.nice_size}),
-    (re.compile(r"\[FILE:? *([^\]]*)\]"),
+    (re.compile(r"\[\[FILE:? *(.*)\]\]"),
      ('file',), {'all' : lambda f: f.get_absolute_url()}),
 ]
 
@@ -56,6 +73,7 @@ def convert_file(p, s):
         name = s
     return File.objects.get(parent__url=url, name=name)
 convert = {
+    'string' : lambda p, s: s if (not s is None) else '',
     'page' : convert_page,
     'file' : convert_file,
 }
@@ -79,9 +97,6 @@ def psk(value, p):
             for i, typ in enumerate(types):
                 typ = convert.get(typ, lambda s: str(s))
                 val = m.group(i + 1)
-                if val is None:
-                    args.append(val)
-                    continue
                 try:
                     args.append(typ(p, val))
                 except:
