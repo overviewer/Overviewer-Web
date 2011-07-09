@@ -6,7 +6,7 @@
 {% block title %}History for {{ page.title }}{% endblock %}
 
 {% block body %}
-{% filter markdown:"extra,toc,codehilite"|typogrify %}
+{% filter markdown|typogrify %}
 # History for {{ page.title }}
 Go back to [{{ page.title }}]({{ page.get_absolute_url }}).
 

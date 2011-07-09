@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% load psk %}
-{% load markup %}
 {% load typogrify %}
 
 {% block title %}{{ page.title }}{% endblock %}
@@ -54,7 +53,7 @@
 {% endblock navigation %}
 
 {% block body %}
-{{ page.body|markdown_page_tree|markdown:"extra,toc,codehilite"|typogrify }}
+{{ page.body|psk:page|typogrify }}
 {% endblock body %}
 
 {% block footer %}

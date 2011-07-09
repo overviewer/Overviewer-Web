@@ -155,6 +155,18 @@ class File(DirtyFieldsMixin):
     
     userfields = ['owner', 'parent', 'name', 'file']
     
+    @property
+    def nice_size(self):
+        # might as well be future-proof
+        # binary prefixes, also!
+        oom = ['bytes', 'kiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+        size = self.size
+        for i, mag in enumerate(oom):
+            if int(size / 1024) == 0:
+                return "%i %s" % (round(size), mag)
+            size /= 1024
+        return "(unknown; > 1024 YiB)"
+    
     def get_absolute_url(self):
         return reverse('podstakannik.views.file', args=(self.parent.url[1:], self.name))
     @property
