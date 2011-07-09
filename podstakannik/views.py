@@ -24,6 +24,10 @@ def canonicalize_url(url, def_ext=''):
     else:
         ext = def_ext
     
+    # special case
+    if url == '/root':
+        url = '/'
+    
     return url, ext
 
 def page(request, url):

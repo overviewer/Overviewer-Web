@@ -100,27 +100,35 @@ class Page(MPTTModel, DirtyFieldsMixin):
         return self.shortname
     calculated_url = property(get_calculated_url)
     
+    # used to make view urls prettier, but you should avoid it!
+    @property
+    def _view_url(self):
+        if self.url == '/':
+            return 'root'
+        else:
+            return self.url[1:]
+    
     def get_absolute_url(self):
         return reverse('podstakannik.views.page', args=(self.url[1:],))
     
     @property
     def history_url(self):
-        return reverse('podstakannik.views.history', args=(self.url[1:],))
+        return reverse('podstakannik.views.history', args=(self._view_url,))
     @property
     def files_url(self):
-        return reverse('podstakannik.views.list_files', args=(self.url[1:],))
+        return reverse('podstakannik.views.list_files', args=(self._view_url,))
     @property
     def add_url(self):
-        return reverse('podstakannik.views.add', args=(self.url[1:],))
+        return reverse('podstakannik.views.add', args=(self._view_url,))
     @property
     def edit_url(self):
-        return reverse('podstakannik.views.edit', args=(self.url[1:],))
+        return reverse('podstakannik.views.edit', args=(self._view_url,))
     @property
     def move_url(self):
-        return reverse('podstakannik.views.move', args=(self.url[1:],))
+        return reverse('podstakannik.views.move', args=(self._view_url,))
     @property
     def delete_url(self):
-        return reverse('podstakannik.views.delete', args=(self.url[1:],))
+        return reverse('podstakannik.views.delete', args=(self._view_url,))
     
     # recalculate current url, and update recursively
     def recalculate_urls(self, parent_url=None):
@@ -171,10 +179,10 @@ class File(DirtyFieldsMixin):
         return "(unknown; > 1024 YiB)"
     
     def get_absolute_url(self):
-        return reverse('podstakannik.views.file', args=(self.parent.url[1:], self.name))
+        return reverse('podstakannik.views.file', args=(self.parent._view_url, self.name))
     @property
     def delete_url(self):
-        return reverse('podstakannik.views.delete_file', args=(self.parent.url[1:], self.name))
+        return reverse('podstakannik.views.delete_file', args=(self.parent._view_url, self.name))
     
     def calculate_file_data(self):
         f = self.file
