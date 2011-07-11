@@ -14,6 +14,10 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    
+    # login and logout
+    (r'^login$', 'django.contrib.auth.views.login'),
+    (r'^logout$', 'django.contrib.auth.views.logout_then_login'),
 
     # fallback on podstakannik page
     url(r'^', include('podstakannik.urls')),

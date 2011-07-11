@@ -26,11 +26,14 @@
 <body>
 <div class="container">
 
-{% block navigation %}{% endblock %}
+{% block navigation %}
+<div class="quiet small span-24 noprint last">
+</div>
+{% endblock navigation %}
 
 {% if user.is_authenticated %}
 <div class="quiet small span-24 rightalign noprint last">
-Logged in as {{ user.username }}.
+Logged in as {{ user.username }}. [<a href="/logout">logout</a>]
 <br />
 {% block admin %}{% endblock %}
 </div>
