@@ -13,7 +13,7 @@
 {% for alt in alternates %}# {{ alt.name|upper }}: {{ alt.url }}
 {% endfor %}
 
-{{ page.body|markdown_page_tree }}
+{{ page.body|psk_text:page }}
 
 ---
 
