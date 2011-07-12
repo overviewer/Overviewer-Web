@@ -76,7 +76,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'qkk7^h3icr&8k=_ko07-gb$7^d+kbk@2832df@d72lnhxwh*sr'
+SECRET_KEY = 'xx%f5usqol%i9pjdx26dn)qh&b_imi5&fx+yd^s1cwary$fa!i'
 
 # URL of the login page.
 LOGIN_URL = '/login'
@@ -110,7 +110,7 @@ MIDDLEWARE_CLASSES = (
 #    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
-ROOT_URLCONF = 'gammalevel.urls'
+ROOT_URLCONF = 'overviewer_org.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".

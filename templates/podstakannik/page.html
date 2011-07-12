@@ -17,7 +17,7 @@
 {% block navigation %}
 {% if page.get_absolute_url != '/' %}
 
-<div class="span-16 quiet small noprint">
+<div class="quiet small span-16">
 {% for parent in page.get_ancestors %}
 {% if not forloop.first %}
 &raquo;
@@ -30,24 +30,22 @@
 <span class="alt">{{ page.subtitle }}</span>
 </div>
 
-<div class="quiet span-8 small rightalign noprint last">
+<div class="quiet small rightalign span-8 last">
 {% with next=page.get_next_sibling prev=page.get_previous_sibling %}
 {% if prev %}
 <a href="{{ prev.get_absolute_url }}" class="nowrap">&laquo;&nbsp;{{ prev.title }}</a>
 {% endif %}
 {% if prev and next %}
-<br />
+|
 {% endif %}
 {% if next %}
 <a href="{{ next.get_absolute_url }}" class="nowrap">{{ next.title }}&nbsp;&raquo;</a>
 {% endif %}
 {% endwith %}
 </div>
-
 {% else %}
 
-<div class="quiet small span-24 noprint last">
-</div>
+<!-- no navigation -->
 
 {% endif %}
 {% endblock navigation %}
@@ -75,12 +73,3 @@ This page is available in the following formats:
 {% endif %}
 {% endblock %}
 
-{% block license %}
-This work is available under the <a rel="license" href="{{ page.license.url }}">{{ page.license.name }}</a>.
-{% endblock %}
-
-{% block licensebutton %}
-{% if page.license.image %}
-<a href="{{ page.license.url }}"><img alt="{{ page.license.name }}" src="{{ page.license.image }}" /></a>
-{% endif %}
-{% endblock licensebutton %}

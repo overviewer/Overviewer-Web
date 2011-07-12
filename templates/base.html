@@ -1,78 +1,48 @@
 <?xml version="1.0" encoding="utf-8" ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<link rel="stylesheet" type="text/css" href="/static/styles/codehilite.css" media="screen, projection, print" />
+  <head>
+	<link rel="stylesheet" type="text/css" href="/static/styles/codehilite.css" media="screen, projection, print" />
+	
+	<!--
+	   this page uses Blueprint CSS. See blueprintcss.org for details.
+	  -->
+	<link rel="stylesheet" type="text/css" href="/static/styles/screen.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="/static/styles/print.css" media="print"/>
+	<!--[if IE]><link rel="stylesheet" type="text/css" href="/static/styles/ie.css" media="screen, projection" /><![endif]-->
+	
+	<!-- custom overrides for blueprint, codehilite -->
+	<link rel="stylesheet" type="text/css" href="/static/styles/custom.css" media="screen, projection, print" />
+	<link rel="stylesheet" type="text/css" href="/static/styles/customscreen.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="/static/styles/customprint.css" media="print" />
 
-<!--
-	this page uses Blueprint CSS. See blueprintcss.org for details.
--->
-<link rel="stylesheet" type="text/css" href="/static/styles/screen.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="/static/styles/print.css" media="print"/>
-<!--[if IE]><link rel="stylesheet" type="text/css" href="/static/styles/ie.css" media="screen, projection" /><![endif]-->
+	<title>{% block title %}{% endblock %}</title>
+  </head>
+  
+  <body>
+	<div class="container">
+	  
+	  {% if user.is_authenticated %}
+	  <div class="quiet small span-24 last">
+		Logged in as {{ user }}. [<a href="/logout">logout</a>].
+		<br />
+		{% block admin %}{% endblock %}
+	  </div>
+	  {% endif %}
 
-<!-- custom overrides for blueprint, codehilite -->
-<link rel="stylesheet" type="text/css" href="/static/styles/custom.css" media="screen, projection, print" />
-<link rel="stylesheet" type="text/css" href="/static/styles/customscreen.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="/static/styles/customprint.css" media="print" />
+	  {% block navigation %}{% endblock %}
+	  
+	  <div class="span-24 last">
+		{% block body %}{% endblock %}
+	  </div>
+	  
+	  <div class="quiet small span-24 last">
+		{% block footer %}{% endblock %}
+	  </div>
+	  <div class="quiet small span-24 last">
+		{% block license %}{% endblock %}
+	  </div>
 
-<!-- newfangled standardized favicons -->
-<link rel="icon" type="image/png" href="/static/images/gears.png" />
-<link rel="apple-touch-icon-precomposed" type="image/png" href="/static/images/gears-ios.png" />
-
-<title>{% block title %}{% endblock %}</title>
-</head>
-
-<body>
-<div class="container">
-
-{% block navigation %}
-<div class="quiet small span-24 noprint last">
-</div>
-{% endblock navigation %}
-
-{% if user.is_authenticated %}
-<div class="quiet small span-24 rightalign noprint last">
-Logged in as {{ user.username }}. [<a href="/logout">logout</a>]
-<br />
-{% block admin %}{% endblock %}
-</div>
-{% endif %}
-
-<div class="span-24 last">
-
-{% block body %}{% endblock %}
-
-</div>
-
-<hr />
-
-<div class="quiet small centeralign">
-{% block footer %}
-{% endblock footer %}
-
-<br />
-
-<div class="noprint">
-{% block licensebutton %}
-<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" src="/static/images/creativecommons.png" /></a>
-{% endblock licensebutton %}
-<a href="http://validator.w3.org/check?uri=referer"><img alt="Valid XHTML" src="/static/images/xhtml.png" /></a>
-<a href="http://jigsaw.w3.org/css-validator/check/referer"><img alt="Valid CSS" src="/static/images/css.png" /></a>
-<a href="http://no-www.org/"><img alt="Class B no-www" src="/static/images/no-www-b.png" /></a>
-
-<br />
-
-{% block alternates %}
-{% endblock %}
-
-</div>
-
-{% block license %}
-Unless otherwise specified, this work is available under the <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution Non-Commercial Share-Alike 3.0 Unported License</a>.
-{% endblock %}
-</div>
-
-</div>
-</body>
+	</div>
+  </body>
 </html>
