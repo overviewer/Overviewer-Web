@@ -1,0 +1,342 @@
+[
+  {
+    "pk":1,
+    "model":"podstakannik.license",
+    "fields":{
+      "url":"http://creativecommons.org/licenses/by-nc-sa/3.0/",
+      "image":"/static/images/creativecommons.png",
+      "name":"Creative Commons Attribution Non-Commercial Share-Alike 3.0 Unported License"
+    }
+  },
+  {
+    "pk":4,
+    "model":"podstakannik.license",
+    "fields":{
+      "url":"http://www.gnu.org/licenses/fdl.html",
+      "image":"",
+      "name":"GNU Free Documentation License v1.3"
+    }
+  },
+  {
+    "pk":2,
+    "model":"podstakannik.license",
+    "fields":{
+      "url":"http://www.gnu.org/copyleft/gpl.html",
+      "image":"",
+      "name":"GNU General Public License v3"
+    }
+  },
+  {
+    "pk":3,
+    "model":"podstakannik.license",
+    "fields":{
+      "url":"http://www.gnu.org/copyleft/lgpl.html",
+      "image":"",
+      "name":"GNU Lesser General Public License v3"
+    }
+  },
+  {
+    "pk":1,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"gammalevel.com\r\n===============\r\n\r\n*the personal pages of Aaron Griffith*\r\n\r\nIf you don't know what you're looking for, you can take a look at the\r\n[comprehensive site map][]. Points of interest on these pages...\r\n\r\n [comprehensive site map]: /sitemap\r\n\r\n* how to [contact me](/contact)\r\n* the gamma-level.com [Cydia Repository](/cydia/info)\r\n* my [Software for iPhone and iPad](/iphoneos/)\r\n* the nitty-gritty on my [Ports for iPhoneOS](/iphoneos/ports/)\r\n* stuff for [Team Fortress 2](/teamfortress2/) and SourceMod",
+      "rght":32,
+      "subtitle":"",
+      "parent":null,
+      "markup":"markdown",
+      "license":1,
+      "title":"gammalevel.com",
+      "url":"/",
+      "level":0,
+      "lft":1,
+      "forceurl":"/",
+      "tree_id":1,
+      "shortname":"root"
+    }
+  },
+  {
+    "pk":2,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"Donations\r\n===================\r\n\r\nI work on a lot of projects in my spare time, and a few of them have\r\nwound up in the wild as open source (and often as\r\n[free software][]). I do this because I often build on the work of\r\nother open source software; it's only right to let others do the same.\r\n\r\n [free software]: http://www.gnu.org/philosophy/free-sw.html\r\n\r\nHowever, development is rarely free. The hosting for this website, and\r\nlicensing fees for things like the iPhone developer program are just\r\nsome examples of what I need to pay for to continue this work.\r\n\r\nIf you've come to this page, it was probably with some intention to\r\nhelp out, after using one of my projects. I don't expect to be able to\r\nlive off of donations, but being able to pay part of these expenses on\r\ndonations would be wonderful.\r\n\r\nIf you've liked something I've made and want to donate, you can use\r\nthe button below (through PayPal). Thank you.\r\n\r\n<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\">\r\n<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\"/>\r\n<input type=\"hidden\" name=\"encrypted\" value=\"-----BEGIN PKCS7-----MIIHPwYJKoZIhvcNAQcEoIIHMDCCBywCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYBMED8OSNCIfChgU6etoaKPiiHqgV/UnzpPRaDJjYTO+/ZwM+n7qRVNT7rXBofrzN8rClyRNCh/RmMg9xpRPjC81U7ZdVaJPpM0DTct/GGBNWRBm/D/+eI+vaps3HsuZUj8KW3CElwN6y3zLwjd3lx1MdX3qByMNJ3AApq5jBdZVjELMAkGBSsOAwIaBQAwgbwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIouM7Gsbba8yAgZjm6UFzivelGBATfoN0ILhkna2bYjPPcummV9pO0/WL4KXNCYAoc9RxLbxKaeUDjNQNaVWimtMb+I/01tFRDIrO2nk1xVnToSb1HW0fyrehVCLqTZ5lM8cUh6HvCYLNzmNMd2hjtB/LLHzzRszQrmBZSEkETONDS5JAG+wcUbtQhEpQkT3mmDyAiHh4TIDBsAvZ6oQFLPLO4KCCA4cwggODMIIC7KADAgECAgEAMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTAeFw0wNDAyMTMxMDEzMTVaFw0zNTAyMTMxMDEzMTVaMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwUdO3fxEzEtcnI7ZKZL412XvZPugoni7i7D7prCe0AtaHTc97CYgm7NsAtJyxNLixmhLV8pyIEaiHXWAh8fPKW+R017+EmXrr9EaquPmsVvTywAAE1PMNOKqo2kl4Gxiz9zZqIajOm1fZGWcGS0f5JQ2kBqNbvbg2/Za+GJ/qwUCAwEAAaOB7jCB6zAdBgNVHQ4EFgQUlp98u8ZvF71ZP1LXChvsENZklGswgbsGA1UdIwSBszCBsIAUlp98u8ZvF71ZP1LXChvsENZklGuhgZSkgZEwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAgV86VpqAWuXvX6Oro4qJ1tYVIT5DgWpE692Ag422H7yRIr/9j/iKG4Thia/Oflx4TdL+IFJBAyPK9v6zZNZtBgPBynXb048hsP16l2vi0k5Q2JKiPDsEfBhGI+HnxLXEaUWAcVfCsQFvd2A1sxRr67ip5y2wwBelUecP3AjJ+YcxggGaMIIBlgIBATCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwCQYFKw4DAhoFAKBdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTEwMTIxNzA0NTEyN1owIwYJKoZIhvcNAQkEMRYEFJOB+MgL0UZ1xoOvEQ8pEVPsWQ77MA0GCSqGSIb3DQEBAQUABIGALCAgtXjCQpalOhxpKhbzCaM/4Gh1kjsPNWGFqDG70icN8wUT+6Lhx8Awh08NVvoq4ZyhLLVj0CnmWQUfO59+iyOEm0NoI5xRoY0UbPpGPZj/j3rDiQAYRlajvmKjd0L0+9u3vsAECcy6dwnkmn3fGg1xz/TFj51qPozFaw9Vse4=-----END PKCS7-----\r\n\"/>\r\n<input type=\"image\" src=\"https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\"/>\r\n<img alt=\"\" border=\"0\" src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"/>\r\n</form>\r\n\r\n(**Note**: To prevent confusion, I am *not* a non-profit or charitable\r\norganization, so this is *not* a tax-deductable donation. This is a\r\n\"donation\" in the same sense as it is used for many other individual\r\ndevelopers -- it counts as a form of income for us.)\r\n",
+      "rght":3,
+      "subtitle":"help with development and hosting",
+      "parent":1,
+      "markup":"markdown",
+      "license":1,
+      "title":"Donations",
+      "url":"/donate",
+      "level":1,
+      "lft":2,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"donate"
+    }
+  },
+  {
+    "pk":3,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"Contact Information\r\n===================\r\n\r\nShould you ever need to reach me, I will always respond to emails at\r\n[aargri@gmail.com][email] or [griffith.637@osu.edu][osuemail]. I can\r\nalso be found on these websites:\r\n\r\n* GitHub: [agrif][github]\r\n* Twitter: [@agrif][twitter]\r\n* Slashdot: [agrif][slashdot]\r\n* Steam Community: [Rakeri][steam]\r\n* AlliedModders: [agrif][alliedmodders]\r\n* reddit: [agrif][reddit]\r\n\r\n [email]: mailto:aargri@gmail.com\r\n [osuemail]: mailto:griffith.637@osu.edu\r\n [github]: http://github.com/agrif\r\n [twitter]: http://twitter.com/agrif\r\n [slashdot]: http://slashdot.org/~agrif\r\n [steam]: http://steamcommunity.com/id/rakeri\r\n [alliedmodders]: http://forums.alliedmods.net/member.php?u=67696\r\n [reddit]: http://www.reddit.com/user/agrif\r\n \r\nYou may have come to this page looking for a way to donate. If so,\r\n[look here][donate].\r\n\r\n [donate]: donate\r\n",
+      "rght":5,
+      "subtitle":"how to get in touch with me",
+      "parent":1,
+      "markup":"markdown",
+      "license":1,
+      "title":"Contact Information",
+      "url":"/contact",
+      "level":1,
+      "lft":4,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"contact"
+    }
+  },
+  {
+    "pk":4,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"Site Map\r\n========\r\n\r\nThis is a comprehensive list of every page on this site, with a short\r\nblurb describing what it's about.\r\n\r\n",
+      "rght":7,
+      "subtitle":"a list of every page on the site",
+      "parent":1,
+      "markup":"markdown",
+      "license":1,
+      "title":"Site Map",
+      "url":"/sitemap",
+      "level":1,
+      "lft":6,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"sitemap"
+    }
+  },
+  {
+    "pk":5,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"Team Fortress 2\r\n===============\r\n\r\nI play a lot of [Team Fortress 2][tf2]. I mean, maybe not as much as\r\nthe most *hardcore* TF2 players, but as my friend reminds me, I could\r\nhave become a police officer with the hours I've sunk into just the\r\nSniper. Just check out the TF2 played time on my [Steam account][].\r\n\r\n [tf2]: http://www.teamfortress.com/\r\n [Steam account]: http://steamcommunity.com/id/rakeri\r\n\r\nI have put some of this time to good use, though. Check out this stuff:\r\n\r\n * [Automatic Bot Names](botnames) for SourceMod (TF2, CS:S)\r\n * [SourcePawn Emacs Mode](sourcepawn-mode) for the discerning pawn hacker\r\n * [Sprays](sprays) that I frequently use\r\n",
+      "rght":15,
+      "subtitle":"",
+      "parent":1,
+      "markup":"markdown",
+      "license":1,
+      "title":"Team Fortress 2 Stuff",
+      "url":"/teamfortress2",
+      "level":1,
+      "lft":8,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"teamfortress2"
+    }
+  },
+  {
+    "pk":6,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"`sourcepawn-mode`\r\n=================\r\n\r\n(*`sourcepawn-mode` is available at [GitHub][].*)\r\n\r\n [GitHub]: http://github.com/agrif/sourcepawn-mode\r\n\r\nI use [emacs][] to develop, and that includes writing plugins for\r\n[SourceMod][]. However, I've had to use `c++-mode` if I wanted any\r\nsort of automatic indentation or code highlighting. The problem is,\r\nthis mode just doesn't quite fit right: SourcePawn is not C++. The\r\ncode highlighting is a tad off, and if you don't use semicolons (which\r\nare *not* required in Pawn), the auto-indent screws itself up.\r\n\r\n [emacs]: http://www.gnu.org/software/emacs/\r\n [SourceMod]: http://www.sourcemod.net/\r\n\r\nI got tired of trying to shoehorn Pawn into `c++-mode`, so I went and\r\nwrote `sourcepawn-mode`.\r\n\r\n[TOC]\r\n\r\nTo download, see the [Installing](#installing) section.\r\n\r\nCurrent Features\r\n----------------\r\n\r\n`sourcepawn-mode` is, quite honestly, a very immature major mode. It\r\ndoesn't do very much yet, but what it does is helpful:\r\n\r\n * Pawn syntax highlighting\r\n * SourceMod-specific function and constant highlighting\r\n * Pawn syntax-aware indentation (via TAB)\r\n\r\n### Bugs, Suggestions, and Patches\r\n\r\nBug reports, as always, are welcome. Patches are even more welcome, if\r\nyou feel like spelunking through my beginners elisp code. Just\r\n[contact me][] and tell me what's up.\r\n\r\nThis mode is likely extremely biased towards my coding style and emacs\r\nusage style, but by no means should it stay like that. If something\r\ndoesn't work the way you think it should, I'm always open to\r\nsuggestions.\r\n\r\n### License\r\n\r\n`sourcepawn-mode` is licensed under the [GNU GPL v3][gpl].\r\n\r\n [gpl]: http://www.gnu.org/licenses/gpl.html\r\n\r\nInstalling\r\n----------\r\n\r\nI know that `sourcepawn-mode` works on GNU emacs 22.2.1. For other\r\nversions and flavors, your mileage may vary. Please [contact me][] if\r\nit doesn't work on your version, and you can't upgrade and want it\r\nfixed.\r\n\r\n [contact me]: /contact\r\n\r\n### Download\r\n\r\nYou can download any of these versions (I recommend the most recent),\r\nor you can checkout my development version from [GitHub][]. If you go\r\nthe git route, see the section below about generating\r\n`sourcepawn-mode.el` before continuing.\r\n\r\n * `sourcepawn-mode-0.1` (August 5, 2010, commit `cf1b928`):\r\n   ([zip][0.1-zip]) ([gz][0.1-gz]) ([bz2][0.1-bz2])\r\n\r\n [0.1-zip]: files/sourcepawn-mode-0.1.zip\r\n [0.1-gz]: files/sourcepawn-mode-0.1.tar.gz\r\n [0.1-bz2]: files/sourcepawn-mode-0.1.tar.bz2\r\n\r\n### Editing `.emacs`\r\n\r\nOnce downloaded and uncompressed, you will have a folder with various\r\nfiles. Copy the file `sourcepawn-mode.el` to somewhere where Emacs can\r\nfind it. If you don't know where that is, we can just tell emacs to\r\nlook in this folder instead.\r\n\r\n(**Note**: do not copy `proto-sourcepawn-mode.el`, copy\r\n`sourcepawn-mode.el`. The first one *will not* work!)\r\n\r\nAfter copying this file (or not), we must edit your `.emacs` file,\r\nwhich should be in your home directory. If you've never done this\r\n(though you should have), you may have to create it.\r\n\r\nAdd these lines to the bottom (or wherever):\r\n\r\n~~~~{.scheme}\r\n;; if you have to, tell emacs where to find this file\r\n;; if you put the file in emacs's path, you don't need this\r\n(add-to-list 'load-path \"/home/agrif/sourcepawn-mode\")\r\n\r\n;; tell emacs to autoload an interactive function named 'sourcepawn-mode'\r\n(autoload 'sourcepawn-mode \"sourcepawn-mode\" nil t)\r\n;; also tell it to use sourcepawn-mode for *.sp files\r\n(add-to-list 'auto-mode-alist '(\".sp\\\\'\" . sourcepawn-mode))\r\n~~~~\r\n\r\nThere! It should be working now. Go test it out and bask in the\r\nfont-lock colored text glory!\r\n\r\nGenerating `sourcepawn-mode.el`\r\n-------------------------------\r\n\r\n(**Note**: Most people will *never* have to do this. This section is\r\nfor developers and git sources only.)\r\n\r\n`sourcepawn-mode` scans the standard SourcePawn include files to\r\ngenerate a list of keywords and constants for it to highlight, then\r\ncreates `sourcepawn-mode.el` (the main file) from the source in\r\n`proto-sourcepawn-mode.el` and the generated lists. The files\r\navailable on this page already have this file generated, so you can\r\njust install using the instructions above.\r\n\r\nIf you got `sourcepawn-mode` from [Github][], or if you just want to,\r\nyou can generate a new copy of `sourcepawn-mode.el` from\r\n`proto-sourcepawn-mode.el` and the SourcePawn include files from a\r\nSourceMod release.\r\n\r\n### Copying the SourcePawn Includes\r\n\r\nYou have to copy over the SourcePawn includes to the `sp-include`\r\ndirectory. These include files can be found in\r\n`sourcemod/scripting/include/`. For me, this command would be:\r\n\r\n~~~~{.console}\r\nagrif@hesperus:~/sourcepawn-mode$ cp ~/valve/orangebox/tf/addons/sourcemod/scripting/include/* sp-include/\r\n~~~~\r\n\r\nIf you want, you can delete the `version.tpl` file. It may get in the\r\nway in the future; for now, it's harmless.\r\n\r\n### Scanning and Generating\r\n\r\nNow, run `make` to autogenerate the keywords and make\r\n`sourcepawn-mode.el`. This requires `emacs` and `make` to be installed\r\non the current machine. If you don't have `make` installed, you could\r\nrun these commands instead, in the root of the package:\r\n\r\n~~~~{.console}\r\nagrif@hesperus:~/sourcepawn-mode$ emacs --script tools/scan.el\r\nagrif@hesperus:~/sourcepawn-mode$ emacs --script tools/generate.el\r\n~~~~\r\n\r\nThe first command scans the files in `sp-include`, and dumps lists of\r\nkeywords into `keywords/generated/`. The second command reads these\r\nlists, and the static lists in `keywords`, compiles them into\r\noptimized regexps, and inserts them into `proto-sourcepawn-mode.el`,\r\nthus creating `sourcepawn-mode.el`, the final file.\r\n\r\nYou can now proceed with [installing](#installing) as described above.\r\n",
+      "rght":10,
+      "subtitle":"an emacs major mode for SourceMod Pawn",
+      "parent":5,
+      "markup":"markdown",
+      "license":1,
+      "title":"SourcePawn Emacs Mode",
+      "url":"/teamfortress2/sourcepawn-mode",
+      "level":2,
+      "lft":9,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"sourcepawn-mode"
+    }
+  },
+  {
+    "pk":7,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"Sprays for TF2\r\n==============\r\n\r\nThis page is really mostly for my own benefit; I often forget what\r\nsprays I have laying around, and I need reminding. It's also a great\r\nplace to put them when I rediscover them!\r\n\r\n### Kerath's Arch\r\n\r\n![Kerath's Arch](files/kerath.png \"Kerath's Arch\")\r\n\r\nThis is a poster of [Kerath's Arch][], which I made during one of the\r\nmany phases where I wanted to do passive promotion of [Uru Live][],\r\nwhich to this day fills me with a nostalgic love.  You can download\r\nthe TGA file [here](files/kerath.tga).\r\n\r\n [Kerath's Arch]: http://en.mystlore.com/wiki/Kerath%27s_Arch\r\n [Uru Live]: http://mystonline.com/en/\r\n",
+      "rght":12,
+      "subtitle":"my most commonly used TF2 sprays",
+      "parent":5,
+      "markup":"markdown",
+      "license":1,
+      "title":"Sprays for TF2",
+      "url":"/teamfortress2/sprays",
+      "level":2,
+      "lft":11,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"sprays"
+    }
+  },
+  {
+    "pk":8,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"Automatic Bot Names\r\n===================\r\n\r\n(*`botnames` is also available from [GitHub][].*)\r\n\r\n [GitHub]: http://github.com/agrif/botnames\r\n\r\n(*this plugin was first posted to [this thread][original] at\r\n[AlliedMods.net][].*)\r\n\r\n [original]: http://forums.alliedmods.net/showthread.php?p=1054057\r\n [AlliedMods.net]: http://forums.alliedmods.net/\r\n\r\n[TOC]\r\n\r\nThis is a simple plugin I wrote for [SourceMod][] to give names to\r\nbots when they are created. I wrote it and tested it under TF2, but\r\ntheoretically it *should* work fine with other games. In particular, I\r\nhave heard that CS:S works well. However, it certainly *does not* work\r\nwith Left 4 Dead (2) and INS servers.\r\n\r\n [SourceMod]: http://www.sourcemod.net/\r\n\r\nThe current source for version 1.2.1 is [here][botnames.sp].\r\n\r\n [botnames.sp]: files/botnames.sp\r\n\r\nI wrote this plugin because the names for the new bots for TF2 KOTH\r\n(and now Dustbowl) are hardcoded into the game, and I don't think\r\nthat's very cool. This plugin reads bot names from a file, and gives\r\nevery new bot an appropriate name.\r\n\r\nYes, CS:S has a file for this. I've heard it's non-trivial to edit,\r\nthough. And I know for a fact that TF2 has no such file.\r\n\r\nAbout `botnames.txt`\r\n--------------------\r\n\r\n`botnames.txt` should be at `{sourcemod}/configs/botnames.txt` (so,\r\nfor me, it's in\r\n`valve/orangebox/tf/addons/sourcemod/configs/botnames.txt`). It's a\r\nsimple text file, with one name per line, and some basic\r\ncomments. Anything on a line after a '`#`' or '`//`' is ignored, as\r\nare blank lines. Excessive whitespace on the names is trimmed.\r\n\r\nI've placed a generic `botnames.txt` [here][botnames.txt], with names\r\nof Physicists, and an extra one [here][botnames.scifi.txt] with\r\ncharacter names from science fiction novels, as a quick start and as\r\nexamples. For best results, write your own!\r\n\r\n [botnames.txt]: files/botnames.txt\r\n [botnames.scifi.txt]: files/botnames.scifi.txt\r\n \r\nLoading Names from a Database\r\n-----------------------------\r\n\r\nAlternately, as of version 1.2, you can tell `botnames` to load the\r\nnames to use from a database table. To do this, set\r\n*sm_botnames_db_name* to the name of the database configuration to\r\nuse, from SourceMod's `databases.cfg`. Then, set\r\n*sm_botnames_db_table* to the name of the table to load from, and\r\n*sm_botnames_db_column* to the name of the column that contains the\r\nbot names.\r\n\r\nAs of version 1.2.1, there is additional support for more advanced\r\ndatabase setups. You can set *sm_botnames_order_by* to a column name\r\nto get the list of names in ascending order according to that\r\ncolumn. You may also set *sm_botnames_descending* to \"1\" to reverse\r\nthis order. Setting *sm_botnames_db_limit* to a non-zero number will\r\nlimit the amount of names loaded to that number.\r\n\r\nIf you are using a MySQL database and would like to load UTF8 names,\r\nset *sm_botnames_db_use_utf8* to \"1\". Note that this will emit a\r\nwarning and do nothing on other types of database connections.\r\n\r\nPlugin CVars\r\n------------\r\n\r\nHere's a list of the supported cvars, their defaults, and what they do:\r\n\r\n* *sm_botnames_version* : always set to the current version\r\n* *sm_botnames_enabled* (default 1) : set to 0 to disable everything\r\n* *sm_botnames_prefix* (default \"\") : set this to add something before each bot name. Remember to add a space at the end if you want a space between your prefix and the name! Requires reload.\r\n* *sm_botnames_random* (default 1) : when set to 1, randomly give out names. When 0, the names are given out in the same order as in the file. Requires reload.\r\n* *sm_botnames_announce* (default 0) : when set to 1, print a message to general chat whenever a bot is added\r\n* *sm_botnames_suppress* (default 1) : when set to 1, suppress connect/team change/name change messages for bots. This reduces visual spam, and is recommended.\r\n* *sm_botnames_db_name*, *sm_botnames_db_table*, *sm_botnames_db_column*, *sm_botnames_db_order_by*, *sm_botnames_db_descending*, *sm_botnames_db_limit*, and *sm_botnames_db_use_utf8* : see \"[Loading Names from a Database][dbinfo]\", above\r\n\r\n [dbinfo]: #loading-names-from-a-database\r\n\r\nReloading of `botnames.txt`, and setting new values for *sm_botnames_prefix* and *sm_botnames_random* is done on map load. To do this manually, use the *sm_botnames_reload* command.\r\n\r\nImplementation Details\r\n----------------------\r\n\r\n### Random Names\r\n\r\nThe random names are implemented so that it is *unlikely* that two\r\nbots in the same server will have the same name, as long as\r\n`botnames.txt` has enough names. Note that it is not *impossible*: to\r\ndo that would be an unreasonable load on the server for just random\r\nbot names. Still, you should never see it happen under routine\r\ncircumstances.\r\n\r\nThe random names are implemented by shuffling the name list after it\r\nis loaded, then going through the shuffled list in order, and looping\r\nback around at the end.\r\n\r\n### Quota Mode TF2 Bots\r\n\r\nIf you use the built-in bot quota system for TF2, there is an\r\nadditional caveat. These bots are renamed *immediately* after changing\r\nteams, and these name changes *totally ignore* the usual rules agains\r\ntoo many name changes in a row. Unfortunately, my code has to follow\r\nthese rules.\r\n\r\nIf I rename the bots before they join a team, my name is lost. If I do\r\nit *right after* the team join, my name change triggers a \"too many\r\nname changes\" error. So, right now, I *must* do these name changes\r\nafter 10 entire seconds.\r\n\r\nSo, these auto-fill bots will name change after 10 seconds, but not\r\nbefore. This is annoying and *not* an ideal solution. I'm looking into\r\na better solution. If anyone knows how to entirely block name changes\r\nin SourceMod, please [tell me][contact].\r\n\r\n [contact]: /contact\r\n\r\nBugs and Patches\r\n----------------\r\n\r\nIf you've found a bug in Automatic Bot Names, please\r\n[tell me][contact]. Please provide as much information as you\r\nreasonably can.\r\n\r\nAs with all my other projects, I accept patches graciously. If you\r\nhave improved Automatic Bot Names, or have fixed a bug, I would love\r\nto [hear from you][contact].\r\n\r\nLicense\r\n-------\r\n\r\nThe source `botnames.sp` for Automatic Bot Names, as well as the\r\nexample files `botnames.txt` and `botnames.scifi.txt`, are in the\r\n[Public Domain][]. That is, they have *no* license. Do with them what\r\nyou will.\r\n\r\n [Public Domain]: http://en.wikipedia.org/wiki/Public_domain\r\n",
+      "rght":14,
+      "subtitle":"give names to bots when they're created",
+      "parent":5,
+      "markup":"markdown",
+      "license":1,
+      "title":"Automatic Bot Names for Sourcemod",
+      "url":"/teamfortress2/botnames",
+      "level":2,
+      "lft":13,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"botnames"
+    }
+  },
+  {
+    "pk":9,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"Cydia Repository\r\n================\r\n\r\nI host a Cydia repository here to distribute any packages I port or\r\nwrite to either the iPhone or the iPad. Currently, I'm hosting these\r\npackages:\r\n\r\n* [boodler](http://boodler.org/) - a python-based soundscape generator\r\n* [xz](http://tukaani.org/xz/) - a next-generation lzma compression utility\r\n* [emacs](http://www.gnu.org/software/emacs/) - the classic GNU editor\r\n\r\nFor all of the packages, see [here](/cydia/). Also, for the sources,\r\nsee [here](/cydia/sources/).\r\n\r\nNow, I'm not exactly sure what the \"*unlimited*\" bandwidth my web host\r\ngives me means, so don't go downloading these packages like 50 times a\r\nday; some of these packages are quite sizeable (for example, Emacs).\r\nIf anyone out there wants to help me out by hosting any of these in\r\ntheir own repository, please [contact me][].\r\n\r\n [contact me]: /contact\r\n\r\nTo get these packages, go into Cydia and add a new repository with the\r\nurl \"`http://gammalevel.com/cydia/`\".\r\n\r\nAlso, I'm a newbie at APT packages. If you have any issues with the\r\npackages *or* with the software, please [tell me][contact me].\r\n",
+      "rght":17,
+      "subtitle":"general information about my Cydia repository for iOS",
+      "parent":1,
+      "markup":"markdown",
+      "license":1,
+      "title":"Cydia Repository",
+      "url":"/cydia/info",
+      "level":1,
+      "lft":16,
+      "forceurl":"/cydia/info",
+      "tree_id":1,
+      "shortname":"cydia"
+    }
+  },
+  {
+    "pk":10,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"Software for iPhone and iPad\r\n============================\r\n\r\nHere is where I've collected information on the stuff I've written for\r\niPhoneOS.\r\n\r\nPorts\r\n-----\r\n\r\nIn addition to writing *original* software for iPhoneOS, I've also\r\n[ported some software][ports] to the *jailbroken* version of the OS.\r\n\r\n [ports]: ports/\r\n\r\nOriginal Software\r\n-----------------\r\n\r\nI hope to eventually have web pages for each of these, but for now,\r\nmost of these link to their source on [GitHub][].\r\n\r\n* [OSU Bus][] - an iPhone client for the OSU TRIP route information program\r\n* [daemophone][] - an iPad MPD client\r\n\r\n [GitHub]: http://github.com/\r\n [daemophone]: http://github.com/agrif/daemophone\r\n [OSU Bus]: http://osubus.gammalevel.com/\r\n",
+      "rght":31,
+      "subtitle":"",
+      "parent":1,
+      "markup":"markdown",
+      "license":1,
+      "title":"Software for iPhone and iPad",
+      "url":"/iphoneos",
+      "level":1,
+      "lft":18,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"iphoneos"
+    }
+  },
+  {
+    "pk":11,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"iPhone Ports\r\n============\r\n\r\nI've ported some software to the iPhone and iPad. Here, you can find\r\nout how to build this software yourself, and exactly what I changed\r\nand why in each package.\r\n\r\nIf you're simply interested in installing these programs, and not in\r\nbuilding them from source, most of them are available from my\r\n[Cydia repository][], with the notable exception of TeX Live.\r\n\r\n [Cydia repository]: /cydia/info\r\n\r\nYou'll need the [on-iPhone development environment][] for most (if not\r\n*all*) of these packages.\r\n\r\n [on-iPhone development environment]: environment\r\n\r\n* [Boodler](boodler) - a python-based soundscape tool\r\n* [Emacs](emacs) - the classic GNU text editor and kitchen sink\r\n* [XZ Utils](xz) - a next-generation compression tool\r\n* [TeX Live](texlive) - a standard LaTeX distribution\r\n",
+      "rght":30,
+      "subtitle":"how to compile various tools for the iPhone and iPad",
+      "parent":10,
+      "markup":"markdown",
+      "license":1,
+      "title":"iPhone Ports",
+      "url":"/iphoneos/ports",
+      "level":2,
+      "lft":19,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"ports"
+    }
+  },
+  {
+    "pk":12,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"On-iPhone Development Environment\r\n=================================\r\n\r\n[TOC]\r\n\r\nOften, for some of the trickier packages to build (like Emacs or most\r\nPython-based programs), it is easier to have a development environment\r\non the device than to deal with a cross-compiler. The method I outline\r\nhere is one way to get one. It takes up room, and it's outdated, but\r\nit works for almost anything you'd want to do, if you put up with it.\r\n\r\nI'm not going to pretend that this is the best way to do this. I\r\ndeveloped this method by changing the one I used for OS 1.0 a little\r\nat a time when a new OS came out. It's a bit of a hack right now, but\r\nit works. I point out where I think an improvement could be made.\r\n\r\nI'm going to assume you have a freshly jailbroken iPhone or iPad. Feel\r\nfree to skip steps if you think you can.\r\n\r\nI've tried to write this as accurately as possible, but errors do\r\nhappen. Feel free to [contact me][] to work things out. Worst case\r\nscenario? You have to do a full restore of your device, which is\r\nannoying but not hard. Be sure to have backups, but it shouldn't come\r\nto that!\r\n\r\n(Also, standard disclaimer: I claim *no responsibility* if somehow you\r\nmake your device blow up, or otherwise fail, while using this guide.)\r\n\r\n [contact me]: /contact\r\n\r\nFor this guide, I'm going to assume at least passing familiarity with\r\nthe unix shell. After all, you're here for a development environment!\r\nAbove that, I'll try to explain what I feel is needed to continue.\r\n\r\nFinally, this guide was written for iOS 3.2 on the iPad. It shouldn't be\r\nsignificantly different for similar versions on both the iPhone and\r\niPad, though.\r\n\r\nLet's get started!\r\n\r\nGetting Shell Access\r\n--------------------\r\n\r\nMore than likely, since you're here at all, you've already done\r\nthis. It's included here for completeness. Feel free to skip ahead!\r\n\r\nIf you've just jailbroken, install the OpenSSH package. Also,\r\ninstalling the OpenSSH reconnect helper and Insomnia is a good\r\nidea. The helper will reconnect you automatically if you lose your\r\nshell connection, and Insomnia keeps that from happening at\r\nall. Nothing is more annoying that having to fidget with your device\r\njust to keep the Wifi up!\r\n\r\nSSH in to your device with the username `root` and the password\r\n`alpine`. We're going to change this now, for security, and then we'll\r\ngive the user `mobile` a password so we can log in without being root.\r\n\r\n~~~~{.console}\r\niphone:~ root# passwd\r\nChanging password for root.\r\nNew password: [type a password here]\r\nRetype new password: [repeat it here]\r\niphone:~ root# passwd mobile\r\nChanging password for mobile.\r\nNew password: [type a different or same password here]\r\nRetype new password: [again...]\r\niphone:~ root# \r\n~~~~\r\n\r\n### Getting an Editor\r\n\r\nRight now we have no way of editing files. For now, I recommend\r\ninstalling `nano`. It's lightweight and easy to wrap your head\r\naround. If you've never used it before, look around the web for a\r\n[GNU nano tutorial][]. If `nano`'s not your thing, you could also install\r\n`vim` or even `emacs` (though for `emacs`, you need my [Cydia repository][]).\r\n\r\n [GNU nano tutorial]: http://dwabbott.com/nano.html\r\n [Cydia repository]: /cydia/info\r\n\r\n~~~~{.console}\r\niphone:~ root# apt-get install nano # or 'vim', or 'emacs', or...\r\n~~~~\r\n\r\n(**Note**: I usually run `nano` as `nano -w`, which keeps `nano` from\r\nautomatically wrapping lines, which can ruin most configuration\r\nfiles.)\r\n\r\n### Setting Up `sudo`\r\n\r\nWorking as root is bad, *very* bad. I've accidentaly deleted my `/usr`\r\nonce, bricking my iPad. However, it gets annoying to have to `su` into\r\nroot every time you want to install something. So let's install\r\n`sudo`!\r\n\r\n~~~~{.console}\r\niphone:~ root# apt-get install sudo\r\n~~~~\r\n\r\nNow we need to edit the sudoers file to make `sudo` useful. We set the\r\n`EDITOR` environment variable to keep `visudo` from complaining that\r\n`vi` isn't there. If you'le using `vim`, you can leave it out.\r\n\r\n~~~~{.console}\r\niphone:~ root# EDITOR=nano visudo\r\n~~~~\r\n\r\nRight below the line that says \"`root ALL=(ALL) ALL`\", write the\r\nsimilar line \"`mobile ALL=(ALL) ALL`\", then save and exit.\r\n\r\n(**Note**: when you run `sudo` as `mobile`, it will ask you for a\r\npassword sometimes. This is `mobile`'s password, not `root`'s.)\r\n\r\n### Logging In as `mobile`\r\n\r\nBefore we continue, we're going to drop our superuser privelege. Log\r\nout and log back in as mobile. As a test, make sure `sudo` is working\r\nfine. It'll give you a nice scary administration notice when you run\r\nit the first time, as a bonus!\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ sudo whoami\r\n\r\nWe trust you have received the usual lecture from the local System\r\nAdministrator. It usually boils down to these three things:\r\n\r\n    #1) Respect the privacy of others.\r\n    #2) Think before you type.\r\n    #3) With great power comes great responsibility.\r\n\r\nPassword: [type in mobile's password]\r\nroot\r\niphone:~ mobile$\r\n~~~~\r\n\r\nThe last line saying `root` is the key: it means `sudo` is set up right\r\nand correctly giving you root access.\r\n\r\nInstalling GCC and Friends\r\n--------------------------\r\n\r\nFinally, we get to the *fun* part. First off, let's install some\r\ngeneral utilities for our development environment:\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ sudo apt-get install ldid make wget patch gawk\r\n~~~~\r\n\r\nSome explanation: `ldid` modifies programs to fake iPhone OS into\r\nrunning them like official binaries. `make` is the standard GNU build\r\ntool. We'll use `wget` to fetch tarballs from the internet right in\r\nthe terminal, and then `patch` to patch them. Autotools, which just\r\nabout every package uses, needs `gawk` to run.\r\n\r\nNext, we're going to install `gcc` itself, but if we just go and do\r\nit, we'll run into a problem with the `libgcc` offered on Telesphoreo:\r\nit refuses to install, because it breaks the system. Instead, we'll\r\ninstall the dummy package found [here][dummy package], and trick APT\r\ninto thinking it's already installed.\r\n\r\n [dummy package]: http://www.telesphoreo.org/ticket/163\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ wget http://gammalevel.com/forever/fake-libgcc_1.0_iphoneos-arm.deb\r\niphone:~ mobile$ sudo dpkg -i fake-libgcc_1.0_iphoneos-arm.deb\r\n~~~~\r\n\r\nNow we're prepared to install `gcc` and some development headers. Note\r\nthat these headers are *compatibility* headers, meant to ease the\r\ntransition from iOS 1.0 to 2.0. That is, they are *old*. I only trust\r\nthem for the standard POSIX headers, and even for that they fail in\r\nsome parts. *This* is one place that could probably be improved: more\r\non that later.\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ sudo apt-get install iphone-gcc com.bigboss.20toolchain\r\n~~~~\r\n\r\nIf you're anything like me, you'll be itching to write a little\r\n\"Hello, world!\" program right now and try out your shiny new\r\n`gcc`. Well, you'd be dissappointed. These packages are so old that\r\nthey need fixing first.\r\n\r\nFixing What's Broken\r\n--------------------\r\n\r\n### Libraries\r\n\r\nUnfortunately, you have some downloading to do. Go fetch the [iPhone\r\nDeveloper SDK][iphone sdk]. Once you have it, on a Mac, simply install\r\nit. If you're not on a Mac, you'll need an archive tool that reads\r\nDMGs and Mac packages. I know that [7zip][] works well on Windows, and\r\nprobably works fine through [Wine][] on other systems.\r\n\r\n [iphone sdk]: http://developer.apple.com/iphone/\r\n [7zip]: http://www.7-zip.org/\r\n [wine]: http://www.winehq.org/\r\n\r\nWe'll be looking in the `iPhoneOS3.2.sdk` directory, but by all means\r\nchange this version number if you need to. On a Mac with the installed\r\nofficial SDK, this is at\r\n\"`/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.2.sdk`\".\r\nIf you're using 7zip, open the Xcode DMG, then the `5.hfs` partition,\r\nwhich will take a while. Then, open up\r\n\"`iPhoneSDK/Packages/iPhoneSDKHeadersAndLibs.pkg`\" for the most recent\r\nversion, or \"`.../iPhoneSDKXXX.pkg`\" for a different version. Inside\r\nthat package, open `Payload`, then `Payload~`, then \"`.`\". The\r\ndirectory we are looking for is then at\r\n\"`Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.2.sdk`\".\r\n\r\nWe need to copy libraries from the official SDK on to the\r\ndevice. `scp` works really well, if you have it: it transfers files\r\nover SSH. However, anything that gets files from your computer to your\r\ndevice will work.\r\n\r\n(**Note** for the interested: iPhoneOS is missing libraries to link\r\nagainst, so we'll be copying them over. Later on, we'll be editing\r\nsystem headers. Also, none of the frameworks on the device come with\r\nheaders, so you'll need to copy those over as you need them. It occurs\r\nto me that we might be able to just copy over the *entire* official\r\nSDK, and skip doing this by hand. It *might* work, but I haven't tried\r\nit. For now, I just copy over whatever's missing as I run into it. I\r\nwould like to look into this, though.)\r\n\r\nIn the directory `iPhoneOS3.2.sdk/usr/lib`, you will find the\r\nfollowing files:\r\n\r\n~~~~{.text}\r\nlibgcc_s.1.dylib\r\nlibSystem.B.dylib\r\nlibstdc++.6.0.9.dylib\r\nlibiconv.2.dylib\r\n~~~~\r\n\r\nWe need to copy these files to `mobile`'s home directory,\r\n`/var/mobile`, on the device. Once there, reopen your shell on your\r\ndevice and move them to `/usr/lib`:\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ sudo mv *.dylib /usr/lib/\r\n~~~~\r\n\r\nWe also need to reconstruct a few symlinks:\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ sudo ln -s /usr/lib/libSystem.B.dylib /usr/lib/libSystem.dylib\r\niphone:~ mobile$ sudo ln -s /usr/lib/libSystem.dylib /usr/lib/libc.dylib\r\niphone:~ mobile$ sudo ln -s /usr/lib/libSystem.dylib /usr/lib/libm.dylib\r\n\r\niphone:~ mobile$ sudo ln -s /usr/lib/libstdc++.6.0.9.dylib /usr/lib/libstdc++.6.dylib\r\niphone:~ mobile$ sudo ln -s /usr/lib/libstdc++.6.dylib /usr/lib/libstdc++.dylib\r\n\r\niphone:~ mobile$ sudo ln -s /usr/lib/libiconv.2.dylib /usr/lib/libiconv.2.4.0.dylib\r\n~~~~\r\n\r\n### Headers\r\n\r\nWe also need to copy over some key C++ headers. In\r\n`iPhoneOS3.2.sdk/usr/include/c++/4.0.0/arm-apple-darwin9`, there is a\r\ndirectory named `bits`. Copy that directory and all it contains to\r\nyour device, then install it:\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ sudo mkdir /var/include/c++/4.0.0/arm-apple-darwin9\r\niphone:~ mobile$ sudo mv bits /var/include/c++/4.0.0/arm-apple-darwin9/\r\niphone:~ mobile$ sudo ln -s /var/include/c++/4.0.0/arm-apple-darwin9/{,v6}\r\niphone:~ mobile$ sudo ln -s /var/include/c++/4.0.0/arm-apple-darwin{9,8}\r\niphone:~ mobile$ sudo ln -s {/var,/usr}/include/c++\r\n~~~~\r\n\r\n### Manual Header Modifications\r\n\r\nNot only are there critical system libraries missing, but some of the\r\nheaders are just plain *wrong*, too. It seems that somewhere along the\r\nline, iPhone OS moved from a 32 bit inode to a 64 bit inode, so there\r\nare a lot of structures defined in these headers that have the wrong\r\nsize.\r\n\r\n(**Note** for the interested: Beleive me when I say that hunting down\r\nbugs in *system headers* is a nightmare. Just keep in mind, if you\r\nseem to be getting random segfaults for no reason, or some extremely\r\nsubtle bug that has no reason to exist, it's probably a system header\r\nerror I haven't found yet! Compare the given headers with the ones\r\nfrom Apple, with `__DARWIN_64_BIT_INO_T` defined.)\r\n\r\nFirst off, we're going to edit\r\n\"`/private/var/include/sys/stat.h`\". Make sure to edit with `sudo`, so\r\nyou have write permissions! In `struct stat`, remove the line that\r\nsays:\r\n\r\n~~~~{.c}\r\nino_t\t\t\tst_ino;\t\t\t/* [XSI] File serial number */\r\n~~~~\r\n\r\nBetween the entries for `st_nlink` and `st_uid`, add this line:\r\n\r\n~~~~{.c}\r\n__uint64_t\t\tst_ino;\t\t\t/* [XSI] File serial number */\r\n~~~~\r\n\r\nAfter the entry for `st_ctimespec`, add this line:\r\n\r\n~~~~{.c}\r\nstruct timespec st_birthtimespec;\t\t/* time of file creation */\r\n~~~~\r\n\r\nFinally, after the entries for `st_ctime` and `st_ctimensec`, add these lines:\r\n\r\n~~~~{.c}\r\ntime_t\t\t\tst_birthtime;\t\t\t/* [XSI] Time of file creation */\r\nlong\t\t\tst_birthtimensec;\t\t/* nsec of file creation */\r\n~~~~\r\n\r\nWe're also going to edit \"`/private/var/include/sys/dirent.h`\". First,\r\nwe're going to change the definition of `__DARWIN_MAXNAMLEN`:\r\n\r\n~~~~{.c}\r\n#define __DARWIN_MAXNAMLEN\t\t1023\r\n~~~~\r\n\r\nIn the definition of `struct dirent`, remove the line at the top that says\r\n\r\n~~~~{.c}\r\nino_t d_ino;\t\t\t/* file number of entry */\r\n~~~~\r\n\r\nIn its place, write in:\r\n\r\n~~~~{.c}\r\n__uint64_t d_ino;\t\t/* file number of entry */\r\n__uint64_t d_seekoff;\r\n~~~~\r\n\r\nBetween the entries for `d_reclen` and `d_type`, write in:\r\n\r\n~~~~{.c}\r\n__uint16_t d_namlen;\t/* length of string in d_name */\r\n~~~~\r\n\r\nFinally, between the entries for `d_type` and `d_name`, remove the\r\nline that says:\r\n\r\n~~~~{.c}\r\n__uint8_t d_namlen;\t\t/* length of string in d_name */\r\n~~~~\r\n\r\nThat's it!\r\n\r\n### Minor Details\r\n\r\nSome configure scripts and Makefiles (like Emacs's) looks for the C\r\ncompiler under `cc`, which is supposed to exist on standard\r\nsetups. Since we emphatically *don't* have a standard setup, we have\r\nto make a link.\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ sudo ln -s /usr/bin/gcc /usr/bin/cc\r\n~~~~\r\n\r\nTesting your GCC\r\n----------------\r\n\r\nIf you feel so inclined, now would be the time to test out your build\r\nenvironment. GCC works exactly as it does on Mac OS X, that is,\r\nexactly like on other systems, but with added options for linking with\r\nframeworks. Keep in mind, you may need to sign your programs before\r\nthey'll run. I have found that I don't, but you may need to. If your\r\nprogram crashes for no reason when you start it, you need to run\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ ldid -S program_name\r\n~~~~\r\n\r\nThere's some way to change the system so you don't *ever* need to do\r\nthis, but last I heard there were some long-term side-effects.\r\n\r\nYou're Done!\r\n------------\r\n\r\nCongratulations!\r\n",
+      "rght":21,
+      "subtitle":"how to set up your phone with GCC and friends",
+      "parent":11,
+      "markup":"markdown",
+      "license":1,
+      "title":"On-iPhone Development Environment",
+      "url":"/iphoneos/ports/environment",
+      "level":3,
+      "lft":20,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"environment"
+    }
+  },
+  {
+    "pk":13,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"XZ Utils for iPhone\r\n===================\r\n\r\n[XZ Utils][] is free general-purpose data compression software with a\r\nhigh compression ratio. The easiest way to install XZ Utils is through\r\nmy [Cydia repository][]. If you want to know how to build it from\r\nsource, though, read on.\r\n\r\n [XZ Utils]: http://tukaani.org/xz/\r\n [Cydia repository]: /cydia/info\r\n\r\nYou will need the [on-iPhone development environment][env] to build XZ\r\nUtils. As always, please [contact me][] if you need help.\r\n\r\n [env]: environment\r\n [contact me]: /contact\r\n\r\nThe Easy Way\r\n------------\r\n\r\nFirst, you need to download a copy of the XZ Utils source and the patch:\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ wget http://tukaani.org/xz/xz-4.999.9beta.tar.bz2\r\niphone:~ mobile$ wget http://gammalevel.com/forever/xz-4.999.9beta-iPad.patch\r\n~~~~\r\n\r\nNow, we will unpack the source and apply the patch:\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ tar xjvf xz-4.999.9beta.tar.bz2\r\niphone:~ mobile$ cd xz-4.999.9beta\r\niphone:~/xz-4.999.9beta mobile$ patch -p1 < ../xz-4.999.9beta-iPad.patch\r\n~~~~\r\n\r\nNow we can configure, build, and install as always:\r\n\r\n~~~~{.console}\r\niphone:~/xz-4.999.9beta mobile$ ./configure\r\niphone:~/xz-4.999.9beta mobile$ make\r\niphone:~/xz-4.999.9beta mobile$ sudo make install\r\n~~~~\r\n\r\nXZ Utils is now installed.\r\n\r\nThe Hard Way\r\n------------\r\n\r\nIn this section, we build XZ Utils the same way, except I'll actually\r\nwalk through editing files manually, and explain why the changes are\r\nmade. You should really use the patch method, though, if it works.\r\n\r\nThe only file we need to change in XZ Utils is\r\n`src/common/cpucores.h`, and this file is patched this way for just\r\nabout every BSD system there is. It seems the XZ Utils developers\r\ndidn't know how to use the `sysctl` call correctly. Find the line\r\nwhere they call the `sysctl` function, and change it to this:\r\n\r\n~~~~{.c}\r\nif (!sysctl(name, 2, &cpus, &cpus_size, NULL, NULL)\r\n   \t\t\t\t  && cpus_size == sizeof(cpus) && cpus > 0)\r\n~~~~\r\n\r\nNote that the only difference is the `2` added after `name`.\r\n",
+      "rght":23,
+      "subtitle":"a next-gen compression tool",
+      "parent":11,
+      "markup":"markdown",
+      "license":1,
+      "title":"XZ Utils for iPhone",
+      "url":"/iphoneos/ports/xz",
+      "level":3,
+      "lft":22,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"xz"
+    }
+  },
+  {
+    "pk":14,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"Boodler for iPhone\r\n==================\r\n\r\n[TOC]\r\n\r\n[Boodler][] is an open-source soundscape tool written in C and\r\nPython. It is able to generate a never-ending, never-repeating stream\r\nof sound based on soundscape code, written in Python.\r\n\r\n [Boodler]: http://boodler.org/\r\n\r\nA while back, I ported Boodler to the iPhone. It also works fine on\r\nthe iPad. However, it does not have a UI, so if you want to use it,\r\nyou'd better be able to use a terminal.\r\n\r\nThe easiest way to install Boodler for iPhone is through my\r\n[Cydia repository][]. This will install a pre-built Boodler with all the\r\ndependencies. If you want to compile from scratch, read on. And make\r\nsure you have an [on-iPhone development environment][env] set up.\r\n\r\n [Cydia repository]: /cydia/info\r\n [env]: environment\r\n\r\nAs always, feel free to [contact me][] if something doesn't work out.\r\n\r\n [contact me]: /contact\r\n\r\nThe Easy Way\r\n------------\r\n\r\nThe easiest way to compile Boodler on the iPhone is with a\r\npatch. First, though, you'll need to get the dependencies and the\r\nsources.\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ sudo apt-get install python setuptools\r\niphone:~ mobile$ wget http://boodler.org/dl/Boodler-2.0.3.tar.gz\r\niphone:~ mobile$ wget http://gammalevel.com/forever/Boodler-2.0.2-iPhone.patch\r\n~~~~\r\n\r\nNow, we'll unpack the sources and apply the patch:\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ tar xzvf Boodler-2.0.3.tar.gz\r\niphone:~ mobile$ cd Boodler-2.0.3\r\niphone:~/Boodler-2.0.3 mobile$ patch -p1 < ../Boodler-2.0.2-iPhone.patch\r\n~~~~\r\n\r\nFinally, we'll build, sign, and install our copy of Boodler.\r\n\r\n~~~~{.console}\r\niphone:~/Boodler-2.0.3 mobile$ python setup.py build\r\niphone:~/Boodler-2.0.3 mobile$ ldid -S build/lib.darwin-10.5-arm-2.5/boodle/cboodle_osxaq.dylib\r\niphone:~/Boodler-2.0.3 mobile$ sudo python setup.py install\r\n~~~~\r\n\r\n(You may get a complaint about a missing AudioToolbox framework. If\r\nyou do, copy it over from the official SDK, like we did during the\r\nenvironment setup. It should be in\r\n\"`(SDK)/System/Library/Frameworks/AudioToolbox.framework`\". Be sure to\r\n*merge* them, though: don't overwrite files, just copy the missing\r\nones from inside the framework.)\r\n\r\n### Testing Boodler\r\n\r\nTo test your freshly-installed Boodler, run this command:\r\n\r\n~~~~{.console}\r\niphone:~/Boodler-2.0.3 mobile$ boodler.py --testsound\r\n~~~~\r\n\r\nIf nothing plays, check your volume levels. If it still doesn't work,\r\nbut there's no error, something weird is going on. Feel free to\r\n[contact me][] with questions.\r\n\r\nIf you hear something, congratulations! Boodler now works exactly as\r\nit does on the desktop! However, you should only use Boodler as\r\n`mobile`; it complains loudly when you use it as `root`. For more\r\ninformation on how to use Boodler, refer to the [Boodler\r\ndocumentation][boodledocs].\r\n\r\n [boodledocs]: http://boodler.org/doc/\r\n\r\nThe Hard Way\r\n------------\r\n\r\nThis method is exactly like the one used above, but instead of\r\napplying a patch, we'll be editing files manually. This section is\r\nmore for my reference in the future: it shows what I did, where, and\r\nwhy.\r\n\r\n### `setup.cfg`\r\n\r\nFirst, we need to edit `setup.cfg` so that it uses the OS X AudioQueue\r\ndriver by default:\r\n\r\n~~~~{.ini}\r\n[build_scripts]\r\ndefault_driver=osxaq\r\n~~~~\r\n\r\nAlso, we need to specify what drivers we want, and which we don't. We\r\ndon't really want to compile anything but the `osxaq` driver. Also, we\r\nshould enable integer math instead of floating-point math.\r\n\r\nThe most important point here is disabling the `macosx`\r\ndriver. Without disabling it, it *will* try to compile, and it *will*\r\nfail, always.\r\n\r\n~~~~{.ini}\r\n[build_ext]\r\nwith-drivers=osxaq\r\nwithout-drivers=stdout,file,lame,vorbis,shout,macosx\r\nintmath=1\r\n~~~~\r\n\r\n(Note: I have since learned the iPhone is *completely* capable of fast\r\nfloating-point math, but it needs to be out of \"Thumb\" mode. I'll have\r\nto investigate this further when I have time.)\r\n\r\n### `setup.py`\r\n\r\nI used to have a modification for `setup.py`, but if you copy over the\r\ndevelopment framework from the official SDK, you don't need it\r\nanymore. Go figure.\r\n\r\n### `src/cboodle/audev-osxaq.c`\r\n\r\nThese mods are not really needed, and they're a bit of a hack. They\r\nkeep Boodler running even when the device is locked, though, so it's\r\nnice to have.\r\n\r\nAt the top, near the other CoreAudio/AudioToolbox includes, add these:\r\n\r\n~~~~{.c}\r\n#include <AudioToolbox/AudioServices.h>\r\n#include <CoreFoundation/CoreFoundation.h>\r\n~~~~\r\n\r\nWe need a thread with a run loop, so that AudioServices can tell us\r\nwhen a call is coming in, or we need to be quiet. Add a new global\r\npthread with the other global variables:\r\n\r\n~~~~{.c}\r\nstatic pthread_t cfthread;\r\n~~~~\r\n\r\nNow we need an AudioServices callback, to tell us when we need to shut\r\nup. Right below the `playCallback` function prototype, add this:\r\n\r\n~~~~{.c}\r\nvoid interruptionListenerCallback(void* user, UInt32 intState)\r\n{\r\n\tif (intState == 1) // begin interrupt\r\n\t{\r\n\t\tAudioQueuePause(aqueue);\r\n\t\tbailing = TRUE;\r\n\t\trunning = FALSE;\r\n\t\taudev_close_device();\r\n\t\texit(0); // a hack, to please AudioServices\r\n\t}\r\n}\r\n~~~~\r\n\r\nNow we need a function to run in our thread, to set up AudioServices\r\nand our callback, then to run the Run Loop:\r\n\r\n~~~~{.c}\r\nvoid* cfthread_main(void* arg)\r\n{\r\n\tAudioSessionInitialize(CFRunLoopGetCurrent(), NULL, interruptionListenerCallback, NULL);\r\n\tUInt32 sessionCategory = 'medi'; // media player, stays on when locked\r\n\tAudioSessionSetProperty('acat', sizeof(UInt32), &sessionCategory);\r\n\tAudioSessionSetActive(1);\r\n\tCFRunLoopRun();\r\n\treturn NULL;\r\n}\r\n~~~~\r\n\r\nFinally, we need to actually start our thread. In `audev_init_device`,\r\nright before the block where all the properties of `formataq` are set,\r\nput this line:\r\n\r\n~~~~{.c}\r\npthread_create(&cfthread, NULL, cfthread_main, NULL);\r\n~~~~\r\n",
+      "rght":25,
+      "subtitle":"a python-based soundscape tool",
+      "parent":11,
+      "markup":"markdown",
+      "license":1,
+      "title":"Boodler for iPhone",
+      "url":"/iphoneos/ports/boodler",
+      "level":3,
+      "lft":24,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"boodler"
+    }
+  },
+  {
+    "pk":15,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"Emacs for iPhone\r\n================\r\n\r\n[Emacs][] is the closest thing to an Operating System that a simple text editor should ever be allowed to come, if we're to maintain our sanity. It's also my favorite IDE.\r\n\r\n [Emacs]: http://www.gnu.org/software/emacs/\r\n\r\nThe easiest way to get Emacs for iPhone is through my [Cydia repository][]. This will let you install a pre-built, pre-verified Emacs. However, if you want to know how to build it from scratch, read on.\r\n\r\n [Cydia repository]: /cydia/info\r\n\r\nYou'll need an [on-iPhone development environment][env] to build Emacs, because it does this freaky thing where it loads a built version of itself, loads a ton of Lisp files, and then dumps itself out. This can't be done in a simple cross-compiler setup!\r\n\r\n [env]: environment\r\n\r\nAs always, you can [contact me][] if you need help.\r\n\r\n [contact me]: /contact\r\n\r\nThe Easy Way\r\n------------\r\n\r\nFirst, we need to install dependencies and fetch the Emacs sources and the patch file:\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ sudo apt-get install ncurses\r\niphone:~ mobile$ wget http://ftp.gnu.org/pub/gnu/emacs/emacs-23.2.tar.bz2\r\niphone:~ mobile$ wget http://gammalevel.com/forever/emacs-23.2-iPad.patch\r\n~~~~\r\n\r\nNext, we extract the sources and patch them:\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ tar xjvf emacs-23.2.tar.bz2\r\niphone:~ mobile$ cd emacs-23.2\r\niphone:~/emacs-23.2 mobile$ patch -p1 < ../emacs-23.2-iPad.patch\r\n~~~~\r\n\r\nNow, with the sources fully patched, we can build and install Emacs:\r\n\r\n~~~~{.console}\r\niphone:~/emacs-23.2 mobile$ ./configure\r\niphone:~/emacs-23.2 mobile$ make\r\niphone:~/emacs-23.2 mobile$ sudo make install\r\n~~~~\r\n\r\nThis compile can take a while on an iPad, and even longer on an\r\niPhone. Go grab some coffee. Congratulations! You now have Emacs!\r\n\r\nThe Hard Way\r\n------------\r\n\r\nHere, I'll actually guide you through editing the files by hand\r\ninstead of using a patch. I've also included *why* you edit the files\r\nthis way, in case the patch doesn't work.\r\n\r\nFirst, we need to tell Emacs that Darwin on ARM makes sense. Open up\r\n`configure`, and do a search for the string \"`*-apple-darwin*`\". This\r\nwill help you locate the block that checks machine types for Apple\r\nDarwin systems. Right below the line that says\r\n\r\n~~~~{.bash}\r\npowerpc-* )\t\tmachine=macppc ;;\r\n~~~~\r\n\r\nadd a line below it that says:\r\n\r\n~~~~{.bash}\r\narm-* )\t\t\tmachine=arm ;;\r\n~~~~\r\n\r\nAlso, we need to edit `src/unexmacosx.c`. Search for the string\r\n\"`nothing to do for prebound lazy pointer`\". Underneath this case in\r\nthe `switch` statement, *outside* of the `#if defined (__ppc__)` /\r\n`#endif` block, and *before* the default case, add in this case:\r\n\r\n~~~~{.c}\r\ncase GENERIC_RELOC_LOCAL_SECTDIFF:\r\n\t /* no idea what this is, but we ignore it anyway */\r\n\t break;\r\n~~~~\r\n\r\niPhone OS uses a Mach-O executable format section that Emacs doesn't\r\nnormally support, so it will yell at us when we try to compile. This\r\nfix will tell Emacs to ignore that section instead. I have no idea\r\nwhat this section does, but when it's ignored, Emacs still runs fine,\r\nso it must not be too important.\r\n\r\nNow, you can compile as above!\r\n",
+      "rght":27,
+      "subtitle":"the classic GNU editor",
+      "parent":11,
+      "markup":"markdown",
+      "license":1,
+      "title":"Emacs for iPhone",
+      "url":"/iphoneos/ports/emacs",
+      "level":3,
+      "lft":26,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"emacs"
+    }
+  },
+  {
+    "pk":16,
+    "model":"podstakannik.page",
+    "fields":{
+      "body":"TeX Live for iPhone\r\n==================\r\n\r\n[TOC]\r\n\r\n[TeX Live][] is a common distribution of [LaTeX][], which is a system\r\nbuilt around the [TeX][] typesetting system by Donald Knuth (and\r\nothers).\r\n\r\n [TeX Live]: http://www.tug.org/texlive/\r\n [LaTeX]: http://en.wikipedia.org/wiki/LaTeX\r\n [TeX]: http://en.wikipedia.org/wiki/TeX\r\n\r\nThe easiest way to install TeX Live for the iPhone will eventually be\r\nmy [Cydia repository][], but I have not yet made a TeX Live package\r\nbecause TeX is *huge*, and I'm working out how to do the distribution.\r\n\r\n [Cydia repository]: /cydia/info\r\n\r\nRight now the only way to get TeX on your iPhone is to compile it\r\nyourself. You will need an [on-iPhone development\r\nenvironment][env]. Also you will need a copy of [XZ Utils][xz]. You\r\ncan either build it yourself or get it from my [Cydia repository][].\r\n\r\n [env]: environment\r\n [xz]: xz\r\n\r\nLuckily, the TeX Live source includes all the libraries it needs, so\r\nyou don't have many dependencies to go through. Using these libraries\r\nis easy, but they link statically so the final TeX binaries are much\r\nbigger. This works right now; my next goal is using system libraries\r\ninstead.\r\n\r\nThe TeX Live build is *long*: make sure your device won't go into\r\nsleep mode, or otherwise interrupt the build. TeX Live is mighty\r\npicky about build order, sometimes, so an interruption could be\r\nbad. It might not be, but it's best not to risk it.\r\n\r\nAs always, if you have any questions, feel free to [contact me][].\r\n\r\n [contact me]: /contact\r\n\r\nThe Easy Way\r\n------------\r\n\r\nHere, I'm using the term \"easy\" *lightly*. There's still a lot of\r\nsteps, even with a patch file. Again, be sure your device won't fall\r\nasleep on you!\r\n\r\n### Installing Build Tools\r\n\r\nWe need to add the [coredev.nl][] APT repository so we can download\r\n`perl`. The following commands will add the source and its public\r\nkey. Note that we use `su` to become root for a bit; the password\r\nasked for is `root`'s.\r\n\r\n [coredev.nl]: http://coredev.nl/\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ wget http://coredev.nl/cydia/coredev.pub\r\niphone:~ mobile$ su\r\niphone:/var/mobile root# apt-key add coredev.pub\r\niphone:/var/mobile root# echo 'deb http://coredev.nl/cydia iphone main' > /etc/apt/sources.list.d/coredev.nl.list\r\niphone:/var/mobile root# apt-get update\r\niphone:/var/mobile root# exit\r\n~~~~\r\n\r\nNow, we can install the dependencies we need. `perl` is broken into a\r\nton of small packages, so don't be alarmed when APT tells you it's\r\ninstalling about 100 things.\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ sudo apt-get install perl bison flex m4\r\n~~~~\r\n\r\n(We need to install `m4` manually, even though it should be included\r\nas a dependency of either `bison` or `flex`.)\r\n\r\nThe iPhone OS limits the number of processes that a single user can\r\nrun to some small number. Normally, this isn't a problem, even when\r\nbuilding things like [Emacs][]. However, the TeX Live build system is\r\n*massive*, and you'll quickly run up against this limit. I've written\r\na little script that launches a subshell where this limit is much\r\nhigher (64, in fact), so you can complete the TeX build.\r\n\r\n [Emacs]: emacs\r\n\r\n~~~~{.bash}\r\n#!/bin/bash\r\n(whoami | grep --quiet root) || sudo $0\r\n(whoami | grep --quiet root) || exit\r\nsysctl -w kern.maxprocperuid=256 > /dev/null || exit\r\nulimit -u 64 > /dev/null || exit\r\necho Entering supermode...\r\nsudo -i -u mobile\r\necho Leaving supermode...\r\n~~~~\r\n\r\nTo use, just save this as `supermode` in your home directory, and\r\n`chmod +x supermode`. Then, whenever you need the extra processes, use\r\nthe command `~/supermode`, type in your password if it asks, and a new\r\nshell will launch. To leave, just use `exit`. For the rest of this\r\nguide, I'll assume you're in \"supermode\".\r\n\r\n### Fetching, Installing, and Building\r\n\r\nNow we can fetch the TeX Live sources and the patch.\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ wget ftp://tug.org/historic/systems/texlive/2009/texlive-20091107-source.tar.xz\r\niphone:~ mobile$ wget http://gammalevel.com/forever/texlive-20091107-iPad.patch\r\n~~~~\r\n\r\nMake sure the XZ Utils are installed, then extract the sources and\r\napply the patch. Try to free up as much memory as possible before this\r\nstep; the extraction can take a while, and the file is large.\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ xzcat texlive-20091107-source.tar.xz | tar xv\r\niphone:~ mobile$ cd texlive-20091107-source\r\niphone:~/texlive-20091107-source mobile$ patch -p1 < ../texlive-20091107-iPad.patch\r\n~~~~\r\n\r\nNow, we'll create a seperate build directory, and configure TeX\r\nLive. Make sure to include every part of this massive list of\r\nconfigure options, and note that `pwd` is inside *back-ticks* (the\r\nun-shifted version of `~` on most keyboards). In fact, it'd probably\r\nbe best if you just copy and paste that last command...\r\n\r\n~~~~{.console}\r\niphone:~/texlive-20091107-source mobile$ mkdir ../texlive-build\r\niphone:~/texlive-20091107-source mobile$ cd ../texlive-build\r\niphone:~/texlive-build mobile$ ../texlive-20091107-source/configure --datadir=`pwd` --prefix=/usr --with-tex-banner=\"TeX Live 2009/iPhone OS [gammalevel.com]\" --disable-xetex --disable-shared --disable-missing --disable-largefile --disable-threads --without-x --disable-native-texlive-build --disable-multiplatform --disable-xdvipdfmx\r\n~~~~\r\n\r\nOnce TeX Live is done configuring itself, we're ready to build and\r\ninstall. This part can take a while; go get some coffee.\r\n\r\n~~~~{.console}\r\niphone:~/texlive-build mobile$ make texmf=${TEXMF_PATH:-/usr/share/texmf}\r\niphone:~/texlive-build mobile$ sudo make texmf=${TEXMF_PATH:-/usr/share/texmf} install-strip\r\n~~~~\r\n\r\nCongratulations! You've just installed TeX Live for iPhone! However,\r\nit's not usable yet...\r\n\r\n### Installing the `texmf` Tree\r\n\r\nFirst of all, TeX Live just installed a useless baby `texmf` tree\r\nalready, and into the wrong place no less, so let's remove that:\r\n\r\n~~~~{.console}\r\niphone:~/texlive-build mobile$ cd ../\r\niphone:~ mobile$ sudo rm -rf /usr/texmf /usr/texmf-dist\r\n~~~~\r\n\r\nNow, you need to download, extract, and install the `texmf` tree. This\r\nfile is *gigantic*: around 900MB! This part will probably take even\r\nlonger than the compile, so if you want, you could download it on a\r\ncomputer, *then* move it to your device.\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ wget ftp://tug.org/historic/systems/texlive/2009/texlive-20091107-texmf.tar.xz\r\n~~~~\r\n\r\n(If the download is cancelled somehow, just run the `wget` command\r\nagain with `-c` to ensure it will continue downloading where it left\r\noff.)\r\n\r\nAt this point, you really should make sure the file is correct:\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ sha256sum texlive-20091107-texmf.tar.xz\r\n63e38a218c04e28081e12b4f48969a7e25cf5f81a8c4807aae815a49b575ae5d  texlive-20091107-texmf.tar.xz\r\n~~~~\r\n\r\nNow we can continue with extraction and installation:\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ xzcat texlive-20091107-texmf.tar.xz | tar xv\r\niphone:~ mobile$ sudo mv texlive-20091107-texmf/texmf* /usr/share/\r\n~~~~\r\n\r\n### Finishing Up\r\n\r\nThe `texmf.cnf` we installed has the wrong paths, so we'll replace it:\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ wget http://gammalevel.com/forever/texlive-20091107-texmf.cnf\r\niphone:~ mobile$ sudo mv texlive-20091107-texmf.cnf /usr/share/texmf/web2c/texmf.cnf\r\n~~~~\r\n\r\nNow, we need to tell TeX Live to reconfigure itself after the install:\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ sudo mktexlsr\r\niphone:~ mobile$ sudo texlinks\r\niphone:~ mobile$ sudo texconfig-sys init\r\n~~~~\r\n\r\n(The last command will exit with an error, complaining about failed\r\nformat builds for `xetex`: these are normal, because we disabled it!\r\nIf there's any other errors, though, those are real problems.)\r\n\r\nCongratulations! You have just finished installing TeX Live! To\r\nconfigure your new system (for example, to set the default paper\r\nsize), use this command (though honestly, it's never worked for me):\r\n\r\n~~~~{.console}\r\niphone:~ mobile$ texconfig\r\n~~~~\r\n\r\nThe Hard Way\r\n------------\r\n\r\nI'm still backtracking through what I did to find out all these\r\npatches and configure options, but when I figure it all out again,\r\nI'll put *why* I made those changes here.\r\n",
+      "rght":29,
+      "subtitle":"a popular distribution of LaTeX",
+      "parent":11,
+      "markup":"markdown",
+      "license":1,
+      "title":"TeX Live for iPhone",
+      "url":"/iphoneos/ports/texlive",
+      "level":3,
+      "lft":28,
+      "forceurl":"",
+      "tree_id":1,
+      "shortname":"texlive"
+    }
+  }
+]
