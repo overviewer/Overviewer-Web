@@ -78,10 +78,6 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'xx%f5usqol%i9pjdx26dn)qh&b_imi5&fx+yd^s1cwary$fa!i'
 
-# URL of the login page.
-LOGIN_URL = '/login'
-LOGIN_REDIRECT_URL = '/'
-
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -110,6 +106,17 @@ MIDDLEWARE_CLASSES = (
 #    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.google.GoogleBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# URL of the login page.
+LOGIN_URL = '/login'
+LOGIN_ERROR_URL = '/login-error'
+LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_ERROR_KEY = 'social_errors'
+
 ROOT_URLCONF = 'overviewer_org.urls'
 
 TEMPLATE_DIRS = (
@@ -134,11 +141,11 @@ INSTALLED_APPS = (
     
     'mptt',
     'reversion',
-    
     'django.contrib.markup',
     'typogrify',
-    
     'podstakannik',
+    
+    'social_auth',
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
