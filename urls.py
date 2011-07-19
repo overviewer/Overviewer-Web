@@ -1,5 +1,12 @@
 from django.conf.urls.defaults import patterns, include, url
 
+from django.conf import settings
+
+def login_error(request):
+    """Error view"""
+    error_msg = request.session.pop(settings.SOCIAL_AUTH_ERROR_KEY, None)
+    raise ValueError(error_msg)
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -16,9 +23,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     
     # login and logout
-    (r'^login$', 'django.contrib.auth.views.login'),
-    (r'^logout$', 'django.contrib.auth.views.logout_then_login'),
-    url(r'', include('social_auth.urls')),
+    url(r'^login$', 'social_auth.views.auth', name='socialauth_begin', kwargs={'backend' : 'github'}),
+    (r'^logout$', 'django.contrib.auth.views.logout'),
+    (r'^login-error$', login_error),
+    url(r'^auth/', include('social_auth.urls')),
 
     # fallback on podstakannik page
     url(r'^', include('podstakannik.urls')),
