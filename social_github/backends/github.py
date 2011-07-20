@@ -22,9 +22,15 @@ class GitHubBackend(OAuthBackend):
     def get_user_details(self, response):
         """Return user details from github account"""
         print "get_user_details", response
+        email = response.get('email', None)
+        if email is None:
+            email = ''
+        name = response.get('name', None)
+        if name is None:
+            name = ''
         return {USERNAME: response['login'],
-                'email': response.get('email', ''),
-                'fullname': response.get('name', ''),
+                'email': email,
+                'fullname': name,
                 'first_name': '',
                 'last_name': ''}
 
