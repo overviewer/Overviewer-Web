@@ -29,7 +29,7 @@ file list
   {% for file in files %}
   <tr>
 	<td><a href="{{ file.get_absolute_url }}">{{ file.name }}</a></td>
-	<td>{% if file.owner %}{{ file.owner.name }}{% else %}-{% endif %}</td>
+	<td>{% if file.owner %}{{ file.owner.username }}{% else %}-{% endif %}</td>
 	<td>{{ file.date }}</td>
 	<td>{{ file.nice_size }}</td>
 	<td><code>{{ file.md5 }}</code></td>
