@@ -34,6 +34,8 @@ urlpatterns = patterns('',
     url(r'^auth/', include('social_auth.urls')),
 
     # map uploader
+    url(r'^upload$', redirect('/uploader/')),
+    url(r'^upload/$', redirect('/uploader/')),
     url(r'^uploader$', redirect('/uploader/')),
     url(r'^uploader/', include('uploader.urls')),
 

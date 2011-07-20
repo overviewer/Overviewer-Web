@@ -38,6 +38,8 @@ $(document).ready(function() {
 {% block body %}
 <h1>overviewer.org uploader</h1>
 
+<p>(or, check out the <a href="{% url uploader.views.list_uploads %}">uploaded file list</a>.)</p>
+
 {% if file %}
 <h2>upload successful!</h2>
 <p>
