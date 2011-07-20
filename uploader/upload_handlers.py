@@ -23,6 +23,8 @@ class UploadProgressCachedHandler(FileUploadHandler):
         self.content_length = content_length
         if 'X-Progress-ID' in self.request.GET:
             self.progress_id = self.request.GET['X-Progress-ID']
+        elif 'X-Progress-ID' in self.request.META:
+            self.progress_id = self.request.META['X-Progress-ID']
         if self.progress_id:
             self.cache_key = "%s_%s" % (self.request.META['REMOTE_ADDR'], self.progress_id )
             cache.set(self.cache_key, {

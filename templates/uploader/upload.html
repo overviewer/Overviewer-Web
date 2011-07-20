@@ -49,7 +49,7 @@ File <em>{{ file.name }}</em> ({{ file.nice_size }}) uploaded successfully. MD5:
 <p>If you want, you can <a href="/login?next=/uploader/">log in via GitHub</a> to attach uploaded files to your name so they're easier for us to find.</p>
 {% endif %}
 
-<form method="POST" action="" enctype="multipart/form-data">
+<form method="POST" action="" enctype="multipart/form-data" id="upload_form">
   {% csrf_token %}
   <table>
 	{{ form }}
@@ -57,7 +57,7 @@ File <em>{{ file.name }}</em> ({{ file.nice_size }}) uploaded successfully. MD5:
   <p><input type="submit" name="commit" value="Upload" /></p>
 </form>
 
-<div id="progress_container">
+<div class="quiet" id="progress_container">
   <div id="progress_filename"></div>
   <div id="progress_bar">
 	<div id="progress_indicator"></div>
