@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Deleting {{ file.name }}{% endblock %}
+
+{% block body %}
+<h1>Deleting {{ file.name }}</h1>
+<p>Go back to the <a href="{% url uploader.views.list_uploads %}">file list</a>.</p>
+
+<form method="POST" action="">
+  {% csrf_token %}
+  <input type="submit" name="commit" value="DELETE" />
+</form>
+
+{% endblock body %}

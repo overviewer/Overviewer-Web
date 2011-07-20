@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load markup %}
+{% load typogrify %}
+
+{% block title %}overviewer.org uploader -- list{% endblock %}
+
+{% block body %}
+{% filter markdown:"extra"|typogrify %}
+
+overviewer.org uploader
+=======================
+
+file list
+---------
+
+{% if files %}
+<table style="border: 1px solid gray;">
+  <tr>
+	<th>Name</th>
+	<th>Owner</th>
+	<th>Date</th>
+	<th>Size</th>
+	<th>MD5</th>
+	{% if perms.uploader.delete_file %}<th>Delete</th>{% endif %}
+  </tr>
+  {% for file in files %}
+  <tr>
+	<td><a href="{{ file.get_absolute_url }}">{{ file.name }}</a></td>
+	<td>{% if file.owner %}{{ file.owner.name }}{% else %}-{% endif %}</td>
+	<td>{{ file.date }}</td>
+	<td>{{ file.nice_size }}</td>
+	<td><code>{{ file.md5 }}</code></td>
+	{% if perms.uploader.delete_file %}<td><a href="{% url uploader.views.delete file.id %}">delete</a></td>{% endif %}
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+Nothing to see here. :(
+{% endif %}
+
+{% endfilter %}
+{% endblock body %}

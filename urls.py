@@ -1,11 +1,16 @@
 from django.conf.urls.defaults import patterns, include, url
-
 from django.conf import settings
+from django.http import HttpResponseRedirect
 
 def login_error(request):
     """Error view"""
     error_msg = request.session.pop(settings.SOCIAL_AUTH_ERROR_KEY, None)
     raise ValueError(error_msg)
+
+def redirect(target):
+    def redirect_view(request):
+        return HttpResponseRedirect(target)
+    return redirect_view
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -27,6 +32,10 @@ urlpatterns = patterns('',
     (r'^logout$', 'django.contrib.auth.views.logout'),
     (r'^login-error$', login_error),
     url(r'^auth/', include('social_auth.urls')),
+
+    # map uploader
+    url(r'^uploader$', redirect('/uploader/')),
+    url(r'^uploader/', include('uploader.urls')),
 
     # fallback on podstakannik page
     url(r'^', include('podstakannik.urls')),

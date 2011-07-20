@@ -1,4 +1,5 @@
 # Django settings for osubus_web project.
+from django.conf import global_settings
 
 # first, get the project directory
 import os.path
@@ -106,6 +107,10 @@ MIDDLEWARE_CLASSES = (
 #    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
+FILE_UPLOAD_HANDLERS = (
+    'uploader.upload_handlers.UploadProgressCachedHandler',
+) + global_settings.FILE_UPLOAD_HANDLERS
+
 AUTHENTICATION_BACKENDS = (
     'social_github.backends.github.GitHubBackend',
     'django.contrib.auth.backends.ModelBackend',
@@ -153,6 +158,8 @@ INSTALLED_APPS = (
     
     'social_auth',
     'social_github',
+    
+    'uploader',
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',

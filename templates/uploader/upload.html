@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}overviewer.org uploader{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/static/styles/upload.css" media="screen, projection" />
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/jquery.uploadProgress.js"></script>
+<script type="text/javascript">
+$(document).ready(function() { 
+    $(function() {
+        $('#upload_form').uploadProgress({
+            jqueryPath: "/static/js/jquery.js",
+            progressBar: '#progress_indicator',
+            progressUrl: '{% url uploader.views.upload_progress %}',
+            start: function() {
+                $("#upload_form").hide();
+                filename = $("#id_file").val().split(/[\/\\]/).pop();
+                $("#progress_filename").html('Uploading ' + filename + "...");
+                $("#progress_container").show();
+            },
+            uploadProgressPath: "/static/js/jquery.uploadProgress.js",
+            uploading: function(upload) {
+                if (upload.percents == 100) {
+                    window.clearTimeout(this.timer);
+                    $("#progress_filename").html('Processing ' + filename + "...");
+                } else {
+                    $("#progress_filename").html('Uploading ' + filename + ': ' + upload.percents + '%');
+                }
+            },
+            interval: 1000
+        });
+    });
+});
+</script>
+{% endblock head %}
+
+{% block body %}
+<h1>overviewer.org uploader</h1>
+
+{% if file %}
+<h2>upload successful!</h2>
+<p>
+File <em>{{ file.name }}</em> ({{ file.nice_size }}) uploaded successfully. MD5: <strong>{{ file.md5 }}</strong></p>
+<hr />
+{% endif %}
+
+{% if not user.is_authenticated %}
+<p>If you want, you can <a href="/login?next=/uploader/">log in via GitHub</a> to attach uploaded files to your name so they're easier for us to find.</p>
+{% endif %}
+
+<form method="POST" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+  <table>
+	{{ form }}
+  </table>
+  <p><input type="submit" name="commit" value="Upload" /></p>
+</form>
+
+<div id="progress_container">
+  <div id="progress_filename"></div>
+  <div id="progress_bar">
+	<div id="progress_indicator"></div>
+  </div>
+</div>
+
+{% endblock body %}
