@@ -1,6 +1,7 @@
 from django.db import models
 from django import forms
 from django.contrib.auth.models import User
+from django.db.models.signals import post_delete
 
 from hashlib import md5
 
@@ -73,6 +74,12 @@ class File(DirtyFieldsMixin):
         if 'file' in dirty_fields:
             self.calculate_file_data()
         super(File, self).save(*args, **kwargs)
+
+def cleanup_deleted_file(sender, **kwargs):
+    obj = kwargs['instance']
+    obj.file.delete(save=False)
+
+post_delete.connect(cleanup_deleted_file, sender=File)    
 
 class FileForm(forms.ModelForm):
     class Meta:
