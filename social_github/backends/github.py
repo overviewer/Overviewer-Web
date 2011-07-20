@@ -23,8 +23,8 @@ class GitHubBackend(OAuthBackend):
         """Return user details from github account"""
         print "get_user_details", response
         return {USERNAME: response['login'],
-                'email': response['email'],
-                'fullname': response['name'],
+                'email': response.get('email', ''),
+                'fullname': response.get('name', ''),
                 'first_name': '',
                 'last_name': ''}
 
