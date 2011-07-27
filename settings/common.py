@@ -160,6 +160,7 @@ INSTALLED_APPS = (
     'social_github',
     
     'uploader',
+    'oo_extra',
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
