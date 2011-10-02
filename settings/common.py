@@ -128,6 +128,10 @@ GITHUB_OAUTH2_CLIENT_KEY = '7abf70feb670e4e594a6'
 GITHUB_OAUTH2_CLIENT_SECRET = 'bead9d1870ef6c963c0256e0b74fdee36d6f746a'
 SOCIAL_AUTH_ERROR_KEY = 'social_errors'
 
+# doc build post-hook key
+UPDATE_DOCS_KEY = 'a9ffffab42257e86'
+UPDATE_DOCS_COMMAND = '/home/agrif/local/mco-docs/gen-docs.sh'
+
 ROOT_URLCONF = 'overviewer_org.urls'
 
 TEMPLATE_DIRS = (
