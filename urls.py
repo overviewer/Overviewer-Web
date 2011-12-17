@@ -40,7 +40,7 @@ urlpatterns = patterns('',
     url(r'^uploader/', include('uploader.urls')),
     
     # doc update hook
-    url(r'^docs/update$', 'oo_extra.views.update_docs'),
+    url(r'^hooks/update$', 'oo_extra.views.update'),
     
     # fallback on podstakannik page
     url(r'^', include('podstakannik.urls')),
