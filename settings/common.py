@@ -130,7 +130,7 @@ SOCIAL_AUTH_ERROR_KEY = 'social_errors'
 
 # doc build post-hook key
 UPDATE_HOOK_KEY = 'a9ffffab42257e86'
-UPDATE_HOOK_COMMAND = '/home/agrif/local/mco-docs/gen-docs.sh'
+UPDATE_HOOK_COMMAND = '/home/agrif/local/mco-hook/hook.sh'
 
 ROOT_URLCONF = 'overviewer_org.urls'
 
