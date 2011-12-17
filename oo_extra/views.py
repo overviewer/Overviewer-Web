@@ -7,7 +7,8 @@ import os
 @csrf_exempt
 def update(request):
     if request.method == 'POST' and 'payload' in request.POST and 'key' in request.GET and request.GET['key'] == settings.UPDATE_HOOK_KEY:
-        data = json.load(request)
+        data = request.POST['payload']
+        data = json.loads(data)
         ref = data['ref']
         os.system("%s %s" % (settings.UPDATE_HOOK_COMMAND, ref))
         return HttpResponse('<pre>Hook Started</pre>\n')
