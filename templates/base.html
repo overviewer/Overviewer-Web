@@ -1,50 +1,46 @@
-<?xml version="1.0" encoding="utf-8" ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-	<link rel="stylesheet" type="text/css" href="/static/styles/codehilite.css" media="screen, projection, print" />
-	
-	<!--
-	   this page uses Blueprint CSS. See blueprintcss.org for details.
-	  -->
-	<link rel="stylesheet" type="text/css" href="/static/styles/screen.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="/static/styles/print.css" media="print"/>
-	<!--[if IE]><link rel="stylesheet" type="text/css" href="/static/styles/ie.css" media="screen, projection" /><![endif]-->
-	
-	<!-- custom overrides for blueprint, codehilite -->
-	<link rel="stylesheet" type="text/css" href="/static/styles/custom.css" media="screen, projection, print" />
-	<link rel="stylesheet" type="text/css" href="/static/styles/customscreen.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="/static/styles/customprint.css" media="print" />
-	
-	{% block head %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+    <!-- this site uses bootstrap: http://twitter.github.com/bootstrap/ -->
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/custom.css" />
 
-	<title>{% block title %}{% endblock %}</title>
+    <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27756118-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+
+</script>
+	{% block head %}{% endblock %}
   </head>
   
   <body>
-	<div class="container">
-	  
-	  {% if user.is_authenticated %}
-	  <div class="quiet small span-24 last">
-		Logged in as {{ user }}. [<a href="/logout">logout</a>].
-		<br />
-		{% block admin %}{% endblock %}
-	  </div>
-	  {% endif %}
-
-	  {% block navigation %}{% endblock %}
-	  
-	  <div class="span-24 last">
-		{% block body %}{% endblock %}
-	  </div>
-	  
-	  <div class="quiet small span-24 last">
-		{% block footer %}{% endblock %}
-	  </div>
-	  <div class="quiet small span-24 last">
-		{% block license %}{% endblock %}
-	  </div>
-
-	</div>
+    <div class="container">
+      <div class="masthead">
+        <h1>The Minecraft Overviewer</h1>
+      </div>
+      <hr />
+	  {% block body %}
+	  {% endblock body %}
+      <hr />
+      <div class="footer">
+        <a href="/login">log in via GitHub</a> <span class="divider">|</span>
+        <a href="/example">example</a> <span class="divider">|</span>
+        <a href="/uploader">uploader</a> <span class="divider">|</span>
+        <a href="/debian/info">debian repository</a> <span class="divider">|</span>
+        <a href="/irc">#overviewer on freenode</a>
+      </div>
+    </div>
   </body>
 </html>

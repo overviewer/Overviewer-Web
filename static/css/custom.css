@@ -1,0 +1,87 @@
+body
+{
+    position: relative;
+    background: #E3EFF1;
+    background: #eaeef0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+
+}
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+
+}
+
+hr {
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.masthead
+{
+    margin-top: 3em;
+    margin-bottom: 4em;
+    text-align: center;
+}
+
+.masthead h1
+{
+    font-size: 4em;
+}
+
+.hugebutton
+{
+    text-align: center;
+}
+
+.hugebutton img
+{
+    margin-bottom: 1em;
+    
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.53);
+    -moz-box-shadow: 0px 0px 15px rgba(0,0,0,0.53);
+    -webkit-box-shadow: 0px 0px 15px rgba(0,0,0,0.53);
+}
+
+.hugebutton img:hover
+{
+    box-shadow: 0px 0px 15px #000;
+    -moz-box-shadow: 0px 0px 15px #000;
+    -webkit-box-shadow: 0px 0px 15px #000;
+}
+
+.hugebutton p
+{
+    font-weight: bold;
+}
+
+.hugebutton a
+{
+    color: #404040;
+}
+
+.hugebutton a:hover
+{
+    text-decoration: none;
+}
+
+.footer
+{
+	margin-bottom: 2em;
+    text-align: center;
+    font-size: 0.85em;
+    color: #888;
+}
+
+.footer a:link, .footer a:visited
+{
+    color: #888;
+}
+
+.footer a:hover, .footer a:active
+{
+    color: #888;
+}

@@ -1,8 +1,0 @@
-/* custom overrides for gamma-level.com */
-/* specifically for printing */
-
-/* hide this for printers */
-.noprint
-{
-	display: none;
-}
