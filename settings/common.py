@@ -18,7 +18,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 # get rid of pesky slashes on flatpages
-APPEND_SLASH = False
+#APPEND_SLASH = False
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -103,8 +103,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
-#    'reversion.middleware.RevisionMiddleware',
-#    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
 FILE_UPLOAD_HANDLERS = (
@@ -123,7 +122,7 @@ SOCIAL_AUTH_IMPORT_BACKENDS = (
 # URL of the login page.
 LOGIN_URL = '/login'
 LOGIN_ERROR_URL = '/login-error'
-LOGIN_REDIRECT_URL = '/landing'
+LOGIN_REDIRECT_URL = '/'
 GITHUB_OAUTH2_CLIENT_KEY = '7abf70feb670e4e594a6'
 GITHUB_OAUTH2_CLIENT_SECRET = 'bead9d1870ef6c963c0256e0b74fdee36d6f746a'
 SOCIAL_AUTH_ERROR_KEY = 'social_errors'
@@ -152,13 +151,10 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'django.contrib.flatpages',
+    'django.contrib.flatpages',
     
-    'mptt',
-    'reversion',
     'django.contrib.markup',
     'typogrify',
-    'podstakannik',
     
     'social_auth',
     'social_github',

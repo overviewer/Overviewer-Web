@@ -42,7 +42,7 @@ def list_uploads(request):
     files = File.objects.all()
     return render_to_response('uploader/list.html', {'files' : files}, context_instance=RequestContext(request))
 
-@permission_required('podstakannik.delete_file')
+@permission_required('uploader.delete_file')
 def delete(request, file_id):
     f = get_object_or_404(File, id=file_id)
     
@@ -50,5 +50,4 @@ def delete(request, file_id):
         f.delete()
         return HttpResponseRedirect(reverse(list_uploads))
 
-    # re-use podstakannik delete page here, for great justice!
     return render_to_response('uploader/delete.html', {'file' : f}, context_instance=RequestContext(request))
