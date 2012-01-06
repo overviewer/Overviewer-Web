@@ -76,7 +76,7 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
+# Make this unique, and don't share it with anybody. (overridden later)
 SECRET_KEY = 'xx%f5usqol%i9pjdx26dn)qh&b_imi5&fx+yd^s1cwary$fa!i'
 
 # List of callables that know how to import templates from various sources.
@@ -127,11 +127,11 @@ GITHUB_OAUTH2_CLIENT_KEY = '7abf70feb670e4e594a6'
 GITHUB_OAUTH2_CLIENT_SECRET = 'bead9d1870ef6c963c0256e0b74fdee36d6f746a'
 SOCIAL_AUTH_ERROR_KEY = 'social_errors'
 
-# doc build post-hook key
+# doc build post-hook key (overridden later)
 UPDATE_HOOK_KEY = 'a9ffffab42257e86'
 UPDATE_HOOK_COMMAND = '/home/agrif/local/mco-hook/hook.sh'
 
-# package post-hook key
+# package post-hook key (overridden later)
 PACKAGE_HOOK_KEY = 'Serend1p1t0usC4c0ph0ny'
 
 ROOT_URLCONF = 'overviewer_org.urls'
