@@ -9,6 +9,7 @@ from uploader.models import File
 
 class Package(models.Model):
     platform = models.CharField(max_length=64)
+    repo = models.URLField()
     checkout = models.CharField(max_length=64)
     commit = models.CharField(max_length=128)
     date = models.DateTimeField()
@@ -19,7 +20,7 @@ class Package(models.Model):
     revision = models.PositiveIntegerField()
     
     class Meta:
-        ordering = ['checkout', '-major', '-minor', '-revision', 'platform', '-date']
+        ordering = ['repo', 'checkout', '-major', '-minor', '-revision', 'platform', '-date']
     
     @property
     def version(self):
@@ -29,14 +30,14 @@ class Package(models.Model):
         return self.url
     
     def __unicode__(self):
-        return '{0} {1} ({2})'.format(self.platform, self.version, self.checkout)
+        return '{0} {1}'.format(self.platform, self.version)
 
 class PackageModelForm(forms.ModelForm):
     version = forms.CharField(max_length=64)
     
     class Meta:
         model = Package
-        fields = ('platform', 'checkout', 'commit', 'version', 'url')
+        fields = ('platform', 'repo', 'checkout', 'commit', 'version', 'url')
     
     def __init__(self, *args, **kwargs):
         if 'instance' in kwargs.keys():
