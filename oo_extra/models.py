@@ -8,7 +8,8 @@ from django.dispatch import receiver
 from uploader.models import File
 
 class Package(models.Model):
-    target = models.CharField(max_length=64)
+    platform = models.CharField(max_length=64)
+    checkout = models.CharField(max_length=64)
     commit = models.CharField(max_length=128)
     date = models.DateTimeField()
     url = models.URLField()
@@ -18,7 +19,7 @@ class Package(models.Model):
     revision = models.PositiveIntegerField()
     
     class Meta:
-        ordering = ['-major', '-minor', '-revision', 'target', '-date']
+        ordering = ['checkout', '-major', '-minor', '-revision', 'platform', '-date']
     
     @property
     def version(self):
@@ -28,14 +29,14 @@ class Package(models.Model):
         return self.url
     
     def __unicode__(self):
-        return '{0} {1}'.format(self.target, self.version)
+        return '{0} {1} ({2})'.format(self.platform, self.version, self.checkout)
 
 class PackageModelForm(forms.ModelForm):
     version = forms.CharField(max_length=64)
     
     class Meta:
         model = Package
-        fields = ('target', 'commit', 'version', 'url')
+        fields = ('platform', 'checkout', 'commit', 'version', 'url')
     
     def __init__(self, *args, **kwargs):
         if 'instance' in kwargs.keys():
