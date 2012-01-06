@@ -9,7 +9,7 @@ from uploader.models import File
 
 class Package(models.Model):
     platform = models.CharField(max_length=64)
-    repo = models.URLField()
+    repo = models.CharField(max_length=200)
     checkout = models.CharField(max_length=64)
     commit = models.CharField(max_length=128)
     date = models.DateTimeField()
