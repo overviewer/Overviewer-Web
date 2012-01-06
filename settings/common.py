@@ -131,6 +131,9 @@ SOCIAL_AUTH_ERROR_KEY = 'social_errors'
 UPDATE_HOOK_KEY = 'a9ffffab42257e86'
 UPDATE_HOOK_COMMAND = '/home/agrif/local/mco-hook/hook.sh'
 
+# package post-hook key
+PACKAGE_HOOK_KEY = 'Serend1p1t0usC4c0ph0ny'
+
 ROOT_URLCONF = 'overviewer_org.urls'
 
 TEMPLATE_DIRS = (

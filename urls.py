@@ -50,6 +50,7 @@ urlpatterns = patterns('',
     url(r'^uploader$', redirect('/uploader/')),
     url(r'^uploader/', include('uploader.urls')),
     
-    # doc update hook
+    # hooks!
     url(r'^hooks/update$', 'oo_extra.views.update'),
+    url(r'^hooks/package$', 'oo_extra.views.package_hook'),
 )

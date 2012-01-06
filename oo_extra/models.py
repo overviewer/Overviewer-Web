@@ -1,8 +1,70 @@
 from django.db import models
 
+import datetime
+from django import forms
+
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from uploader.models import File
+
+class Package(models.Model):
+    target = models.CharField(max_length=64)
+    commit = models.CharField(max_length=128)
+    date = models.DateTimeField()
+    url = models.URLField()
+    
+    major = models.PositiveIntegerField()
+    minor = models.PositiveIntegerField()
+    revision = models.PositiveIntegerField()
+    
+    class Meta:
+        ordering = ['-major', '-minor', '-revision', 'target', '-date']
+    
+    @property
+    def version(self):
+        return '{0}.{1}.{2}'.format(self.major, self.minor, self.revision)
+    
+    def get_absolute_url(self):
+        return self.url
+    
+    def __unicode__(self):
+        return '{0} {1}'.format(self.target, self.version)
+
+class PackageModelForm(forms.ModelForm):
+    version = forms.CharField(max_length=64)
+    
+    class Meta:
+        model = Package
+        fields = ('target', 'commit', 'version', 'url')
+    
+    def __init__(self, *args, **kwargs):
+        if 'instance' in kwargs.keys():
+            if not 'initial' in kwargs.keys():
+                kwargs['initial'] = {}
+            
+            kwargs['initial']['version'] = kwargs['instance'].version
+        super(PackageModelForm, self).__init__(*args, **kwargs)
+    
+    def clean_version(self):
+        version = self.cleaned_data['version']
+        try:
+            version = map(int, version.split('.'))
+            if not len(version) == 3:
+                raise ValueError('version does not have 2 dots')
+        except ValueError:
+            raise forms.ValidationError('invalid version string (form #.#.#)')
+        return self.cleaned_data['version']
+    
+    def save(self, force_insert=False, force_update=False, commit=True):
+        m = super(PackageModelForm, self).save(commit=False)
+        
+        m.major, m.minor, m.revision = map(int, self.cleaned_data['version'].split('.'))
+        m.date = datetime.datetime.now()
+        m.full_clean()
+        
+        if commit:
+            m.save()
+        return m
 
 class Message(models.Model):
     text = models.CharField(max_length=512)
