@@ -53,4 +53,8 @@ urlpatterns = patterns('',
     # hooks!
     url(r'^hooks/update$', 'oo_extra.views.update'),
     url(r'^hooks/package$', 'oo_extra.views.package_hook'),
+    
+    # zinnia blog
+    url(r'^blog/comments/', include('django.contrib.comments.urls')),
+    url(r'^blog/', include('zinnia.urls')),
 )

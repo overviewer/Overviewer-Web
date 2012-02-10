@@ -94,6 +94,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
     'django.core.context_processors.request',
+    
+    # zinnia
+    'zinnia.context_processors.version',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -164,7 +167,13 @@ INSTALLED_APPS = (
     
     'uploader',
     'oo_extra',
-
+    
+    # zinnia
+    'django.contrib.comments',
+    'tagging',
+    'mptt',
+    'zinnia',
+    
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
