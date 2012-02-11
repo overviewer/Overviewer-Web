@@ -21,7 +21,7 @@
 
 {% block body %}
 <div class="row">
-  <div class="span12">
+  <div class="span8">
 	{% block content %}{% endblock %}
   </div>
   <div class="span4">
@@ -32,7 +32,7 @@
 		  <input type="text" value="{% trans "Keywords..." %}" name="pattern" id="searchbox" onfocus="this.value=''" />
 		  <input type="submit" class="submitbutton" value="OK" />
 		  <a title="{% trans 'You can use - to exclude words or phrases, &quot;double quotes&quot; for exact phrases and the AND/OR boolean operators combined with parenthesis for complex searchs.' %}">
-			<img src="{{ STATIC_URL }}zinnia/img/help.png" alt="?" width="14" height="14" />
+			<i class="icon-question-sign"></i>
 		  </a>
 		</p>
 	  </form>
