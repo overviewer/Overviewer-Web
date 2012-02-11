@@ -169,3 +169,8 @@ hr {
 {
 	text-align: center;
 }
+
+#searchbox, #searchbutton
+{
+	margin-bottom: 0.5em;
+}
