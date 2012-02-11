@@ -131,3 +131,41 @@ hr {
 {
 	clear: both;
 }
+
+.news h1
+{
+	margin-bottom: 0.2em;
+}
+
+.news-title
+{
+	font-size: 1.2em;
+	font-weight: bold;
+	color: rgba(0, 0, 0, 0.5);
+	text-align: center;
+	padding-top: 0.5em;
+}
+
+.news-more
+{
+	text-align: center;
+	font-size: 1.1em;
+	padding-top: 0.5em;
+}
+
+.news-item
+{
+	font-size: 1.3em;
+	padding-top: 0.5em;
+}
+
+.news-info
+{
+	color: rgba(0, 0, 0, 0.5);
+	font-size: 0.9em;
+}
+
+.center
+{
+	text-align: center;
+}

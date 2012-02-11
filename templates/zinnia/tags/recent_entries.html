@@ -1,0 +1,20 @@
+{% load i18n %}
+
+<!--<div class="news-title span2">Latest Posts</div>-->
+
+{% for entry in entries %}
+{% if forloop.counter == 1 or forloop.counter == 3 %}
+<div class="span4 center">
+{% else %}
+<div class="span3 center">
+{% endif %}
+<div class="news-item"><a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a></div>
+<div class="news-info">{% if entry.authors.count %} by {% for author in entry.authors.all %}{% if forloop.first %}{{ author }}{% endif %}{% endfor %}{% endif %} on {{ entry.creation_date|date:"DATE_FORMAT" }}</div>
+</div>
+{% empty %}
+<div class="span4 offset4">
+<div class="news-item">{% trans "No entries yet." %}</div>
+</div>
+{% endfor %}
+
+<div class="news-more span1"><a href="/blog/">more <i class="icon-chevron-right"></i></a></div>

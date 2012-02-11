@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load zinnia_tags %}
 
 {% block title %}Minecraft Overviewer{% endblock %}
 
@@ -30,5 +31,9 @@
       for downloads, issue reporting, and access to the code.
     </p>
   </div>
+</div>
+<hr />
+<div class="row">
+  {% get_recent_entries 3 %}
 </div>
 {% endblock body %}
