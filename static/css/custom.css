@@ -34,6 +34,12 @@ hr {
 	color: rgba(0, 0, 0, 0.8);
 }
 
+.authmessage
+{
+	margin-top: 1em;
+	color: rgba(0, 0, 0, 0.5);
+}
+
 .hugebutton
 {
     text-align: center;

@@ -31,6 +31,9 @@
     <div class="container">
       <div class="masthead">
         <h1><a href="/">The Minecraft Overviewer</a></h1>
+		{% if user.is_authenticated %}
+		<p class="authmessage">(logged in as {{ user.username }}. <a href="/logout">log out</a>.)</p>
+		{% endif %}
       </div>
       <hr />
 	  {% block body %}
