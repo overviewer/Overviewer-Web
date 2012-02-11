@@ -21,19 +21,19 @@
 
 {% block body %}
 <div class="row">
-  <div class="span8">
+  <div class="span9">
 	{% block content %}{% endblock %}
   </div>
-  <div class="span4">
+  <div class="span3">
 	<div id="widget-search" class="widget">
-	  <h3>{% trans "Search" %}</h3>
-	  <form method="get" id="searchform" action="{% url zinnia_entry_search %}">
+	  <form method="get" id="searchform" action="{% url zinnia_entry_search %}" class="form-search">
 		<p>
-		  <input type="text" value="{% trans "Keywords..." %}" name="pattern" id="searchbox" onfocus="this.value=''" />
-		  <input type="submit" class="submitbutton" value="OK" />
+		  <input type="text" name="pattern" id="searchbox" class="input-medium search-query" />
+		  <input type="submit" class="btn" value="Search" />
+		  <!--
 		  <a title="{% trans 'You can use - to exclude words or phrases, &quot;double quotes&quot; for exact phrases and the AND/OR boolean operators combined with parenthesis for complex searchs.' %}">
 			<i class="icon-question-sign"></i>
-		  </a>
+		  </a>-->
 		</p>
 	  </form>
 	</div>

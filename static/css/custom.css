@@ -85,3 +85,49 @@ hr {
 {
     color: #888;
 }
+
+.entry-title a
+{
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.entry-info
+{
+	font-size: 0.9em;
+	font-style: italic;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.continue-reading
+{
+	font-size: 0.9em;
+	font-style: italic;
+}
+
+.entry-footer
+{
+	text-align: right;
+}
+
+.entry-footer p
+{
+	display: inline;
+	margin-right: 1em;
+}
+
+.entry-tags, .entry-comments
+{
+	font-size: 0.9em;
+	font-style: italic;
+}
+
+.float-left
+{
+	float: left;
+	margin-right: 3em;
+}
+
+.float-clear
+{
+	clear: both;
+}
