@@ -137,6 +137,12 @@ UPDATE_HOOK_COMMAND = '/home/agrif/local/mco-hook/hook.sh'
 # package post-hook key (overridden later)
 PACKAGE_HOOK_KEY = 'Serend1p1t0usC4c0ph0ny'
 
+# tell zinnia blog not to use email :(
+ZINNIA_MAIL_COMMENT_NOTIFICATION_RECIPIENTS = []
+ZINNIA_MAIL_COMMENT_REPLY = False
+ZINNIA_MAIL_COMMENT_AUTHORS = False
+ZINNIA_AUTO_MODERATE_COMMENTS = False
+
 ROOT_URLCONF = 'overviewer_org.urls'
 
 TEMPLATE_DIRS = (

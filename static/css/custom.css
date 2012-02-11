@@ -29,6 +29,11 @@ hr {
     font-size: 4em;
 }
 
+.masthead a
+{
+	color: rgba(0, 0, 0, 0.8);
+}
+
 .hugebutton
 {
     text-align: center;
@@ -173,4 +178,28 @@ hr {
 #searchbox, #searchbutton
 {
 	margin-bottom: 0.5em;
+}
+
+.post-author
+{
+	border: 2px solid #AAA;
+}
+
+.comment-info
+{
+	font-style: italic;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.gravatar
+{
+	float: left;
+	margin-right: 1.5em;
+	
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.53);
+    -moz-box-shadow: 0px 0px 15px rgba(0,0,0,0.53);
+    -webkit-box-shadow: 0px 0px 15px rgba(0,0,0,0.53);
 }

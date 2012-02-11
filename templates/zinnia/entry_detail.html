@@ -95,9 +95,8 @@
   <h3>{% trans "Comments" %}</h3>
   {% with comment_list=object.comments %}
   {% if comment_list.count %}
-  <ol id="comment-list">
     {% for comment in comment_list %}
-    <li id="comment_{{ comment.pk }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %}">
+    <div id="comment_{{ comment.pk }}" class="well comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %}">
       <img src="{% get_gravatar comment.email 60 "G" %}"
            class="gravatar photo" alt="{{ comment.user_name }}"/>
       <p class="comment-info">
@@ -113,9 +112,8 @@
         </abbr>
       </p>
       {{ comment.comment|linebreaks }}
-    </li>
+    </div>
     {% endfor %}
-  </ol>
     {% if not object.comments_are_open %}
   <p>{% trans "Comments are closed." %}</p>
     {% endif %}
