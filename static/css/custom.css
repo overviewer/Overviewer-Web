@@ -20,13 +20,14 @@ hr {
 .masthead
 {
     margin-top: 3em;
-    margin-bottom: 4em;
+    margin-bottom: 1em;
     text-align: center;
 }
 
 .masthead h1
 {
     font-size: 4em;
+	margin-bottom: 0.25em;
 }
 
 .masthead a
@@ -34,9 +35,8 @@ hr {
 	color: rgba(0, 0, 0, 0.8);
 }
 
-.authmessage
+.tagline
 {
-	margin-top: 1em;
 	color: rgba(0, 0, 0, 0.5);
 }
 
