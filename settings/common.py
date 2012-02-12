@@ -114,20 +114,20 @@ FILE_UPLOAD_HANDLERS = (
 ) + global_settings.FILE_UPLOAD_HANDLERS
 
 AUTHENTICATION_BACKENDS = (
-    'social_github.backends.github.GitHubBackend',
+    'social_auth.backends.contrib.github.GithubBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_IMPORT_BACKENDS = (
-    'social_github.backends',
+SOCIAL_AUTH_ENABLED_BACKENDS = (
+    'github',
 )
 
 # URL of the login page.
 LOGIN_URL = '/login'
 LOGIN_ERROR_URL = '/login-error'
 LOGIN_REDIRECT_URL = '/'
-GITHUB_OAUTH2_CLIENT_KEY = '7abf70feb670e4e594a6'
-GITHUB_OAUTH2_CLIENT_SECRET = 'bead9d1870ef6c963c0256e0b74fdee36d6f746a'
+GITHUB_APP_ID = '7abf70feb670e4e594a6'
+GITHUB_APP_SECRET = 'bead9d1870ef6c963c0256e0b74fdee36d6f746a'
 SOCIAL_AUTH_ERROR_KEY = 'social_errors'
 
 # doc build post-hook key (overridden later)
@@ -169,7 +169,6 @@ INSTALLED_APPS = (
     'typogrify',
     
     'social_auth',
-    'social_github',
     
     'uploader',
     'oo_extra',
