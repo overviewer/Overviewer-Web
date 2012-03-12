@@ -169,16 +169,18 @@ INSTALLED_APPS = (
     'typogrify',
     
     'social_auth',
-    
+
+	# custom apps
     'uploader',
     'oo_extra',
+    'avatarapp',
     
     # zinnia
     'django.contrib.comments',
     'tagging',
     'mptt',
     'zinnia',
-    
+
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

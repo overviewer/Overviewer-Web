@@ -57,4 +57,7 @@ urlpatterns = patterns('',
     # zinnia blog
     url(r'^blog/comments/', include('django.contrib.comments.urls')),
     url(r'^blog/', include('zinnia.urls')),
+
+	# avatars
+    url(r'^avatar/', include('avatarapp.urls')),
 )
