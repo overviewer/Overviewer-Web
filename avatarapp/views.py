@@ -23,12 +23,16 @@ def get_from_minecraft(player="__default_img__"):
 
     return Image.open(data)
 
+def paste(dst,src,dst_x,dst_y,src_x,src_y,src_w,src_h):
+        src = src.crop((src_x,src_y,src_x+src_w,src_y+src_h))
+        try:
+            dst.paste(src, (dst_x, dst_y), src)
+        except ValueError:
+            dst.paste(src, (dst_x, dst_y))
+
 def create_av_from_skin(skin):
     av = Image.new("RGBA", (16,32))
 
-    def paste(dst,src,dst_x,dst_y,src_x,src_y,src_w,src_h):
-            src = src.crop((src_x,src_y,src_x+src_w,src_y+src_h))
-            dst.paste(src, (dst_x, dst_y), src)
 
     pastes = [
             (4,0,8,8,8,8), # head
@@ -37,23 +41,42 @@ def create_av_from_skin(skin):
             (12,8,47,20,4,12), # arm-r
             (4,20,4,20,4,12), # leg-l
             (8,20,7,20,4,12), # leg-r
-            (4,0,40,8,8,8), # hat
         ]
+    if "A" in skin.mode:
+        pastes += [
+            (4,0,40,8,8,8), # hat
+            ]
     for p in pastes:
         paste(av,skin,*p)
     return av
 
-def getav(request, username):
-    image_data = cache.get(username)
-    image_data = None
+def create_head_from_skin_with_size(size):
+    def skintohead(skin):
+        head = skin.crop((8,8,16,16))
+        if "A" in skin.mode:
+            hat = skin.crop((40,8,48,16))
+            head.paste(hat, (0,0), hat)
+        return head.resize(size)
+    return skintohead
+
+def cachedavmaker(func, name, username):
+    image_data = cache.get(username+"|"+name)
 
     if not image_data:
         skin = get_from_minecraft(username)
-        width, height = skin.size
-        av = create_av_from_skin(skin)
+        av = func(skin)
         img_buffer = StringIO()
         av.save(img_buffer, format="png")
         image_data = img_buffer.getvalue()
-        cache.set(username, image_data, 1800)
+        cache.set(username+"|"+name, image_data, 1800)
 
     return HttpResponse(image_data, mimetype="image/png")
+
+def getav(request, username):
+    return cachedavmaker(create_av_from_skin, "av", username)
+
+def gethead(request, username):
+    return cachedavmaker(create_head_from_skin_with_size((16,16)), "head", username)
+
+def getbighead(request, username):
+    return cachedavmaker(create_head_from_skin_with_size((64,64)), "bighead", username)
