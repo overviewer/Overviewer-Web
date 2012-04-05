@@ -38,6 +38,7 @@ class File(DirtyFieldsMixin):
     
     class Meta:
         ordering = ['-date', 'name']
+        permissions = (("view", "view uploaded files"),)
     
     @property
     def nice_size(self):

@@ -38,11 +38,12 @@ def upload(request):
     
     return render_to_response('uploader/upload.html', {'file' : m, 'form' : form}, context_instance=RequestContext(request))
 
+@permission_required('uploader.view_file', raise_exception=True)
 def list_uploads(request):
     files = File.objects.all()
     return render_to_response('uploader/list.html', {'files' : files}, context_instance=RequestContext(request))
 
-@permission_required('uploader.delete_file')
+@permission_required('uploader.delete_file', raise_exception=True)
 def delete(request, file_id):
     f = get_object_or_404(File, id=file_id)
     
