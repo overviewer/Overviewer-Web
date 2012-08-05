@@ -180,9 +180,12 @@ INSTALLED_APPS = (
     'tagging',
     'mptt',
     'zinnia',
+	'cannen',
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+CANNEN_BACKEND = ('cannen.backends.mpd.MPDBackend', 'localhost', 6600, '/var/lib/mpd/music')

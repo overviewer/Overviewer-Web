@@ -63,4 +63,7 @@ urlpatterns = patterns('',
 
 	# avatars
     url(r'^avatar/', include('avatarapp.urls')),
+
+	# radio
+	url(r'^radio/', include('cannen.urls')),
 )
