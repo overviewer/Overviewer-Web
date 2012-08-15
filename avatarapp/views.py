@@ -19,7 +19,13 @@ def get_from_minecraft(player="__default_img__"):
         if response.status_code != 200:
             response = requests.get("http://www.minecraft.net/images/char.png")
 
-    data = StringIO(response.raw.data)
+    try:
+        data = StringIO(response.raw.data)
+    except IOError:
+        # for some reason we get IOError("cannot identify image file") here
+        if response.status_code != 200:
+            response = requests.get("http://www.minecraft.net/images/char.png")
+        data = StringIO(response.raw.data)
 
     return Image.open(data)
 
