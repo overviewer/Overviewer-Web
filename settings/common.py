@@ -189,3 +189,9 @@ INSTALLED_APPS = (
 )
 
 CANNEN_BACKEND = ('cannen.backends.mpd.MPDBackend', 'localhost', 6600, '/var/lib/mpd/music')
+CANNEN_TITLE = "Overviewer Radio"
+CANNEN_LISTEN_URLS = [
+    ('MP3', 'http://radio.overviewer.org/cannen.mp3'),
+    ('M3U', 'http://radio.overviewer.org/cannen.mp3.m3u'),
+    ('XSPF', 'http://radio.overviewer.org/cannen.mp3.xspf'),
+]
