@@ -69,12 +69,16 @@ def cachedavmaker(func, name, username):
     image_data = cache.get(username+"|"+name)
 
     if not image_data:
-        skin = get_from_minecraft(username)
-        av = func(skin)
-        img_buffer = StringIO()
-        av.save(img_buffer, format="png")
-        image_data = img_buffer.getvalue()
-        cache.set(username+"|"+name, image_data, 1800)
+        try:
+            skin = get_from_minecraft(username)
+
+            av = func(skin)
+            img_buffer = StringIO()
+            av.save(img_buffer, format="png")
+            image_data = img_buffer.getvalue()
+            cache.set(username+"|"+name, image_data, 1800)
+        except Exception:
+            return HttpResponse(status=503)
 
     return HttpResponse(image_data, mimetype="image/png")
 
