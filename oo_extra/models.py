@@ -20,7 +20,7 @@ class Package(models.Model):
     revision = models.PositiveIntegerField()
     
     class Meta:
-        ordering = ['repo', 'checkout', '-major', '-minor', '-revision', 'platform', '-date']
+        ordering = ['-date', '-major', '-minor', '-revision', 'platform', 'checkout', 'repo']
     
     @property
     def version(self):

@@ -37,6 +37,10 @@ urlpatterns = patterns('',
     
     # root page
     url(r'^$', serve_template('index.html')),
+
+    # downloads
+    url(r'^download$', redirect('/downloads')),
+    url(r'^downloads$', serve_template('downloads.html')),
     
     # login and logout
     url(r'^login$', 'social_auth.views.auth', name='socialauth_begin', kwargs={'backend' : 'github'}),
