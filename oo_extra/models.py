@@ -101,8 +101,16 @@ class Build(models.Model):
             ext = '.' + ext
         except Exception:
             ext = ''
-        nice_path = self.project + '-' + self.version + ext
-        return 'http://overviewer.org/builds/{0}/{1}/{2}'.format(self.pk, self.builder, nice_path)
+            
+        builder = self.builder
+        if builder == 'src':
+            builder = ''
+        else:
+            builder = '-' + builder
+            
+        nice_path = '{project}-{version}{builder}{ext}'.format(project=self.project, version=self.version, builder=builder, ext=ext)
+        
+        return 'http://overviewer.org/builds/{0}/{1}'.format(self.pk, nice_path)
     
     def __unicode__(self):
         return '{0} {1} ({2}:{3})'.format(self.project, self.version, self.builder, self.buildnumber)
