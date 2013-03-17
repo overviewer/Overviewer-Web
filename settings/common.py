@@ -137,6 +137,10 @@ UPDATE_HOOK_COMMAND = '/home/agrif/local/mco-hook/hook.sh'
 # package post-hook key (overridden later)
 PACKAGE_HOOK_KEY = 'Serend1p1t0usC4c0ph0ny'
 
+# used by the build download counter, this should be a protected
+# location to X-Accel-Redirect to (it should actually host the builds!)
+ACCEL_BUILD_URL_PREFIX = "/_protected/builds/"
+
 # tell zinnia blog not to use email :(
 ZINNIA_MAIL_COMMENT_NOTIFICATION_RECIPIENTS = []
 ZINNIA_MAIL_COMMENT_REPLY = False

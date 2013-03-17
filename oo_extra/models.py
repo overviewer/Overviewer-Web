@@ -68,6 +68,81 @@ class PackageModelForm(forms.ModelForm):
             m.save()
         return m
 
+class Build(models.Model):
+    builder = models.CharField(max_length=64)
+    buildnumber = models.PositiveIntegerField()
+    repo = models.CharField(max_length=200)
+    branch = models.CharField(max_length=64)
+    commit = models.CharField(max_length=128)
+    project = models.CharField(max_length=64)
+    date = models.DateTimeField(auto_now=True)
+    path = models.CharField(max_length=200)
+    downloads = models.PositiveIntegerField(default=0)
+    
+    major = models.PositiveIntegerField()
+    minor = models.PositiveIntegerField()
+    revision = models.PositiveIntegerField()
+    
+    class Meta:
+        ordering = ['-date', '-major', '-minor', '-revision', 'builder', '-buildnumber', 'project']
+    
+    @property
+    def version(self):
+        return '{0}.{1}.{2}'.format(self.major, self.minor, self.revision)
+    
+    def get_absolute_url(self):
+        #return reverse('oo_extra.views.build', kwargs=dict(bid=self.pk, path=self.path))
+        # buildbot needs this to not use reverse
+        # sorry! maybe I'll work out how to do this right later
+        # also the ext calculation is highly-dependent on path format
+        try:
+            ext = self.path.rsplit('-', 1)[1]
+            ext = ext.split('.', 1)[1]
+            ext = '.' + ext
+        except Exception:
+            ext = ''
+        nice_path = self.project + '-' + self.version + ext
+        return 'http://overviewer.org/builds/{0}/{1}/{2}'.format(self.pk, self.builder, nice_path)
+    
+    def __unicode__(self):
+        return '{0} {1} ({2}:{3})'.format(self.project, self.version, self.builder, self.buildnumber)
+
+class BuildModelForm(forms.ModelForm):
+    version = forms.CharField(max_length=64)
+    
+    class Meta:
+        model = Build
+        fields = ('builder', 'buildnumber', 'repo', 'branch', 'commit', 'project', 'version', 'path')
+    
+    def __init__(self, *args, **kwargs):
+        if 'instance' in kwargs.keys():
+            if not 'initial' in kwargs.keys():
+                kwargs['initial'] = {}
+            
+            kwargs['initial']['version'] = kwargs['instance'].version
+        super(BuildModelForm, self).__init__(*args, **kwargs)
+    
+    def clean_version(self):
+        version = self.cleaned_data['version']
+        try:
+            version = map(int, version.split('.'))
+            if not len(version) == 3:
+                raise ValueError('version does not have 2 dots')
+        except ValueError:
+            raise forms.ValidationError('invalid version string (form #.#.#)')
+        return self.cleaned_data['version']
+    
+    def save(self, force_insert=False, force_update=False, commit=True):
+        m = super(PackageModelForm, self).save(commit=False)
+        
+        m.major, m.minor, m.revision = map(int, self.cleaned_data['version'].split('.'))
+        m.date = datetime.datetime.now()
+        m.full_clean()
+        
+        if commit:
+            m.save()
+        return m
+
 class Message(models.Model):
     text = models.CharField(max_length=512)
     url = models.URLField(blank=True, null=True)

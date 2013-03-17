@@ -57,6 +57,9 @@ urlpatterns = patterns('',
     #redirect exmaple to example
     url(r'^exmaple', redirect('/example/')),
     
+    # builds!
+    url(r'^builds/(?P<bid>\d+)/(?P<path>.+)$', 'oo_extra.views.build'),
+
     # hooks!
     url(r'^hooks/update$', 'oo_extra.views.update'),
     url(r'^hooks/package$', 'oo_extra.views.package_hook'),

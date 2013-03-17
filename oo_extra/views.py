@@ -1,7 +1,8 @@
-from models import Package, PackageModelForm
+from models import Package, PackageModelForm, Build
 
 from django.http import HttpResponse, Http404
 from django.conf import settings
+from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 import json
 import os
@@ -25,3 +26,15 @@ def update(request):
         return HttpResponse('<pre>Hook Started</pre>\n')
         
     raise Http404
+
+def build(request, bid, path):
+    b = get_object_or_404(Build, pk=bid)
+    b.downloads += 1
+    b.save()
+    
+    response = HttpResponse()
+    url = settings.ACCEL_BUILD_URL_PREFIX + b.path
+    response['Content-Type'] = ""
+    response['X-Accel-Redirect'] = url
+    
+    return response
