@@ -1,42 +1,45 @@
 {% extends "base.html" %}
 {% load zinnia_tags %}
 
-{% block title %}Minecraft Overviewer{% endblock %}
+{% block title %}MEIN KRAFT OVERSEAER{% endblock %}
 
 {% block body %}
 <div class="row">
   <div class="span6 hugebutton">
     <h2>
       <a href="http://docs.overviewer.org/">
-		<small>to</small> documentation
+		read the docz!
 	  </a>
 	</h2>
     <a href="http://docs.overviewer.org/">
       <img src="/static/img/docs.png" alt="documentation button" />
     </a>
     <p>
-      to learn about installation and how to run The Overviewer.
+	  <span style="font-weight: bold; color: #FFFF00;">MICERAFT OWERTURE</span> is <blink>the number one</blink> tool<br/>on the intertubes since the invention of gogel.
     </p>
   </div>
   <div class="span6 hugebutton">
     <h2>
       <a href="https://github.com/overviewer/Minecraft-Overviewer/">
-		<small>to</small> GitHub
+		reade th codez!
 	  </a>
 	</h2>
     <a href="https://github.com/overviewer/Minecraft-Overviewer/">
       <img src="/static/img/github.png" alt="github button" />
     </a>
     <p>
-      for issue reporting and access to the code.
+	  i dont think u can handle uor php tho dood
     </p>
   </div>
+  <br/>
   <div class="row center">
-	<h2>(or go directly to the <a href="/downloads">downloads</a>.)</h2>
+	<h2>You cna dl mcietaft aolvoozer by cliking on dis link: <a href="/downloads">http://adf.ly/hEIOiRgr33dY</a></h2>
   </div>
 </div>
 <hr />
 <div class="row">
+  <marquee>
   {% get_recent_entries 3 %}
+  </marquee>
 </div>
 {% endblock body %}

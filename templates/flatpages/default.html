@@ -6,5 +6,5 @@
 {% block title %}{{ flatpage.title }}{% endblock %}
 
 {% block body %}
-{{ flatpage.content|markdown:"extra,toc,codehilite"|typogrify }}
+{{ flatpage.content|upper|markdown:"extra,toc,codehilite"|typogrify }}
 {% endblock body %}

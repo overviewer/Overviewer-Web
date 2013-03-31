@@ -8,8 +8,8 @@
 {% else %}
 <div class="span3 center">
 {% endif %}
-<div class="news-item"><a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a></div>
-<div class="news-info">{% if entry.authors.count %} by {% for author in entry.authors.all %}{% if forloop.first %}{{ author }}{% endif %}{% endfor %}{% endif %} on {{ entry.creation_date|date:"DATE_FORMAT" }}</div>
+<div class="news-item"><a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title|upper }}</a></div>
+<div class="news-info">{% if entry.authors.count %} writez from {% for author in entry.authors.all %}{% if forloop.first %}{{ author|upper }}{% endif %}{% endfor %}{% endif %} {{ entry.creation_date|date:"Y-m-d H:i:s" }}</div>
 </div>
 {% empty %}
 <div class="span4 offset4">
@@ -17,4 +17,4 @@
 </div>
 {% endfor %}
 
-<div class="news-more span1"><a href="/blog/">more <i class="icon-chevron-right"></i></a></div>
+<div class="news-more span1"><a href="/blog/">MROE <i class="icon-chevron-right"></i></a></div>

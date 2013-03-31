@@ -29,7 +29,7 @@
 	  <form method="get" id="searchform" action="{% url zinnia_entry_search %}" class="form-search">
 		<p>
 		  <input type="text" name="pattern" id="searchbox" class="input-medium search-query" />
-		  <input type="submit" class="btn" id="searchbutton" value="Search" />
+		  <input type="submit" class="btn" id="searchbutton" value="SERCH" />
 		  <!--
 		  <a title="{% trans 'You can use - to exclude words or phrases, &quot;double quotes&quot; for exact phrases and the AND/OR boolean operators combined with parenthesis for complex searchs.' %}">
 			<i class="icon-question-sign"></i>
@@ -38,11 +38,11 @@
 	  </form>
 	</div>
 	<div id="widget-populars" class="widget">
-	  <h3>{% trans "Popular entries" %}</h3>
+	  <h3>POPLAR ENTRIES</h3>
 	  {% get_popular_entries 5 %}
 	</div>
 	<div id="widget-archives" class="widget">
-	  <h3>{% trans "Archives" %}</h3>
+	  <h3>CHIVEZ</h3>
 	  {% get_archives_entries_tree %}
 	</div>
 	{% if user.is_authenticated %}

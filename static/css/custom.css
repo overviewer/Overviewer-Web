@@ -1,20 +1,22 @@
 body
 {
     position: relative;
-    background: #E3EFF1;
-    background: #eaeef0;
+    background: #FF0000;
+	color: #00FF00;
+	font-family: 'Comic Sans MS', cursive;
 }
 
 h1, h2, h3, h4, h5, h6 {
-
+	color: #00FF00;
 }
 
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
-
+	color: #00FF00;
 }
 
 hr {
-    border-bottom: 1px solid #CCCCCC;
+    border-bottom: 5px dashed #0000FF;
+	border-top: 0px;
 }
 
 .masthead
@@ -32,17 +34,19 @@ hr {
 
 .masthead a
 {
-	color: rgba(0, 0, 0, 0.8);
+	color: #00FF00;
 }
 
 .tagline
 {
-	color: rgba(0, 0, 0, 0.5);
+	color: #00FF00;
+	font-size: 1.5em;
 }
 
 .hugebutton
 {
     text-align: center;
+	color: #00FF00;
 }
 
 .center
@@ -54,19 +58,12 @@ hr {
 {
     margin-bottom: 1em;
     
-    border-radius: 15px;
-    -moz-border-radius: 15px;
-    
-    box-shadow: 0px 0px 15px rgba(0,0,0,0.53);
-    -moz-box-shadow: 0px 0px 15px rgba(0,0,0,0.53);
-    -webkit-box-shadow: 0px 0px 15px rgba(0,0,0,0.53);
+	border: 5px dashed #0000FF;
 }
 
 .hugebutton img:hover
 {
-    box-shadow: 0px 0px 15px #000;
-    -moz-box-shadow: 0px 0px 15px #000;
-    -webkit-box-shadow: 0px 0px 15px #000;
+	border: 5px solid #00FF00;
 }
 
 .hugebutton p
@@ -76,7 +73,7 @@ hr {
 
 .hugebutton a
 {
-    color: #404040;
+    color: #00FF00;
 }
 
 .hugebutton a:hover
@@ -89,29 +86,29 @@ hr {
 	margin-bottom: 2em;
     text-align: center;
     font-size: 0.85em;
-    color: #888;
+    color: #00FF00;
 }
 
 .footer a:link, .footer a:visited
 {
-    color: #888;
+    color: #0000FF;
 }
 
 .footer a:hover, .footer a:active
 {
-    color: #888;
+    color: #0000FF;
 }
 
 .entry-title a
 {
-	color: rgba(0, 0, 0, 0.8);
+	color: #00FF00;
 }
 
 .entry-info
 {
 	font-size: 0.9em;
 	font-style: italic;
-	color: rgba(0, 0, 0, 0.5);
+	color: #00FF00
 }
 
 .continue-reading
@@ -157,7 +154,7 @@ hr {
 {
 	font-size: 1.2em;
 	font-weight: bold;
-	color: rgba(0, 0, 0, 0.5);
+	color: #00ff00;
 	text-align: center;
 	padding-top: 0.5em;
 }
@@ -177,7 +174,7 @@ hr {
 
 .news-info
 {
-	color: rgba(0, 0, 0, 0.5);
+	color: #00FF00;
 	font-size: 0.9em;
 }
 
@@ -199,7 +196,7 @@ hr {
 .comment-info
 {
 	font-style: italic;
-	color: rgba(0, 0, 0, 0.5);
+	color: #00FF00;
 }
 
 .gravatar
@@ -207,10 +204,32 @@ hr {
 	float: left;
 	margin-right: 1.5em;
 	
-    border-radius: 15px;
-    -moz-border-radius: 15px;
-    
-    box-shadow: 0px 0px 15px rgba(0,0,0,0.53);
-    -moz-box-shadow: 0px 0px 15px rgba(0,0,0,0.53);
-    -webkit-box-shadow: 0px 0px 15px rgba(0,0,0,0.53);
+	border: 5px dashed #0000FF;
+}
+
+.well
+{
+	border-radius: 0px;
+	background-color: #FF0000;
+	border: 0px;
+}
+
+a:link, a:visited
+{
+	color: #0000ff;
+	text-decoration: underline;
+}
+
+code, pre
+{
+	background-color: #aa0000;
+	color: #00ff00;
+	border-radius: 0;
+	border: 0px;
+	font-family: 'Comic Sans MS', cursive;
+}
+
+p
+{
+	font-family: 'Comic Sans MS', cursive;
 }

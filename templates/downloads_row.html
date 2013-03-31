@@ -5,22 +5,22 @@
 <div class="row">
   <div class="span6 center">
     <h2>
-	  <small>32-bit</small> <br/>
-	  <a href="{{ pkg32.url }}">Overviewer v{{ pkg32.version }}</a>
+	  <small>32-bits</small> <br/>
+	  <a href="{{ pkg32.url }}">OWERWEAR v{{ pkg32.version }}</a>
 	</h2>
     <p>
-	  Uploaded on {{ pkg32.date }}. <br/>
-	  <small>(<a href="https://github.com/overviewer/Minecraft-Overviewer/commit/{{ pkg32.commit }}">commit {{ pkg32.commit|slice:":6" }}</a>)</small>
+	  from {{ pkg32.date|upper }}. <br/>
+	  <small>(<a href="https://github.com/overviewer/Minecraft-Overviewer/commit/{{ pkg32.commit }}">codez! {{ pkg32.commit|slice:":6" }}</a>)</small>
     </p>
   </div>
   <div class="span6 center">
     <h2>
-	  <small>64-bit</small> <br/>
-	  <a href="{{ pkg64.url }}">Overviewer v{{ pkg64.version }}</a>
+	  <small>63-bitz</small> <br/>
+	  <a href="{{ pkg64.url }}">OFTERVIEWER v{{ pkg64.version }}</a>
 	</h2>
     <p>
-	  Uploaded on {{ pkg64.date }}. <br/>
-	  <small>(<a href="https://github.com/overviewer/Minecraft-Overviewer/commit/{{ pkg64.commit }}">commit {{ pkg32.commit|slice:":6" }}</a>)</small>
+	  from {{ pkg64.date|upper }}. <br/>
+	  <small>(<a href="https://github.com/overviewer/Minecraft-Overviewer/commit/{{ pkg64.commit }}">codez! {{ pkg32.commit|slice:":6"|upper }}</a>)</small>
     </p>
   </div>
 </div>

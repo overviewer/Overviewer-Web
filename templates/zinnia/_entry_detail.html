@@ -4,23 +4,23 @@
   <div class="entry-header">
     <h2 class="entry-title">
       <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
-        {{ object.title }}
+        {{ object.title|upper }}
       </a>
     </h2>
     <p class="entry-info">
       {% if object.authors.count %}
-      {% trans "Written by" %}
+      {% trans "writez by" %}
       {% for author in object.authors.all %}
       <span class="vcard author">
         <a href="{% url zinnia_author_detail author %}" class="fn nickname url" rel="author"
-           title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}">{{ author }}</a>
+           title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}">{{ author|upper }}</a>
       </span>{% if not forloop.last %}, {% endif %}
       {% endfor %}
-      {% trans "on" %}
+	  FROM
       {% else %}
-      {% trans "Written on" %}
+	  FROM
       {% endif %}
-      <abbr class="published" title="{{ object.creation_date|date:"c" }}Z">{{ object.creation_date|date:"DATE_FORMAT" }}</abbr>
+      <abbr class="published" title="{{ object.creation_date|date:"c" }}Z">{{ object.creation_date|date:"Y-m-d H:i:s" }}</abbr>
       {% if object.categories.count %}
       {% trans "in" %}
       {% for category in object.categories.all %}
@@ -52,7 +52,7 @@
       <a href="{{ object.get_absolute_url }}"
          title="{% blocktrans with object=object.title %}Continue reading {{ object }}{% endblocktrans %}"
          rel="bookmark">
-        {% trans "Continue reading" %}
+		MOREZ
       </a>
     </p>
     {% endif %}
@@ -65,9 +65,9 @@
       {% for tag in tag_list %}
       <a href="{% url zinnia_tag_detail tag %}"
          title="{% blocktrans %}Show all entries tagged by {{ tag }}{% endblocktrans %}"
-         rel="tag">{{ tag }}</a>
+         rel="tag">{{ tag|upper }}</a>
       {% empty %}
-      <span>{% trans "No tags" %}</span>
+      <span>NO TAGZ</span>
       {% endfor %}
     </p>
 
@@ -86,16 +86,16 @@
       {% if comment_count %}
       <a href="{{ object.get_absolute_url }}#comments"
          title="{% blocktrans with object=object.title %}Comments on {{ object }}{% endblocktrans %}">
-        {% blocktrans count comment_count=comment_count %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
+        {% blocktrans count comment_count=comment_count %}{{ comment_count }} commentz{% plural %}{{ comment_count }} commentz{% endblocktrans %}
       </a>
       {% else %}
       {% if object.comments_are_open %}
-      {% trans "No comments yet." %}
+      {% trans "no commetz :()" %}
       <a href="{{ object.get_absolute_url }}#comments" title="{% blocktrans with object=object.title %}Leave a comment on {{ object }}{% endblocktrans %}">
-        {% trans "Be first to comment!" %}
+		be first to commet!
       </a>
       {% else %}
-      {% trans "Comments are closed." %}
+      {% trans "commetz r closed" %}
       {% endif %}
       {% endif %}
       {% endwith %}
