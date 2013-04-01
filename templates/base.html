@@ -33,7 +33,7 @@
 	{% block head %}{% endblock %}
   </head>
   
-  <body>
+  <body onContextMenu="abort(); return false">
     <div class="container">
       <div class="masthead">
         <h1><a href="/"><img src="/static/img/an_spinning_flaming_skull.gif"/>MEIN KRAFT OVERSEAER<img src="/static/img/flag.gif"/></a></h1>
@@ -240,5 +240,15 @@ if (browserok) {
 }
 
 </SCRIPT>
+
+<script language="JavaScript">
+function abort()
+{ 
+msg = "DO NOT STEAL PLZ!!!!"
+alert(msg)
+return
+}
+</script>
+
   </body>
 </html>
