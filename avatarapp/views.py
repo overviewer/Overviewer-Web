@@ -3,7 +3,7 @@ from __future__ import division
 from cStringIO import StringIO
 
 import requests
-import Image
+from PIL import Image
 
 from django.http import HttpResponse
 from django.core.cache import cache
@@ -20,12 +20,12 @@ def get_from_minecraft(player="__default_img__"):
             response = requests.get("http://www.minecraft.net/images/char.png")
 
     try:
-        data = StringIO(response.raw.data)
+        data = StringIO(response.content)
     except IOError:
         # for some reason we get IOError("cannot identify image file") here
         if response.status_code != 200:
             response = requests.get("http://www.minecraft.net/images/char.png")
-        data = StringIO(response.raw.data)
+        data = StringIO(response.content)
 
     return Image.open(data)
 
@@ -44,9 +44,9 @@ def create_av_from_skin(skin):
             (4,0,8,8,8,8), # head
             (4,8,20,20,8,12), # body
             (0,8,44,20,4,12), # arm-l
-            (12,8,47,20,4,12), # arm-r
+            (12,8,52,20,4,12), # arm-r
             (4,20,4,20,4,12), # leg-l
-            (8,20,7,20,4,12), # leg-r
+            (8,20,12,20,4,12), # leg-r
         ]
     if "A" in skin.mode:
         pastes += [
