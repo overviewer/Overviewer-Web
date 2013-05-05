@@ -1,6 +1,7 @@
 from __future__ import division
 
 from cStringIO import StringIO
+from base64 import b64encode
 
 import requests
 from PIL import Image
@@ -66,7 +67,8 @@ def create_head_from_skin_with_size(size):
     return skintohead
 
 def cachedavmaker(func, name, username):
-    image_data = cache.get(username+"|"+name)
+    key = b64encode(username) + "|" + name
+    image_data = cache.get(key)
 
     if not image_data:
         try:
@@ -76,7 +78,7 @@ def cachedavmaker(func, name, username):
             img_buffer = StringIO()
             av.save(img_buffer, format="png")
             image_data = img_buffer.getvalue()
-            cache.set(username+"|"+name, image_data, 1800)
+            cache.set(key, image_data, 1800)
         except Exception:
             return HttpResponse(status=503)
 
