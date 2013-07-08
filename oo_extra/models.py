@@ -75,7 +75,7 @@ class Build(models.Model):
     branch = models.CharField(max_length=64)
     commit = models.CharField(max_length=128)
     project = models.CharField(max_length=64)
-    date = models.DateTimeField(auto_now=True)
+    date = models.DateTimeField(auto_now_add=True)
     path = models.CharField(max_length=200)
     downloads = models.PositiveIntegerField(default=0)
     
