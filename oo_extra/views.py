@@ -1,6 +1,6 @@
 from models import Package, PackageModelForm, Build
 
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
@@ -28,10 +28,14 @@ def update(request):
     raise Http404
 
 def build(request, bid, path):
+    user_agent = request.META.get("HTTP_USER_AGENT", "")
+    if not user_agent.strip():
+        return HttpResponseForbidden("We're sorry, due to abuse we can no longer allow downloads without a user agent. If you are running a script, we ask that you do not unconditionally download a package every hour, as this runs up our bandwidth. Please download the file you need only once, either by adjusting your script or by downloading it manually. Also any automated scripts must properly identify with a user-agent header. For questions, please ask on IRC. Thank you. -The Management")
+    
     b = get_object_or_404(Build, pk=bid)
     b.downloads += 1
     b.save()
-    
+
     response = HttpResponse()
     url = settings.ACCEL_BUILD_URL_PREFIX + b.path
     response['Content-Type'] = ""

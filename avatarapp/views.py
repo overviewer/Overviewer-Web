@@ -8,6 +8,7 @@ from PIL import Image
 
 from django.http import HttpResponse
 from django.core.cache import cache
+from django.views.decorators.cache import cache_control
 
 def get_from_minecraft(player="__default_img__"):
     "Gets an image from minecraft. Returns a PIL Image object. never caches"
@@ -84,11 +85,14 @@ def cachedavmaker(func, name, username):
 
     return HttpResponse(image_data, mimetype="image/png")
 
+@cache_control(public=True, max_age=604800)
 def getav(request, username):
     return cachedavmaker(create_av_from_skin, "av", username)
 
+@cache_control(public=True, max_age=604800)
 def gethead(request, username):
     return cachedavmaker(create_head_from_skin_with_size((16,16)), "head", username)
 
+@cache_control(public=True, max_age=604800)
 def getbighead(request, username):
     return cachedavmaker(create_head_from_skin_with_size((64,64)), "bighead", username)
