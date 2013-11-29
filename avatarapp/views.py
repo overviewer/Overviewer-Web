@@ -2,6 +2,7 @@ from __future__ import division
 
 from cStringIO import StringIO
 from base64 import b64encode
+import traceback
 
 import requests
 from PIL import Image
@@ -14,19 +15,19 @@ def get_from_minecraft(player="__default_img__"):
     "Gets an image from minecraft. Returns a PIL Image object. never caches"
 
     if player == "___default_img__":
-        response = requests.get("http://www.minecraft.net/images/char.png")
+        response = requests.get("https://s3.amazonaws.com/MinecraftSkins/char.png")
     else:
-        response = requests.get("http://www.minecraft.net/skin/%s.png" % player)
+        response = requests.get("https://s3.amazonaws.com/MinecraftSkins/%s.png" % player)
         
         if response.status_code != 200:
-            response = requests.get("http://www.minecraft.net/images/char.png")
+            response = requests.get("https://s3.amazonaws.com/MinecraftSkins/char.png")
 
     try:
         data = StringIO(response.content)
     except IOError:
         # for some reason we get IOError("cannot identify image file") here
         if response.status_code != 200:
-            response = requests.get("http://www.minecraft.net/images/char.png")
+            response = requests.get("https://s3.amazonaws.com/MinecraftSkins/char.png")
         data = StringIO(response.content)
 
     return Image.open(data)
@@ -81,6 +82,7 @@ def cachedavmaker(func, name, username):
             image_data = img_buffer.getvalue()
             cache.set(key, image_data, 1800)
         except Exception:
+            #traceback.print_exc(file=open("/tmp/avatar.log","a"))
             return HttpResponse(status=503)
 
     return HttpResponse(image_data, mimetype="image/png")
