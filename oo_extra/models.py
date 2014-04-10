@@ -111,6 +111,10 @@ class Build(models.Model):
         nice_path = '{project}-{version}{builder}{ext}'.format(project=self.project, version=self.version, builder=builder, ext=ext)
         
         return 'http://overviewer.org/builds/{0}/{1}'.format(self.pk, nice_path)
+
+    @property
+    def url(self):
+        return self.get_absolute_url()
     
     def __unicode__(self):
         return '{0} {1} ({2}:{3})'.format(self.project, self.version, self.builder, self.buildnumber)
