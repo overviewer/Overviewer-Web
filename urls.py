@@ -61,6 +61,8 @@ urlpatterns = patterns('',
     
     # builds!
     url(r'^builds/(?P<bid>\d+)/(?P<path>.+)$', 'oo_extra.views.build'),
+    url(r'^builds/overviewer-latest\..+$', 'oo_extra.views.latest_build'),
+    url(r'^builds/overviewer-latest-(?P<builder>.+?)\..+$', 'oo_extra.views.latest_build'),
 
     # hooks!
     url(r'^hooks/update$', 'oo_extra.views.update'),

@@ -27,6 +27,15 @@ def update(request):
         
     raise Http404
 
+def latest_build(request, builder='src'):
+    pkgs = Build.objects.filter(builder=builder, branch="master")
+    try:
+        b = pkgs.order_by('-date')[0]
+    except IndexError:
+        raise Http404
+    
+    return build(request, b.pk, None)
+
 def build(request, bid, path):
     user_agent = request.META.get("HTTP_USER_AGENT", "")
     if not user_agent.strip():
