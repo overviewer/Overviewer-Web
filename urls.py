@@ -2,7 +2,7 @@ from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
 
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render
 from django.template import RequestContext
 
 def login_error(request):
@@ -15,9 +15,9 @@ def redirect(target):
         return HttpResponseRedirect(target)
     return redirect_view
 
-def serve_template(tpl):
+def serve_template(tpl, **kwargs):
     def serve_template_view(request):
-        return render_to_response(tpl, {}, context_instance=RequestContext(request))
+        return render(request, tpl, {}, context_instance=RequestContext(request), **kwargs)
     return serve_template_view
 
 # Uncomment the next two lines to enable the admin:
@@ -40,7 +40,9 @@ urlpatterns = patterns('',
 
     # downloads
     url(r'^download$', redirect('/downloads')),
+    url(r'^download.json$', redirect('/downloads.json')),
     url(r'^downloads$', serve_template('downloads.html')),
+    url(r'^downloads.json$', serve_template('downloads.json', content_type='application/json')),
     
     # login and logout
     url(r'^login$', 'social_auth.views.auth', name='socialauth_begin', kwargs={'backend' : 'github'}),

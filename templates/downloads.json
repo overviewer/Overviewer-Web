@@ -1,0 +1,13 @@
+{
+    {% include "downloads_row.json" with target="win32" %},
+    {% include "downloads_row.json" with target="win64" %},
+    {% include "downloads_row.json" with target="deb32" %},
+    {% include "downloads_row.json" with target="deb64" %},
+    {% include "downloads_row.json" with target="fc19-32" %},
+    {% include "downloads_row.json" with target="fc19-64" %},
+    {% include "downloads_row.json" with target="el5-32" %},
+    {% include "downloads_row.json" with target="el5-64" %},
+    {% include "downloads_row.json" with target="el6-32" %},
+    {% include "downloads_row.json" with target="el6-64" %},
+    {% include "downloads_row.json" with target="src" %}
+}

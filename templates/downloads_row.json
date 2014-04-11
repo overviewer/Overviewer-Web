@@ -1,0 +1,8 @@
+{% load oo_packages %}{% get_latest_build target as pkg %}"{{ target }}": {
+        "version": "{{ pkg.version }}",
+        "url": "{{ pkg.url }}",
+        "date": "{{ pkg.date|date:"r" }}",
+        "downloads": {{ pkg.downloads }},
+        "commit": "{{ pkg.commit }}",
+        "commiturl": "https://github.com/overviewer/Minecraft-Overviewer/commit/{{ pkg.commit }}"
+    }
