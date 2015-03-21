@@ -1,0 +1,59 @@
+# This is a (hopefully comprehensive) list of urls that ought to be
+# around at the end of this:
+
+# root and associated pages
+/
+/downloads
+/downloads.json
+/login
+/logout
+/example
+/uploader
+/irc
+/irc/bot
+
+# avatars
+/avatar/agrif
+
+# repo stuff
+/debian/info
+/debian/Release
+/debian/overviewer.gpg.asc
+/rpms/info
+/rpms/overviewer.repo
+
+# blog
+/blog
+/blog/2012/02/05/the-overviewer-update-blog/
+/blog/2012/02/11/help-us-test-our-new-beta/
+/blog/2012/02/12/windows-noob-guide/
+/blog/2012/02/13/about-the-new-config-file-format/
+/blog/2012/02/15/status-new-beta-and-comments-anvil/
+/blog/2012/02/22/rpm-packages-now-available/
+/blog/2012/03/01/anvil-support/
+/blog/2012/03/03/overviewer-09-released/
+/blog/2012/04/11/overviewer-history/
+/blog/2012/05/11/state-overviewer/
+/blog/2012/07/14/mapping-azeroth/
+/blog/2012/12/30/introducing-oil/
+/blog/2013/03/13/overviewer-010-released-supporting-minecraft-15/
+/blog/2013/07/15/minecraft-16-support/
+/blog/2013/10/30/overviewer-011-released-supporting-minecraft-17/
+/blog/2014/05/09/new-optimizeimg/
+/blog/2014/09/02/overviewer-v012-out-supporting-minecraft-18/
+
+# shortcuts
+/wiki
+/issues
+/code
+/git
+/doc
+/docs
+/pull
+/pulls
+
+# homes with content
+/~agrif/
+/~achin/
+/~brownan/
+/~pironic/
