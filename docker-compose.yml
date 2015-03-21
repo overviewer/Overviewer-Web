@@ -1,0 +1,27 @@
+nginx:
+  build: nginx
+  links:
+    - flask
+    - bbmaster
+  volumes_from:
+    - wwwdata
+  ports:
+    - "80:80"
+wwwdata:
+  image: busybox
+  volumes:
+    - /data/www
+
+flask:
+  build: flask
+  volumes_from:
+    - wwwdata
+
+bbdata:
+  image: busybox
+  volumes:
+    - /data/buildbot
+bbmaster:
+  build: buildbot
+  volumes_from:
+    - bbdata

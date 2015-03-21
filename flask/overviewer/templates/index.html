@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Minecraft Overviewer{% endblock %}
+
+{% block body %}
+<div class="row">
+  <div class="span6 hugebutton">
+    <h2>
+      <a href="http://docs.overviewer.org/">
+        <small>to</small> documentation
+      </a>
+    </h2>
+    <a href="http://docs.overviewer.org/">
+      <img src="/static/img/docs.png" alt="documentation button">
+    </a>
+    <p>to learn about installation and how to run The Overviewer.</p>
+  </div>
+  <div class="span6 hugebutton">
+    <h2>
+      <a href="https://github.com/overviewer/Minecraft-Overviewer/">
+        <small>to</small> GitHub
+      </a>
+    </h2>
+    <a href="https://github.com/overviewer/Minecraft-Overviewer/">
+      <img src="/static/img/github.png" alt="github button">
+    </a>
+    <p>for issue reporting and access to the code.</p>
+  </div>
+  <div class="row center">
+    <h2>(or go directly to the <a href="/downloads">downloads</a>.)</h2>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <!-- FIXME blog most recent -->
+</div>
+{% endblock body %}
