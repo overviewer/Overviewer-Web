@@ -5,6 +5,7 @@
 /
 /downloads
 /downloads.json
+/donate
 /login
 /logout
 /example
