@@ -3,18 +3,47 @@
 
 # root and associated pages
 /
+/download
 /downloads
+/download.json
 /downloads.json
 /donate
 /login
 /logout
-/example
+/upload
 /uploader
 /irc
 /irc/bot
+/irc/rules
+
+# big static stuff
+/exmaple
+/example
+/earth
+
+# let me map that for you
+/lmmtfy
+/lmmtfy/almor-castle
+/lmmtfy/braided-stream
+/lmmtfy/catancraft
+/lmmtfy/cradle-of-steve
+/lmmtfy/forgotten
+/lmmtfy/halion
+/lmmtfy/IslaDelMuerto
+/lmmtfy/lands-of-iuvem
+/lmmtfy/reminiscence
+/lmmtfy/steamshire-island
+
+# builds
+/build
+/builds/overviewer-latest.tar.bz2
+/builds/overviewer-latest-deb32.bz2
 
 # avatars
 /avatar/agrif
+/avatar/agrif/body
+/avatar/agrif/head
+/avatar/agrif/bighead
 
 # repo stuff
 /debian/info
