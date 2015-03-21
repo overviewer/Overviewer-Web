@@ -22,6 +22,12 @@
 /rpms/info
 /rpms/overviewer.repo
 
+# wow map
+/wow/
+/warcraft/
+/wow/about-azeroth/
+/wow/about-outland/
+
 # blog
 /blog
 /blog/2012/02/05/the-overviewer-update-blog/
