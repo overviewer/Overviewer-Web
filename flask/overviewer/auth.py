@@ -1,5 +1,6 @@
-from flask import request, url_for, flash, redirect, session
+from flask import request, url_for, flash, redirect, session, abort
 from flask.ext.github import GitHub
+import functools
 from .app import app
 
 github = GitHub(app)
@@ -42,3 +43,21 @@ def authorize(oauth_token):
 def token_getter():
     if session.get('logged_in', False):
         return session['oauth_token']
+
+def user():
+    if session.get('logged_in', False):
+        return session['user']
+
+def is_developer():
+    if session.get('logged_in', False):
+        return session['developer']
+    return False
+
+# use as a decorator!
+def developer_only(f):
+    @functools.wraps(f)
+    def inner(*args, **kwargs):
+        if not is_developer():
+            abort(401)
+        return f(*args, **kwargs)
+    return inner

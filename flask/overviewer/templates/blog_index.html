@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - Minecraft Overviewer{% endblock %}
+
+{% block body %}
+<ul>
+{% for entry in entries %}
+<li>{{ entry.timestamp }} - {{ entry.slug }}</li>
+{% else %}
+<li>No entries.</li>
+{% endfor %}
+</ul>
+{% endblock body %}
+

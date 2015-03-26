@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Blog Create - Minecraft Overviewer{% endblock %}
+
+{% block body %}
+<h1>New Blog Post</h1>
+<form action="" method="post">
+  {{ form.hidden_tag() }}
+  <p>Author: {{ form.user() }}</p>
+  <p>Published: {{ form.published() }}</p>
+  <p>Title: {{ form.title() }}</p>
+  <p>Body: <br> {{ form.body() }}</p>
+  <input type="submit" value="Create">
+</form>
+{% endblock body %}

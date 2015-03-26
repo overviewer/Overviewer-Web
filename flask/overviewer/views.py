@@ -2,6 +2,7 @@ from flask import render_template, redirect
 from .app import app
 
 from .auth import *
+from .blog import *
 
 @app.route('/')
 def index():
