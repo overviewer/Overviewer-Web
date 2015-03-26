@@ -2,14 +2,39 @@
 
 {% block title %}Blog Create - Minecraft Overviewer{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/static/css/pagedown.css" />
+<script type="text/javascript" src="/static/js/Markdown.Converter.js"></script>
+<script type="text/javascript" src="/static/js/Markdown.Sanitizer.js"></script>
+<script type="text/javascript" src="/static/js/Markdown.Extra.js"></script>
+<script type="text/javascript" src="/static/js/Markdown.Editor.js"></script>
+{% endblock %}
+
 {% block body %}
 <h1>New Blog Post</h1>
 <form action="" method="post">
   {{ form.hidden_tag() }}
   <p>Author: {{ form.user() }}</p>
   <p>Published: {{ form.published() }}</p>
+  <p>Date: {{ form.timestamp() }}</p>
   <p>Title: {{ form.title() }}</p>
-  <p>Body: <br> {{ form.body() }}</p>
+  <p>
+    Body:<br> 
+    <div class="wmd-panel">
+      <div id="wmd-button-bar"></div>
+      {{ form.body(id='wmd-input', class='wmd-input') }}
+    </div>
+    <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+  </p>
   <input type="submit" value="Create">
 </form>
+
+<script type="text/javascript">
+(function () {
+    var converter = new Markdown.Converter();
+    Markdown.Extra.init(converter);
+    var editor = new Markdown.Editor(converter);
+    editor.run();
+})();
+</script>
 {% endblock body %}

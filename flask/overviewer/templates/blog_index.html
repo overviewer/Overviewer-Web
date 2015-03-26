@@ -5,7 +5,7 @@
 {% block body %}
 <ul>
 {% for entry in entries %}
-<li>{{ entry.timestamp }} - {{ entry.slug }}</li>
+<li><a href="{{ entry.url }}">{{ entry.timestamp }} - {{ entry.title }}</a></li>
 {% else %}
 <li>No entries.</li>
 {% endfor %}

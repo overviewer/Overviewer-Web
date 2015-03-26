@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - Minecraft Overviewer{% endblock %}
+
+{% block body %}
+<h1>{{ post.title }}</h1>
+<p>By {{ post.user }} on {{ post.timestamp }}</p>
+
+{{ post.body|markdown }}
+
+{% endblock body %}
