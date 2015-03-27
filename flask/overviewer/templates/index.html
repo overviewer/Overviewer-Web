@@ -32,6 +32,17 @@
 </div>
 <hr>
 <div class="row">
-  <!-- FIXME blog most recent -->
+  {% for post in posts %}
+  {% if loop.index == 1 or loop.index == 3 %}
+  <div class="span4 center">
+  {% else %}
+  <div class="span3 center">
+  {% endif %}
+  <div class="news-item"><a href="{{ post.url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a></div>
+  <div class="news-info">by {{ post.user }} on {{ post.timestamp.strftime("%b. %d, %Y") }}</div>
+  </div>
+  {% endfor %}
+
+  <div class="news-more span1"><a href="/blog/">more <i class="icon-chevron-right"></i></a></div>
 </div>
 {% endblock body %}

@@ -1,0 +1,424 @@
+[[posts]]
+slug = 'about-the-new-config-file-format'
+published = true
+user = 'brownan'
+title = 'About the new Config File format'
+timestamp = 2012-02-13T17:32:00Z
+body = '''
+<p><em>Edit Mar 3 2012: The "anvil" branch has been merged into master. This post edited to reflect that.</em></p><p><em>Edit: Mar 1 2012, updated this post to reflect the new "anvil" branch.</em></p><p>In our efforts to rewrite the internals of The Overviewer, we have stripped overviewer.py of almost all its command line options and opted to require everything but the simplest renders into a new config file format. This post goes over the rationale and how to get started with the new format.</p><p><strong>Why?</strong></p><p>Before it was possible to run the Overviewer without a configuration file at all. Every option was on the command line, and the only thing you <em>needed</em>&#160;the config file for was custom rendermodes.</p><p>But as we were thinking about supporting multi-world, where a server may run many Minecraft worlds, we wanted Overviewer to handle options in a more general way. Some options may only apply to one render of one world, others may apply to all renders.</p><p>We briefly considered how to support this on a command line, perhaps with something like this:</p><pre>./overviewer.py --world=/path/world1 --opt=1 --world=/path/world2 --opt=2</pre><p>but this seems cumbersome and confusing. It seems obvious that a more structured method of configuring your renders is needed.</p><p><strong>The Config File</strong></p><p>So here's the solution we came up with. It lets you individually specify "renders", which is a rendering of a world with a set of options. You can specify multiple renders of a single world with different options, renders of different worlds, etc. We tried to leave it as customizable as possible.</p><p>The configuration file is, as before, parsed as a regular python file, meaning you can put any extra complicated logic you want in there. After it's parsed, it expects three things to be defined:</p><ul><li>a dictionary called "worlds" that maps world names to their paths on disk.</li><li>a dictionary called "renders" that maps render names to a dictionary of options.</li><li>a string called "outputdir" containing the path to the directory to place the output</li></ul><p>I have written up further details about the config file on the documentation site:&#160;<a href="http://docs.overviewer.org/en/latest/config/">http://docs.overviewer.org/en/latest/config/</a>. Head there and have a look over it to get an idea of what's possible. I don't want to repeat what's there, and I think that's a pretty good place to start.</p><p><strong>Converting your existing setup to a config file</strong></p><p>Most likely you have some setup where you run overviewer.py from a cron or on a schedule with a bunch of options. Let's say you're running this:</p><pre>overviewer.py -v --north-direction=upper-right --imgformat=jpg --rendermodes=smooth-lighting,smooth-night /path/to/myworld /path/to/mymap</pre><p>To migrate to the new branch, you should first create a config file. It can be named anything you want. If your editor has syntax highlighting, it will be helpful to give it the extension .py, but it's not necessary.</p><p>Say you create "myovconfig.py". This is what you'd add to that file to duplicate your setup:</p><pre>worlds["myworld"] = "/path/to/myworld"
+
+renders["dayrender"] = {
+        "world": "myworld",
+        "title": "Daytime",
+        "rendermode": smooth_lighting,
+        "imgformat": "jpg",
+        "northdirection": "upper-right",
+        }
+
+renders["nightrender"] = {
+        "world": "myworld",
+        "title": "Nighttime",
+        "rendermode": smooth_night,
+        "imgformat": "jpg",
+        "northdirection": "upper-right",
+        }
+
+outputdir = "/path/to/mymap"</pre><p><em>Note: the 'world' option was named 'worldname' up until recently.</em></p><p>Then you run Overviewer with this command:</p><pre>overviewer.py --config=/path/to/myovconfig.py</pre><p>Yes, it is a bit more verbose, but you can see how it is much more customizable than before. You can change the options for the individual renders, add renders for other worlds, add additional renders for the same world (perhaps with a different north-direction!) It's up to you!</p><p>As always, join us in <a href="http://overviewer.org/irc/">IRC</a> if you have any questions!</p>
+'''
+
+[[posts]]
+slug = 'help-us-test-our-new-beta'
+published = true
+user = 'brownan'
+title = 'Help us test our new beta'
+timestamp = 2012-02-11T15:29:00Z
+body = '''
+<p><em>Edit: Mar 3 2012: The new beta has now been merged into master, and as such, some parts of this post (like how to try it out) are outdated. See <a href="http://overviewer.org/blog/2012/03/03/overviewer-09-released/">this post</a>.</em></p><p><em>Edit: Mar 1 2012: updated this post for the Anvil format. -brownan</em></p><p>We've been working hard for the last two months to almost completely re-write a lot of the internals of The Overviewer. And now we need your help to test it out, and give us feedback!</p><div><p><strong>Why have we done this?</strong></p><p>You may be wondering why we took 2 months off from regular development to rewrite code that worked just fine. As some may have guessed, code that evolves over time tends to accumulate cruft and gets more and more difficult to work on as time goes by. Our code has been evolving for over a year now, and while it started out relatively clean, now it's not so much. As new features were added, the code strained to&#160;accommodate them. For example, the customizable north direction feature required adding a small "shim" at just about every layer of code, which is prone to cause problems because it adds complex dependencies between all layers of the program.</p><p>In short, the code was becoming increasingly difficult to work on, and more importantly, it was becoming less <em>fun</em>&#160;to work on. So we did what all programmers dream of doing but can't because of practical deadlines and such: re-designed most of the core components almost from scratch.</p><p>In this re-write we have completely re-thought the way all the internal components fit together and how they interact. The new interfaces between components are much cleaner and the clean separation of responsibility makes the code much easier to work on: easier to add new features, easier to fix bugs, easier to maintain.</p><p>Most of that is of no concern to end users though; people that just want to <em>use</em>&#160;Overviewer don't care how it works. Well, there's something for you too! Along with the rewrite we have many new features and potential features that were either impossible or prohibitively difficult before!</p><p><strong>Here's the new fun features:</strong></p><ul><li>Multi-world! Render and display all your worlds with one unified interface.</li><li>Along with that, Nether and The End support!</li><li>Fixed north-directions to the new sun direction. (Finally!)</li><li>Completely re-designed configuration file format, more customizability!</li><li>Per-render configuration options - render one world multiple ways, render all your worlds one way, or some complex combination. It's up to you!</li><li>Truly customizable rendermodes: compose your own rendermode from our built-in rendermode <em>primitives</em>.</li><li><em>New</em>: Anvil support</li><li><em>New:</em>&#160;Built-in Biome Support!</li></ul><p>Here's the new <em>potential</em>&#160;features -- features that are not in yet, but should be "easy" to implement with the new architecture (if there's demand for these features, they will get implemented!):</p><div><ul><li>Configurable, pluggable caches. Configure the memory usage or even offload your cache to memcached</li><li>Render-farm support: get an entire cluster of machines to render your worlds!</li><li>Support for rendering of smaller portions or subsets of your world, and even arbitrary world transformations (Render heights 0-32, cutting off everything else? Sure! Render your world upside down? I can't imagine why, but why not!)</li><li>More configurable logging</li></ul></div><p>We are releasing this as a "beta" at this point. The new branch is not complete yet. We still have these items to re-implement:</p><div><ul><li>points of interest (signs, etc)</li><li>Overlays</li><li>Miscellaneous&#160;options like textures-path, skip-js, web-assets, no-signs</li></ul></div><div><p>Additionally, it is not yet polished. For example, the output may contain lots of debug lines that got left in, any error messages may not be very friendly, and of course it may contain bugs.</p><p>But we feel like it's ready for people to try out. We're ready to start getting some feedback and some help on finding the last few bugs.</p><p><strong>If you would like to try it out, keep reading</strong>, but know that things may still change in backwards-incompatible ways. Remember that this is a "preview" and you'd be helping us test it. <strong>It's not <em>done</em>&#160;yet, but we feel that it's complete enough to start soliciting feedback.</strong></p></div><p>We're not building binary packages for the new branch at this time. If you would like to try it out, clone the repository and checkout the "anvil" branch:</p><blockquote><pre><span>git clone -b anvil git://github.com/overviewer/Minecraft-Overviewer.git</span></pre></blockquote><p>If you don't have git, you can also download a source tarball:</p><p><a href="https://github.com/overviewer/Minecraft-Overviewer/tarball/anvil">https://github.com/overviewer/Minecraft-Overviewer/tarball/anvil</a></p><div><p>I've rewritten the documentation to go over the new configuration file format. See the <a href="http://readthedocs.org/docs/overviewer/en/anvil/running/">running</a>&#160;and <a href="http://readthedocs.org/docs/overviewer/en/anvil/config/">config file</a> pages of the docs to get started.</p></div><p>And of course, let us know in <a href="http://overviewer.org/irc/">IRC</a> or by filing an issue on the Github issue tracker if something doesn't seem right.</p><p>A follow-up post will go into more details on the new features, notably the new configuration file format. Happy Overviewing!</p></div>
+'''
+
+[[posts]]
+slug = 'the-overviewer-update-blog'
+published = true
+user = 'brownan'
+title = 'The Overviewer Update Blog'
+timestamp = 2012-02-05T20:41:00Z
+body = '''
+Okay, so we need a place to tell our community about updates and to give everyone a place to follow the project. We have some big things coming soon, so everyone add this to your feed readers and bookmarks!
+'''
+
+[[posts]]
+slug = 'windows-noob-guide'
+published = true
+user = 'brownan'
+title = 'Windows Noob Guide'
+timestamp = 2012-02-12T22:12:58Z
+body = '''
+<p>I've written up a guide that assumes next to nothing about windows command prompts.</p><p>The Overviewer <em>is</em>&#160;a command-line program, and that is a barrier for a lot of people. While we have to compromise at some level -- not all the documentation can be written assuming no command line experience -- we do want to lower that barrier.</p><p>So with that, I present the first draft of the <a href="http://docs.overviewer.org/en/latest/win_tut/windowsguide/">Windows Noob Guide to The Overviewer</a>. Hopefully that will be enough to get more people started.</p><p>We love feedback. Please join us on <a href="http://overviewer.org/irc/">IRC</a> and help us improve the documentation!</p><p>About a GUI: We would love to make a GUI frontend for The Overviewer, but nobody has put forth the time and effort yet. Several people have started a GUI in the past, but nothing has materialized. If you are interested in helping us out on this front, please join us in <a href="http://overviewer.org/irc/">IRC</a> and discuss your ideas.</p>
+'''
+
+[[posts]]
+slug = 'status-new-beta-and-comments-anvil'
+published = true
+user = 'brownan'
+title = 'Status of the new beta, and comments on Anvil'
+timestamp = 2012-02-15T17:35:06Z
+body = '''
+<p>Thanks to those that have tried the new beta and given us feedback. We've already fixed several bugs; things are shaping up nicely!</p><p>About the new "Anvil" level format, we will be supporting this, but it is a rather hefty change. Our tentative plan is to make a new branch off of the beta "rewrite" branch for the anvil level format. Once the anvil format makes its way out of the Minecraft "pre-release" stage and into a proper release, we will merge the branch of our code and the new format will be the only one supported from then on.</p><p>We currently don't have any plans to support the Anvil format in the old "master" branch. We are not against it, but I don't&#160;foresee&#160;anyone stepping up to do the work. This means there is a deadline for those of you to convert your config files and setups to the new config format if you want to stay up to date. <em>We believe the new config format is not complicated enough to be a big barrier for converting. If you need help please see us in IRC!</em></p><p>We also currently don't have any plans to support both world formats in one code-base. The changes it requires are quite extensive and I don't see that as being a very feasible option. Thus, if you want to continue running an older version of Minecraft with the older level format in the future, you will be blocked from updating Overviewer past a certain point. We will probably end up leaving a Git branch or tag at the last commit that supports the old format for those that don't want to upgrade. However, as time goes on we think most everyone will end up updating (just like we did for the old chunk format when it upgraded to region files)</p><p>Again, this is our tentative plan. Things may still change depending on demand or who's willing to do what work or how difficult a task turns out to be.</p><p>As always, happy Overviewing!</p><p>-brownan</p>
+'''
+
+[[posts]]
+slug = 'rpm-packages-now-available'
+published = true
+user = 'aheadley'
+title = 'RPM packages now available'
+timestamp = 2012-02-22T23:11:02Z
+body = '''
+<p>To complement our APT repository, we now offer an RPM repository for RPM-based distros. Currently the RPMs are available for CentOS 5 and 6 and Fedora 16 but other targets could be added if there is enough interest. Details on installing the repo can be found over on RPM repo <a href="/rpms/info" title="RPMs Info">info page</a>.</p><p>Are there any other platforms we should support? Let us know in the comments or drop by the <a title="#overviewer on FreeNode" href="http://overviewer.org/irc/">IRC channel</a>!</p>
+'''
+
+[[posts]]
+slug = 'anvil-support'
+published = true
+user = 'brownan'
+title = 'Anvil Support'
+timestamp = 2012-03-01T19:12:20Z
+body = '''
+<p><em>Edit: The "anvil" branch <a href="http://overviewer.org/blog/2012/03/03/overviewer-09-released/">is now merged into master as version 0.9</a>. The note about using anvil is still relevant, but there no longer exists an "anvil" branch. Links to the docs updated. -brownan</em></p><p>The Overviewer now has initial support for the new Anvil map format (used in Minecraft 1.2)! You can find this version in the <a href="https://github.com/overviewer/Minecraft-Overviewer/tree/anvil" title="anvil branch"><em>anvil</em> branch on GitHub</a>. If you need a Windows build, feel free to ask us in our <a href="/irc/" title="IRC channel">IRC channel</a>.</p><p>(<em>Edit: we build the windows builds on-demand. Right now things are developing rapidly and the current version may be unstable, so that's why we're not building them automatically. Once things stabilize we'll start posting the new builds on to the github downloads page. -brownan)</em></p><h3>Using the Anvil Branch</h3><p>The Anvil branch is based on our recent code rewrite, which means that it has a different configuration format and command line options. Please see <a href="/blog/2012/02/13/about-the-new-config-file-format/" title="About the New Config File Format">our blog post</a> or <a href="http://docs.overviewer.org/en/latest/config/" title="Anvil Documentation">the documentation</a>&#160;for more details. Changes made during the rewrite made it much easier to upgrade the Overviewer to Anvil; making these same changes to the old code would be much harder, so we are not planning to update the old code to handle Anvil.</p><p>Due to the large changes made to support Anvil, you will need to render your maps from scratch. Trying to update existing maps will not work. Also, due to major changes to the web assets during the rewrite, you should not simply copy over custom web assets to the new version. In particular, custom <em>overviewerConfig.js </em>files can cause strange problems.</p><h3>A Note about Biomes</h3><p>In addition to the much taller worlds possible with Anvil, the new map format now stores biome information with the chunks. This means that you no longer have to run the Biome Extractor in order to get biome colors on your maps.&#160;Biome colors are working <em>right now</em>&#160;in the Anvil branch; go check it out!</p>
+'''
+
+[[posts]]
+slug = 'overviewer-09-released'
+published = true
+user = 'brownan'
+title = 'Overviewer 0.9 released!'
+timestamp = 2012-03-03T17:44:00Z
+body = '''
+<p><em>For an intro to Overviewer in general, see the <a href="http://docs.overviewer.org/en/latest/index.html">front page of our documentation site</a>.</em></p><p>Support for Minecraft 1.2 worlds is now merged into the "master" branch of our repository!</p><p>Those of you who have repositories with "anvil" or "rewrite" checked out will need to switch to the master branch (git checkout master).</p><p>Those of you who have the old "master" branch checked out will need to see <a href="http://overviewer.org/blog/2012/02/13/about-the-new-config-file-format/">This Post</a> to upgrade to the new version. Config files are incompatible with this upgrade, so this is important!</p><p>Also to note if you're upgrading from 0.4 (the old master branch): remember that due to changes made to the format you WILL need to re-render your maps from scratch. Trying to update existing maps will NOT work. Also due to major changes to the web assets, you should not simply copy over custom web assets to the new version. In particular, custom <em>overviewerConfig.js</em>&#160;files can cause strange problems.</p><p>The new version has been arbitrarily named 0.9. Windows builds are now available on our <a href="https://github.com/overviewer/Minecraft-Overviewer/downloads">downloads page</a>.</p><p>As always, stop in on <a href="http://overviewer.org/irc/">IRC</a> with any questions or just to say hi!</p><p>This is still in <strong>beta</strong>&#160;because there are a few features yet missing, but since Minecraft 1.2 is released, we felt that it was more important to have the master branch compatible with the current Minecraft. Here are the features yet to be implemented:</p><ul><li>Signs, Spawn markers, and other Points of Interest</li><li><del>Ordering of renders and worlds in the javascript interface</del>&#160;<em>Edit: Done! Mar 6 2012</em></li><li>Overlays</li></ul>
+'''
+
+[[posts]]
+slug = 'overviewer-history'
+published = true
+user = 'brownan'
+title = 'Overviewer History'
+timestamp = 2012-04-11T23:15:40Z
+body = '''
+<p>derchris in <a href="http://overviewer.org/irc" title="#overviewer">#overviewer</a>&#160;has made for us an updated visualization of the Overviewer commit history. Check it out!</p><p>What's interesting is you can pretty clearly see when I left around 0:30, or November 2010, and then when I return around 2:00, or October 2011.</p>
+
+<iframe width="420" height="315" src="http://www.youtube.com/embed/WXgklzd-pFk" frameborder="0" /></iframe>
+
+<p>Thanks derchris for the video! Thanks everyone for your contributions!</p>
+'''
+
+[[posts]]
+slug = 'state-overviewer'
+published = true
+user = 'brownan'
+title = 'State of the Overviewer'
+timestamp = 2012-05-11T10:40:53Z
+body = '''
+<p>For the last few months, Overviewer development has slowed. Fear not, the project is <em>not</em>&#160;dead! The semester is coming to a close and us core devs will hopefully re-acquire the necessary free time and motivation to handle some of the larger, outstanding, and much-requested features the community has been asking for.</p><p>Features like:</p><ul><li>Easy addition of custom/mod blocks such as IC2, Redpower, etc.</li><li>As a superset of the above bullet, a plugin-type system for Overviewer to easily add functionality</li><li>A re-design of some of the config options that I personally think are confusing (like how --check-tiles works)</li><li>Better handling of maps edited with external tools</li><li>More performance improvements</li><li>A re-design of the docs to make it more clear and easier to find relevant information</li><li>Probably more I'm forgetting</li></ul><p>I have high hopes that development will pick back up in the next few weeks. We've been keeping up with smaller bug-fixes and features, but these larger features require larger blocks of time.</p><p>Incidentally, if anyone out there has any Python experience, or would like to help e.g. with documentation, please see us on our IRC channel (#overviewer on Freenode). The Overviewer is a community-run project and needs volunteers to help keep things moving. That means <em>you</em>&#160;could help drive development while us regulars are too busy with school/work/vacation/whatever!</p>
+'''
+
+[[posts]]
+slug = 'mapping-azeroth'
+published = true
+user = 'agrif'
+title = 'Mapping Azeroth'
+timestamp = 2012-07-14T17:43:16Z
+body = '''
+<p><a href="http://overviewer.org/wow/" title="WoW Map"><img src="http://overviewer.org/media/uploads/zinnia/Screen_shot_2012-07-14_at_6.47.14_PM.png" title="WoW Map" alt="WoW Map" /></a></p><p>RamsesA's <a href="http://www.minecraftforum.net/topic/997352-crafting-azeroth/" title="Crafting Azeroth">Crafting Azeroth</a>&#160;project completely recreates the World of Warcraft in Minecraft using an elaborate series of custom tools and old-fashioned manual touch-ups. For the last month or so, the Overviewer team has been working with him to render high-resolution maps of these worlds.</p><p>The two largest continents, Eastern Kingdoms and Kalimdor, are complete and <a href="http://overviewer.org/wow/" title="WoW map">are ready to view</a>. Other continents may also be made available as they are rendered.</p><p>The process of creating these worlds to begin with is difficult and extremely interesting, and you can learn about it in <a href="http://www.minecraftforum.net/topic/997352-crafting-azeroth/" title="forum thread">this Minecraft Forum thread</a>. This blog post, though, will focus specifically on what we had to do to create this map.</p><h3>A Tall Order</h3><p>The first hurdle to overcome was the world height. Normal Minecraft worlds are 256 blocks high, but Kalimdor is 1408 blocks high. This means that Kalimdor is 5.5 times taller than normal Minecraft worlds, and 11 times taller than old Minecraft worlds (before the Anvil map format). Since normal Minecraft clients can't handle worlds this tall, RamsesA split the world up into 7 normal-height overlapping world layers, and used a Bukkit plugin to automatically teleport between the layers for a nearly seamless experience. This is great for exploring the map, but Overviewer expects all its map data in a single world. So, the first step was to turn these 7 layers back into a single mega-world with all 1408 blocks of height. To do this, I used my own <a href="https://github.com/agrif/libredstone" title="libredstone">libredstone</a>&#160;with python bindings.</p><p>Once all the world layers were merged, it was possible to load up the world in Overviewer. However, Overviewer still expected the world to be 256 blocks high, so it only rendered a tiny part of the world. Back after the Anvil change, when worlds doubled in height, brownan had worked out the changes needed to the render code. This change was so similar it was mostly a matter of changing a few constants. Our recent rewrite ensured that very few parts of Overviewer code actually depend on world height, and by the end of this process, it had been reduced to two source lines.</p><h3>Making it Pretty</h3><p>So now we were rendering, and boy was it something else. These worlds were <em>huge</em>&#160;and <em>beautiful</em>. We worked with RamsesA to come up with a combination of render primitives to best show off his work. Since there were a lot of forests with very large trees, a lot of the ground was too dark with the normal Overviewer lighting, so we settled on smooth lighting at 65% strength.</p><p>There were a few details left to work out about the rendering, though. RamsesA's conversion code placed water blocks in ways that Minecraft never does, causing a few minor errors in the render. Fixing these was just a few changes to the C source, and an since Overviewer is an incremental renderer, it was easy to just re-render the parts of the map that needed it. Having a render of the entire world also helped to find minor errors in the world itself, which were quickly corrected and fixed with more incremental renders. All told, it took about 2 - 3 weeks for all these renders to finish, running on the beefy 4-core machine hosting <a href="http://overviewer.org/" title="overviewer.org">overviewer.org</a>&#160;(graciously hosted by <a href="http://nexcess.net/" title="nexcess.net">nexcess.net</a>).</p><h3>Final Presentation</h3><p>Now that the bulk of the rendering was done, it was time for the finishing touches. Eminence and pironic assisted RamsesA in placing markers on the map, which showed location info and photos when clicked. This was mostly a matter of using Overviewer's built in POI code, with a few minor tweaks for using it to display so much information. A lot of the Overviewer team also helped with placing the markers and taking photos in-game to go along with them. Finally, Eminence made a few changes to the map controls to simplify the map interface, and a bunch of smaller ones to make the entire experience feel better.</p><p>One of the goals of the rewrite was to make large changes like this easy, and I think the success of this project is a sign that we succeeded. Now that we're done, the improvements and changes made for this project will trickle back into the official Overviewer source as soon as we clean them up and make them configurable. As a bonus, RamsesA found a wonderful optimization in our code that should speed up render times by as much as 15%.</p><p>All together, this was a massive and fun project for us. It was great working with RamsesA to stretch the limits of what Overviewer can do, and we hope you like the result.</p><p>(<a href="http://www.reddit.com/r/gaming/comments/wl5li/a_google_maps_view_of_azeroth_in_minecraft/" title="reddit thread">Reddit thread</a>)</p>
+'''
+
+[[posts]]
+slug = 'introducing-oil'
+published = true
+user = 'agrif'
+title = 'Introducing OIL'
+timestamp = 2012-12-30T16:31:16Z
+body = '''
+<p>For the last few months, I've been working on a replacement for <a href="http://www.pythonware.com/products/pil/" title="PIL">PIL</a> to use with Overviewer. PIL is nice for simple imaging tasks, but as Overviewer grew we were constantly hitting annoying limitations or performance issues. Over time we've accumulated a bunch of ad-hoc image manipulation code, and we decided to consolidate it all and finally replace the parts of PIL we still used. The result is <a href="http://github.com/overviewer/OIL/" title="OIL">OIL</a>&#160;(Overviewer Imaging Library), which is now very close to being finished.</p><p>Along the way, I decided to also rewrite Overviewer's renderer. Currently, Overviewer renders a world by pre-rendering a bunch of block sprites, then pasting those sprites onto the final images. This has worked well, but adding new blocks is an extremely tedious process of manipulating pixels directly to produce something that looks 3D. It also has a major drawback: the view angle and block size is fixed. We've been asked many times to allow configurable block sizes or map rotations, and we haven't been able to do these because our current renderer design is not flexible enough.</p><p>The new renderer is based entirely around 3D block meshes. It draws these directly to the final images, meaning it's trivially easy to rotate and scale them exactly how you want. Overall this means more flexibility for you in how you render your maps, and easier to maintain code for us: adding new blocks is as simple as creating a new block mesh.</p><p>Now, there are two main concerns I want to address as soon as possible:</p>
+
+<ul>
+<li>
+<p><strong>Won't this new renderer be slower? It sounds much more complicated.</strong></p>
+<p>Wonderfully, <em>no!</em> The current experimental renderer currently runs 5% to 15% <em>faster</em> than our old sprite-based renderer. There are still blocks and features to add, but I don't expect it to get much slower from here. At the very least, the new renderer will run in about the same time as the old renderer.</p>
+</li>
+<li>
+<p><strong>3D? I don't like needing a video card just to render maps.</strong></p>
+<p>The new experimental renderer is entirely CPU-based. You don't need
+a video card, and you don't need a graphical environment. If you
+were able to run Overviewer before, you'll still be able to. In
+particular, for Unix users, <em>you will not need X to run
+Overviewer</em>.</p>
+<p>For those of you who have a video card and would like to use it,
+OIL has an OpenGL backend that currently renders 15% to 25% faster
+than the old renderer; but this is an option, not a requirement!</p>
+</li>
+</ul>
+
+<p>So, that's what's been going on for the last few months. The rest of this post is dedicated to pictures, but as always, if you have any comments or questions we would love to hear from you <a href="http://overviewer.org/irc" title="#overviewer on freenode">either in IRC</a> or <a href="http://github.com/overviewer/Minecraft-Overviewer/issues" title="GitHub Issues">on GitHub</a>.</p><h2>Cool Features and Pretty Pictures</h2><p>I'm going to be putting a lot of images below. You can click on them to get the full-sized versions.</p>
+
+<h3>Renderer</h3>
+<p>First, two shots of the same area, one with the current renderer and
+one with the experimental renderer:</p>
+<p><a href="/~agrif/oilblog/old.png"><img src="/~agrif/oilblog/oldthumb.png" /></a>
+<a href="/~agrif/oilblog/cpu.png"><img src="/~agrif/oilblog/cputhumb.png" /></a></p>
+<p>Please remember that the experimental renderer is still unfinished;
+there are a lot of missing blocks, and biome coloring hasn't been
+implemented yet. These are just a preview of what's coming.</p>
+<p>The first picture (with the old renderer) took 1.37 seconds, while the
+second (new renderer) took only 1.14.</p>
+<p>Just for fun, here's a picture of the same area, rendered on my GPU
+with OpenGL:</p>
+<p><a href="/~agrif/oilblog/opengl.png"><img src="/~agrif/oilblog/openglthumb.png" /></a></p>
+<p>It's almost identical to the CPU-rendered version, and this one
+rendered in 1.04 seconds.</p>
+<h3>Configurable Views</h3>
+<p>The advantages of the new renderer don't really show themselves in side-by-side comparisons though. How about something the old renderer couldn't do?</p>
+<p>What if you wanted to render your map with <em>huge</em> blocks, at a really weird angle? I don't know why you'd want to, but with the new renderer, you can:</p>
+<p><a href="/~agrif/oilblog/weird.png"><img src="/~agrif/oilblog/weirdthumb.png" /></a></p>
+<h3>Dithering</h3>
+<p>One benefit we'll be getting from OIL is much more subtle than the new
+renderer. Consider these two images:</p>
+<p><a href="/~agrif/oilblog/undithered.png"><img src="/~agrif/oilblog/unditheredthumb.png" /></a>
+<a href="/~agrif/oilblog/dithered.png"><img src="/~agrif/oilblog/ditheredthumb.png" /></a></p>
+<p>They look about the same, right? Well, would you believe the one on
+the right is <em>80% smaller?</em> That's because the one on the right is an
+<em>indexed image</em>, meaning it uses only 256 total colors instead of the
+4 billion colors normal Overviewer images use. Overviewer images look
+really good as indexed images, because Minecraft doesn't really use a
+whole lot of distinct colors.</p>
+<p>While PIL has support for indexed images, it has no support for
+<em>transparent</em> indexed images, which made implementing this
+impossible. OIL has no such restriction.</p>
+<h2>When will we see it?</h2>
+<p>While OIL itself is just about done, the new renderer still needs a
+lot of work before it'll be merged. This blog post is just to let you
+know that Overviewer isn't dead -- in fact, far from it. There are
+exciting things in the future.</p>
+'''
+
+[[posts]]
+slug = 'overviewer-010-released-supporting-minecraft-15'
+published = true
+user = 'eminence'
+title = 'Overviewer 0.10 released, supporting Minecraft 1.5'
+timestamp = 2013-03-13T11:30:10Z
+body = '''
+<p>Today we have just released Overviewer 0.10.0, with support for Minecraft 1.5 (aka "<a href="http://mojang.com/2013/03/minecraft-1-5-is-published/">The Redstone Update</a>")!</p><p>Head over to <a href="https://github.com/overviewer/Minecraft-Overviewer/">github </a>or our <a href="http://overviewer.org/downloads">downloads </a>page to get a copy! &#160;As usual, <a href="http://overviewer.org/irc">stop by IRC</a>, or open a <a href="http://github.com/overviewer/Minecraft-Overviewer/issues">github issue</a> if you run into any problems.</p><p>With Minecraft 1.5, the format of texture packs has changed significantly. &#160;Previously, textures were all stored in the same terrain.png file. &#160;Now, each item and block has its own texture file. &#160;You will run into problems if you use Overviewer 0.10.0, but haven't updated Minecraft (or your custom texturepack, if you are using one), so if you don't intend on upgrading Minecraft, you should not upgrade Overviewer. &#160;</p>
+'''
+
+[[posts]]
+slug = 'minecraft-16-support'
+published = true
+user = 'brownan'
+title = 'Minecraft 1.6 Support'
+timestamp = 2013-07-15T15:52:17Z
+body = '''
+<p>This blog post is a bit late, but yes, the latest Overviewer does support the latest Minecraft version 1.6.</p><p>As some may know, Minecraft 1.6 adds Resource Packs, and thus the format for texture packs and has changed. Since Overviewer pulls textures straight from the Minecraft client assets, this necessitated a change in Overviewer. And as we're not fans of keeping lots of code around for backwards comparability, this means <em>the latest versions of Overviewer will not support reading textures from Minecraft clients or texture packs from 1.5 and before.</em></p><p>This typically isn't a big deal—as people update their clients and update Overviewer, things will just work. If you do not want to upgrade your Minecraft client or texture packs, then you should not upgrade to the latest Overviewer.</p><p>As always, the best place to get help, ask questions, or get involved is <a href="http://overviewer.org/irc/">on IRC</a>!</p><p>(For posterity, the most recent build that supports 1.5 is&#160;<a href="https://github.com/overviewer/Minecraft-Overviewer/commit/a147ca4a361055ee196dfc9194b4a3df2bd156dc">a147ca4a</a>. Downloads:&#160;<a href="http://overviewer.org/builds/26/overviewer-0.10.48-win64.26-a147ca4.zip">Win64</a>. Also, to be clear, the newer Overviewer will still render older worlds, you just need the new textures.)</p>
+'''
+
+[[posts]]
+slug = 'overviewer-011-released-supporting-minecraft-17'
+published = true
+user = 'eminence'
+title = 'Overviewer 0.11 released, supporting Minecraft 1.7'
+timestamp = 2013-10-30T20:47:02Z
+body = '''
+<p>Earlier this week we released an update to Overviewer to support Minecraft 1.7.  This includes support for all of the new blocks and biomes!  </p>
+
+<p>Head over to <a href="http://github.com/overviewer/Minecraft-Overviewer" title="Github">github</a> or our <a href="http://overviewer.org/downloads" title="Downloads">downloads</a> page to get a copy!  As usual, stop by <a href="http://overviewer.org/irc/" title="IRC">IRC</a>, or open a github <a href="https://github.com/overviewer/Minecraft-Overviewer/issues" title="issues">issue</a> if you run into any problems.</p><p>We have also recently completed some long-needed work on our build infrastructure, so our Debian and RPM&#160;repositories should be updated much more often. &#160;</p>
+'''
+
+[[posts]]
+slug = 'new-optimizeimg'
+published = true
+user = 'CounterPillow'
+title = 'On the New optimizeimg'
+timestamp = 2014-05-09T14:58:45Z
+body = '''
+<p>Hi, I'm CounterPillow. If you've ever been in our IRC channel, you've
+probably seen me. I have been an irregular contributor to Overviewer
+for some time now, and recently, I've rewritten the way <em>optimizeimg</em>
+works. I thought that this would be a good opportunity to explain what
+it is, and how to best use it.</p>
+<p>First, let's explain what this is all about. In essence, this
+increases the time it takes to render a map in favor of smaller
+images. But how does it do that? <em>optimizeimg</em> allows you to run
+various image optimizers against each tile image the Overviewer
+outputs. As of the time of writing, we support optipng, pngcrush and
+pngnq.</p>
+<h2>Lossless vs. Lossy Compression</h2>
+<p>One of the key things to understand is what lossless and lossy
+compression mean. In lossless compression, the file size is reduced,
+but the decompressed data is exactly the same. No data is lost in the
+compression step, hence the name "lossless". Lossy compression, on the
+other hand, does not preserve all information. An uncompressed output
+of a lossy compression algorithm is not the same as the input.</p>
+<p>As you may already know, PNG uses lossless compression. However, there
+are a lot of different knobs to tweak when it comes to how the image
+is compressed, thus reducing file size without altering the image
+data, and we can even reduce the amount of colors in the image,
+essentially making the process lossy! I'm not going to go into detail
+as to how this all works in practice, but I will showcase the tools we
+currently support to achieve this.</p>
+<h2>Lossless Image Optimization, and "crushing"</h2>
+<p>First off, I'll have to admit that I've lied in the previous
+section. Some of the lossless image recompression methods are not
+lossless in the sense of "data in is the same as data out
+decompressed". Some tools, like optipng, discard unused alpha channels
+(where images store their transparency), to reduce file size. I said
+unused, which means that the visible output is still pixel-per-pixel
+the same, thus lossless, but the image data is obviously
+different. However, for all intents and purposes, we can call this
+process "lossless", because no visible information has been changed.</p>
+<p>Discarding unused alpha channels is one way of making the image
+smaller, but there are other ways which are truly lossless. Both
+pngcrush and optipng tweak the previously mentioned knobs of the
+compression, trying to find the smallest possible output. The two
+tools do this a bit differently, but the principle is the same: Tweak
+the encoding parameters. This is what the Overviewer code refers to as
+a "crusher". If you wish to learn more on how this is done internally,
+you can read about it
+<a href="http://optipng.sourceforge.net/pngtech/optipng.html">on the optipng site</a>,
+but beware: It's quite technical.</p>
+<h2>Lossy Image Optimization</h2>
+<p>With pngnq, we also offer a way of lossy image optimization. You may
+be wondering how a PNG can be lossily optimized, as the compression
+method is lossless. The answer is simple: The amount of colors.</p>
+<p>PNG supports a ton of different color modes, amongst them is an
+indexed color mode, or also referred to as "Palette PNG" or
+"PNG8". In images with indexed color modes, the colors of each pixel
+aren't determined individually using red, green and blue
+channels. Instead, it has a palette of colors, and then specifies for
+each pixel the color for it by assigning it the a color of the
+palette. This means less colors, in our case 256 at most, and because
+we can represent those with just one byte, it means less data that
+needs to be compressed. If we find the 256 colors that can best
+represent the image, we get pretty good results that are just a
+fraction of the original size; and since Minecraft doesn't use a lot
+of colors in the default texture pack, it's barely noticeable. agrif
+briefly mentioned this in the
+<a href="http://overviewer.org/blog/2012/12/30/introducing-oil/">"Introducing OIL"</a>
+blog post. In fact, if our input image has less than or exactly 256
+colors anyway, the process is completely lossless!</p>
+<p>Instead of waiting for OIL, you can use palette PNGs right now, with
+the pngnq tool. However, please be aware that due to multiple bugs in
+the imaging library we currently use, PIL (or Pillow, both are buggy),
+this will break transparency. As stated in the docs, this is not
+pngnq's fault.</p>
+<h1>Using Image Optimization In Practice</h1>
+<p>But how is this used in practice, you ask? It's not that hard. The
+first step is to install the tools you wish to use and make sure they
+can be called by Overviewer (i.e., are in your PATH environment
+variable). Then, add them to your config.</p>
+<p><strong>Please be aware that this will increase render times.</strong></p>
+<h2>An example for everyone</h2>
+<p>The following example should be satisfactory for most people who wish
+to use image optimization. Please also be aware that when I say "most
+people", I always actually mean "most people". If you think you are
+not "most people", then you're doing so carrying the risk that you may
+be wasting your time.</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">optimizeimages</span> <span class="kn">import</span> <span class="n">optipng</span>
+
+<span class="n">renders</span><span class="p">[</span><span class="s">"foo"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c"># ... other stuff here</span>
+    <span class="s">"optimizeimg"</span><span class="p">:[</span><span class="n">optipng</span><span class="p">()],</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>This will run optipng with the default number of trials (which is the
+way to go for <em>most people</em>).</p>
+<h2>Playing around with optimization levels</h2>
+<p>We can, of course, also specify some parameters for optipng. Please
+note that you're dangerously venturing out of <em>most people</em>-territory
+here.</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">optimizeimages</span> <span class="kn">import</span> <span class="n">optipng</span>
+
+<span class="n">renders</span><span class="p">[</span><span class="s">"foo"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c"># ... other stuff here</span>
+    <span class="s">"optimizeimg"</span><span class="p">:[</span><span class="n">optipng</span><span class="p">(</span><span class="n">olevel</span><span class="o">=</span><span class="mi">3</span><span class="p">)],</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>This will essentially execute optipng -o3 (instead of -o2), you can
+see what the exact meaning of that is in the optipng manual, or by
+typing <code>optipng -h</code>. Please note that anything above, or most likely
+even including the fifth optimization level, is pointless. The OptiPNG
+developers
+<a href="http://optipng.sourceforge.net/pngtech/optipng.html">said so themselves</a>:</p>
+<blockquote>
+<p>It is important to mention that the achieved compression ratio is
+less and less likely to improve when higher-level presets
+(trigerring more trials) are being used. Even if the program is
+capable of searching automatically over more than 200 configurations
+(and the advanced users have access to more than 1000
+configurations!), a preset that selects around 10 trials should be
+satisfactory for most users. Furthermore, a preset that selects
+between 30-40 trials should be satisfactory for all users, for it is
+very, very unlikely to be beaten significantly by any wider
+search. The rest of the trial configurations are offered rather as a
+curiosity (but they were used in the experimentation from which we
+concluded they are indeed useless!)</p>
+</blockquote>
+<h2>Getting crazy</h2>
+<p>Let's move on to something more hardcore, then. Let's say you don't
+care if your map looks a bit weird thanks to PIL. Let's say you want
+to use pngnq.</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">optimizeimages</span> <span class="kn">import</span> <span class="n">optipng</span><span class="p">,</span> <span class="n">pngnq</span>
+
+<span class="n">renders</span><span class="p">[</span><span class="s">"foo"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c"># ... other stuff here</span>
+    <span class="s">"optimizeimg"</span><span class="p">:[</span><span class="n">pngnq</span><span class="p">(),</span> <span class="n">optipng</span><span class="p">()],</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Note the order in which the two optimizers are specified. Here, pngnq
+is run first, then optipng is run on it. This is important: If you
+feed crushed output into something that is not a crusher (i.e. does
+not do lossless compression tweaking), all benefits of the crusher
+will be lost; essentially, you'd be wasting your time. If you choose
+to use more than one optimization tool, make sure the crusher is at
+the end. Overviewer will warn you if it isn't.</p>
+<h2>Don't be silly</h2>
+<p>Speaking of more than one optimization tool, let's answer a very
+important question: Will the image be smaller by using multiple
+crushers chained together? (i.e. optipng after pngcrush)</p>
+<p>The short answer: No.</p>
+<p>The long answer: Most likely not.</p>
+<p>Crushers, by default, exit if they fail to make the image smaller, and
+just admit that they have not been able to crush it. Crushers may
+perform differently in different situations, so using two crushers
+chained after each other gives you essentially the best output of
+either; however, for most images (and I say "most images" like I say
+"most people"), this will be optipng in our example. Every
+<em>optimizeimg</em> configuration that uses both pngcrush and optipng can
+most likely be reduced to just optipng, with exactly the same results
+but much faster renders.</p>
+<h1>Conclusion</h1>
+<p>As you may have noticed, I often used "most likely" and "most people"
+in this post. This is because we can't make certain statements without
+large-scale tests, which I have not done,
+<a href="http://css-ig.net/png-tools-overview.html">but other people did</a>. If
+you're interested in utilizing image optimization, what you should
+take away from this blog post is that <code>[optipng()]</code> is the way to
+go. If you're not sure, do tests yourself. We may add support for
+better image optimizers in the future, including some for JPEG, so
+frequently checking the documentation to see which are available is a
+good idea.</p>
+'''
+
+[[posts]]
+slug = 'overviewer-v012-out-supporting-minecraft-18'
+published = true
+user = 'eminence'
+title = 'Overviewer v0.12 is out, supporting Minecraft 1.8'
+timestamp = 2014-09-02T13:08:06Z
+body = '''
+<p>Today Overviewer version 0.12 was released, which adds support for most of the Minecraft 1.8 blocks. You can download it at the usual location,&#160;<a href="http://overviewer.org/downloads">right here on the download page</a>. Not all 1.8 blocks are supported at this time; banners and armour stands are not implemented yet. These will not appear on your rendered map for now.</p><p>The new version of Overviewer requires a Minecraft 1.8 resource pack or the Minecraft 1.8 client. If you wish to stick with earlier versions of Minecraft, either use the latest Overviewer 0.11 version or install the Minecraft 1.8 textures.</p><p>Report any bugs you find on&#160;<a href="https://github.com/overviewer/Minecraft-Overviewer/issues">GitHub</a>, and if you have any questions, you can reach us in&#160;<a href="http://overviewer.org/irc/">IRC</a>. Make sure to check out the&#160;<a href="http://docs.overviewer.org/">official documentation</a>&#160;as well.</p>
+'''
+

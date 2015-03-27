@@ -1,12 +1,14 @@
 from flask import render_template, redirect
 from .app import app
+from .models import BlogPost
 
 from .auth import *
 from .blog import *
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    posts = BlogPost.query.order_by(BlogPost.timestamp.desc()).limit(3).all()
+    return render_template('index.html', posts=posts)
 
 # Shortcuts...
 def shortcut(paths, destination):

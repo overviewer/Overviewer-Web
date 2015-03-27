@@ -1,14 +1,27 @@
-{% extends "base.html" %}
+{% extends "blog_base.html" %}
 
 {% block title %}Blog - Minecraft Overviewer{% endblock %}
 
-{% block body %}
-<ul>
-{% for entry in entries %}
-<li><a href="{{ entry.url }}">{{ entry.timestamp }} - {{ entry.title }}</a></li>
-{% else %}
-<li>No entries.</li>
+{% block content %}
+{% for post in posts %}
+{% include "blog_post.html" %}
 {% endfor %}
+
+<ul class="paginator">
+  <li class="index">
+    Page {{ page.page }} of {{ page.pages }}
+  </li>
+  {% for p in page.iter_pages() %}
+  {% if p %}
+  {% if p != page.page %}
+  <li class="page"><a href="?page={{ p }}">{{ p }}</a></li>
+  {% else %}
+  <li class="page current"><strong>{{ p }}</strong></li>
+  {% endif %}
+  {% else %}
+  <span class="ellipsis">...</span>
+  {% endif %}
+  {% endfor %}
 </ul>
-{% endblock body %}
+{% endblock content %}
 

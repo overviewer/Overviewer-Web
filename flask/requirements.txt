@@ -6,3 +6,4 @@ GitHub-Flask==2.0.1
 Flask-WTF==0.11
 unidecode==0.04.1
 Flask-Markdown==0.3
+pytoml==0.1.2

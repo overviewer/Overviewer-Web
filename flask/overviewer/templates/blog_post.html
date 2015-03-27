@@ -1,0 +1,21 @@
+<div class="well">
+  <div id="entry-{{ post.id }}" class="hentry">
+    <div class="entry-header">
+      <h2 class="entry-title">
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </h2>
+      <p class="entry-info">
+        Written by <a href="{{ post.user_url }}">{{ post.user }}</a>
+        on <abbr class="published" title="{{ post.timestamp }}">{{ post.timestamp.strftime('%b. %d, %Y') }}</abbr>
+      </p>
+    </div>
+    <div class="entry-body">
+      <div class="entry-content">
+        {{ post.body|markdown }}
+      </div>
+      <p class="continue-reading">
+        <a href="{{ post.url }}" title="{{ post.title }}">(permalink)</a>
+      </p>
+    </div>
+  </div>
+</div>

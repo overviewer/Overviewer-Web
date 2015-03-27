@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% macro do_archive(dat) %}
+{% for name, url, sub in dat %}
+<li>
+  <a href="{{ url }}">{{ name }}</a>
+  {% if sub %}
+  <ul>
+    {{ do_archive(sub) }}
+  </ul>
+  {% endif %}
+</li>
+{% endfor %}
+{% endmacro %}
+
+{% block body %}
+<div class="row">
+  <div class="span9">
+    {% block content %}{% endblock %}
+  </div>
+  <div class="span3">
+    <!-- <div id="widget-search" class="widget">
+      <form method="get" id="searchform" action="???" class="form-search">
+        <p>
+          <input type="text" name="pattern" id="searchbox" class="input-medium search-query"/>
+          <input type="submit" class="btn" id="searchbutton" value="Search"/>
+        </p>
+      </form>
+    </div> -->
+    {% if session.developer %}
+    <div id="widget-tools" class="widget">
+      <h3>Tools</h3>
+      <ul>
+        <li><a href=" {{ url_for('blog_create') }}">Post an entry</a></li>
+        {% block tools %}{% endblock %}
+      </ul>
+    </div>
+    {% endif %}
+    <div id="widget-archives" class="widget">
+      <h3>Archives</h3>
+      <a href="{{ url_for('blog_index') }}">All Entries</a>
+      <ul>
+        {{ do_archive(archives) }}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock body %}

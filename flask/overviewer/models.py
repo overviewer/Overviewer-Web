@@ -9,10 +9,14 @@ class BlogPost(db.Model):
     timestamp = db.Column(db.DateTime)
     published = db.Column(db.Boolean)
     title = db.Column(db.String(256))
-    slug = db.Column(db.String(128), index=True)
+    slug = db.Column(db.String(128), index=True, unique=True)
     body = db.Column(db.Text())
     
     @property
     def url(self):
         t = self.timestamp
         return url_for('blog_view', year=t.year, month=t.month, day=t.day, slug=self.slug)
+
+    @property
+    def user_url(self):
+        return 'https://github.com/' + self.user

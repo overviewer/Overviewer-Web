@@ -1,11 +1,12 @@
-{% extends "base.html" %}
+{% extends "blog_base.html" %}
 
 {% block title %}{{ post.title }} - Minecraft Overviewer{% endblock %}
 
-{% block body %}
-<h1>{{ post.title }}</h1>
-<p>By {{ post.user }} on {{ post.timestamp }}</p>
+{% block content %}
+{% include "blog_post.html" %}
+{% endblock content %}
 
-{{ post.body|markdown }}
-
-{% endblock body %}
+{% block tools %}
+<li><a href="edit">Edit entry</a></li>
+<li><a href="delete">Delete entry</a></li>
+{% endblock tools %}
