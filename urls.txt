@@ -85,7 +85,7 @@
 /git
 /doc
 /docs
-/pull
+/pull/1
 /pulls
 
 # homes with content

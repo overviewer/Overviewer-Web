@@ -62,5 +62,5 @@
 /git
 /doc
 /docs
-/pull
+/pull/1
 /pulls
