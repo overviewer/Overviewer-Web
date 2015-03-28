@@ -6,7 +6,7 @@ nginx:
   volumes_from:
     - wwwdata
   ports:
-    - "80:80"
+    - "8020:80"
 wwwdata:
   image: busybox
   volumes:
