@@ -37,6 +37,7 @@
 
 # blog
 /blog
+/blog/feeds/latest/
 /blog/2012/02/05/the-overviewer-update-blog/
 /blog/2012/02/11/help-us-test-our-new-beta/
 /blog/2012/02/12/windows-noob-guide/
