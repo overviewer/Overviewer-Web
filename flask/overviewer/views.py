@@ -4,6 +4,9 @@ from .models import BlogPost
 
 from .auth import *
 from .blog import *
+from .avatar import *
+
+app.register_blueprint(avatar, url_prefix='/avatar')
 
 @app.route('/')
 def index():
