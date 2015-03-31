@@ -10,6 +10,18 @@ def index():
     posts = BlogPost.query.order_by(BlogPost.timestamp.desc()).limit(3).all()
     return render_template('index.html', posts=posts)
 
+# static pages...
+def static(path, tmpl=None):
+    name = 'static' + path.replace('/', '_').replace('.', '_')
+    if tmpl is None:
+        tmpl = name + '.html'
+    app.add_url_rule(path, name, lambda: render_template(tmpl))
+
+static('/donate')
+static('/irc/')
+static('/irc/bot')
+static('/irc/rules')
+
 # Shortcuts...
 def shortcut(paths, destination):
     for path in paths:

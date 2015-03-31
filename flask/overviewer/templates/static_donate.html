@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Overviewer Donation Policy{% endblock %}
+
+{% block body %}
+{% filter markdown %}
+Overviewer Donation Policy
+==================
+You are welcome to donate to the Overviewer project, but before you do, please read this document.
+
+Updated February 19, 2014
+
+Funds Usage
+------------
+The Overviewer is a collaborative effort, with dozens of contributors. As such, we do not feel that it would be fair for a subset of contributors to receive money for their work.
+
+However, we have received requests from time to time from people who want to support the project in this way. We have therefore decided to accept donations with the following usage policy on the funds:
+
+* Donations will primarily be used to reimburse the direct costs incurred by members of The Overviewer development team. This may include hosting costs (e.g. Linode servers, domains), bandwidth costs (e.g. S3), or software costs (e.g. a software license for Visual Studio).
+
+* If we receive donations far in excess of what we are able to use, we may ourselves redirect donated money to other projects.  Specifically, we will donate to projects that have made The Overviewer possible (e.g. Python), or projects that may benefit The Overviewer in the future (e.g. PyPy).
+
+* Donations may be dispersed to developers via tip4commit (see below)
+
+To close out this section, I just want to say that we don't *need* your money -- our expenses are very low. Github hosts our code for free, readthedocs.org hosts our documentation for free. Nexcess has donated a server to host everything else. We spend ~$5 a month on S3 storage and that's about it. While we will accept your donations and find a way to use them, don't feel like you have to donate to keep the project afloat!
+
+Solicitation Policy
+----------------------
+Additionally, we do not feel that it's right to solicit donations for this project, e.g. putting a donate button on our main page, because our costs are so low. This page is therefore not linked from anywhere and is given out on request.
+
+These bullets outline our policy on solicitations:
+
+* Donations will *not* be solicited.  This primarily means that there will no 'donate' link or button on the Overviewer.org website, README.rst, wiki, docs, or IRC channel topic.
+
+* As an exception, we may want to fund a special project.  In this case, we may temporarily solicit for donations for that project.  As soon as the project is fully funded, we would return to our default 'no solicitation' policy.
+
+* This page and information about our donation policy is to be made available to people that ask us about donating.
+
+How to donate
+-----------------
+If you are visiting this page, chances are you have already asked about donating and were referred here. If you would still like to donate, please contact one of the core developers on [IRC](/irc/) for the paypal address to use (IRC nicks are in parentheses). As an alternative, you may send us bitcoins.  Contact achin for an address.
+
+* Andrew Chin (achin)
+
+* Aaron Griffith (agrif)
+
+* Andrew Brown (brownan)
+
+The donation will go into the account of one of the core developers.  The understanding is that the money will only be used in the way described in this document.  A high level of trust is required here.
+
+Note for Contributors
+-------------
+Any contributor may ask to use the funds if they have incurred overviewer-related expenses. However, anyone who incurs expenses by providing a service to the team should do with with *no expectation of reimbursement* (without prior approval). The intention is so that someone doesn't go and spend a lot of money, then later try to lay claim to some of the donation pool.
+
+Funds will be distributed according to a consensus of the core developers after consultation with the wider community.
+
+Note about Tip4Commit
+---------------------------
+
+[Tip4Commit](http://tip4commit.com/) is a website that will let you donate money to project.  When a commit is made, a small portion of the fund balance is given to the commit author.  You are encouraged to fund our [project](http://tip4commit.com/projects/579) in this way, if you'd like.
+
+Note on sponsoring development
+-------------------
+A previous version of this document had said that it is not possible to sponsor development, and that donated funds will never go to individual developers.  This position is not consistent with our desire to use tip4commit, so it is being modified.  If you wish to sponsor development, as a way to pay for a particular feature or bug fix, you may do so by contacting a developer individually and negotiating terms with them.  Please stop by IRC to have a chat first, though.
+{% endfilter %}
+{% endblock body %}

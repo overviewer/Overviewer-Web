@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+
+{% block title %}EmceeOverviewer Help{% endblock %}
+
+{% block body %}
+{% filter markdown %}
+EmceeOverviewer Help
+====================
+
+Our [#overviewer][] IRC channel has a customized bot named
+*EmceeOverviewer*, which is able to do a lot of interesting and
+helpful things. This is an incomplete list of the things it can do.
+
+[TOC]
+
+ [#overviewer]: ./
+
+EmceeOverviewer is [free software][], and may be found on
+[GitHub][]. Some of the more specialized commands (like `build` and
+`render`) are not in the public source, because the code is ugly
+and/or contains location-specific hacks.
+
+ [free software]: http://www.gnu.org/philosophy/free-sw.html
+  [GitHub]: https://github.com/agrif/hesperus
+
+Issuing Commands
+----------------
+
+There are 3 primary ways to issue commands to EmceeOverviewer. The
+classic way is much like addressing him directly:
+
+~~~~{.raw}
+EmceeOverviewer, <command>
+~~~~
+
+EmceeOverviewer will also respond to the names "emcee" and "mco", and
+will accept a colon or space instead of a comma. So, all of the
+following are acceptable:
+
+~~~~{.raw}
+EmceeOverviewer: <command>
+emcee, <command>
+mco <command>
+~~~~
+
+You may also issue commands by prefixing the command with a "!", for
+example:
+
+~~~~{.raw}
+!<command>
+~~~~
+
+If you want to issue a (usually short) command inside a more general
+message, you can surround any command with parenthesis "()" or
+brackets "[]" to issue an *inline* command. For example:
+
+~~~~{.raw}
+Hey, check out this (!<command>) cool link!
+I'll render that for you. [emcee, <command>]
+~~~~
+
+If you want to issue a command but don't want to spam up the channel,
+use private messages. If you use PMs, you don't need any special
+syntax for commands, just use the command name:
+
+~~~~{.raw}
+/msg EmceeOverviewer <command>
+~~~~
+
+All of these forms work with all commands, so do whatever seems best
+to you.
+
+Convenience Commands
+--------------------
+
+* `google <query>` -- provides a link to a Google search for
+  `<query>`.
+  * `alpha <query>`, `wa <query>`, `= <query>` -- does a Wolfram Alpha computation
+  * `hesperus` -- provide a link to the current [bot sources][GitHub].
+  * `help` -- provide a link to this guide.
+  * `dtt`, `dttguide` -- provide a link to the
+    [DTT Upgrade Guide](https://github.com/overviewer/Minecraft-Overviewer/wiki/DTT-Upgrade-Guide).
+    * `quickstart`, `guide` -- provide a link to the
+      [Quick Start Guide](https://github.com/overviewer/Minecraft-Overviewer/wiki/Quick-Start-Guide).
+      * `rmo`, `rmoguide` -- provide a link to the [Rendermode Options Guide](https://github.com/overviewer/Minecraft-Overviewer/wiki/Rendermode-Options-Guide).
+      * `example`, `exmaple` -- checkout and zip the latest exmaple (example map).
+      * `terrain` -- give the most up-to-date SHA1 hash of terrain.png
+      * `ddate` -- returns the current date on the
+        [Discordian Calendar](http://en.wikipedia.org/wiki/Discordian_calendar).
+        * `fortune` -- print a random, hopefully interesting, adage ([man fortune 6](http://linux.die.net/man/6/fortune))
+        * `roll` -- rolls virtual dice, given a dice string (based on [rolldice](http://gitorious.org/debian-packages/rolldice))
+
+GitHub Integration and Commands
+-------------------------------
+
+EmceeOverviewer will announce GitHub events (like pushes, open issues,
+...) to the channel as they happen, for
+[all repositories he follows on GitHub][emcee-github]. If you want to
+be added to this list, just ask agrif (Emcee's operator).
+
+ [emcee-github]: https://github.com/EmceeOverviewer
+
+In addition to announcing events, Emcee also supports a few
+convenience commands.
+
+### Searching Issues
+
+To do a search for a specific issue number, use `issue <num>`. Emcee
+also supports `issue #<num>`. If you want to search by phrase instead,
+use `issue <phrase>`, where `<phrase>` can be anything (even including
+spaces!).
+
+If you want to search on something other than the main repo, put
+`on <username>` at the end to search through that user's repo issues
+instead. For example,
+
+~~~~{.raw}
+!issue blocks on agrif
+~~~~
+
+will search for issue with the phrase "blocks" on agrif's repo. This
+works with issue numbers too, and will also accept "in", "for", or
+"of" instead of "on". The `pull` command is an alias for `issue`.
+
+### Linking to Specific Lines
+
+You can have Emcee generate a link to a specific file and line by
+issuing a command of the form `<filename>:<lineno>`. For example, to
+link to line #50 of `chunk.py`, you could issue:
+
+~~~~{.raw}
+!chunk.py:50
+~~~~
+
+Like the `issue` command, this supports the "in", "for", "of", "on"
+syntax to select a specific user's repo.
+
+This is particularly useful as an inline command. For example:
+
+~~~~{.raw}
+Hey, what does this line do? (!src/overviewer.h:12)
+~~~~
+
+Building Overviewer Packages
+----------------------------
+
+(Note: *right now, for safety reasons, this command is
+restricted-access. If you want to be put on the access list, just ask
+agrif*)
+
+Emcee is able to build py2exe and debian packages (and possibly other
+binary packages) automatically, on command. To have Emcee build
+something for you, use `build <target>`. Run `build` (with no targets)
+to get a list of supported targets.
+
+If you want to build something other than the default sources, you can
+add a repo user and commit to the build command. For example,
+
+~~~~{.raw}
+build <target> agrif
+~~~~
+
+will build the "master" branch on agrif's repo, and
+
+~~~~{.raw}
+build <target> agrif/some-branch
+~~~~
+
+will build the "some-branch" branch on agrif's repo.
+
+### Uploading Packages
+
+Emcee now has the ability to build and upload a bunch of targets at
+once, to facilitate releasing new versions of Overviewer. The basic
+command is `upload`, which will build and upload every available
+target. Windows packages are uploaded to [GitHub][gh-downloads], and
+debian packages are uploaded to the [overviewer.org APT repository][apt].
+
+ [gh-downloads]: https://github.com/overviewer/Minecraft-Overviewer/downloads
+  [apt]: /debian/info
+
+Like `build`, `upload` also takes a `repo/branch` as an optional
+argument if you wish to release something other than
+`overviewer/master`. In this case, Windows builds are uploaded to the
+appropriate repository.
+
+Finally, you can specify what targets you want to upload:
+
+~~~~{.raw}
+upload targets deb32 deb64
+upload agrif targets win*
+~~~~
+
+The target list supports shell-style globbing.
+
+`release` is an alias for `upload`, and both commands require
+confirmation before doing anything, as a precaution.
+
+Rendering the Exmaple
+---------------------
+
+In addition to building packages, Emcee can also do render tests on
+command. To generate a test render, run `render`. Like the `build`
+command, `render` also supports specifying a user and commit.
+
+Renders generated this way will always have all rendermodes enabled,
+but will otherwise be completely unmodified.
+
+Recently I added support for providing options to each render. Just
+provide them after the command like you would on the command
+line. Because of this new flexibility, this command is now limited to
+people with `build` access.
+
+For example,
+
+~~~~{.raw}
+!render overviewer --north-direction="upper-left"
+~~~~
+{% endfilter %}
+{% endblock body %}

@@ -11,4 +11,4 @@ if 'OVERVIEWER_SETTINGS' in os.environ:
     app.config.from_envvar('OVERVIEWER_SETTINGS')
 
 db.init_app(app)
-Markdown(app)
+Markdown(app, extensions=['extra', 'toc', 'codehilite'])

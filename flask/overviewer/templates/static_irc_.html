@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Overviewer on Freenode{% endblock %}
+
+{% block body %}
+{% filter markdown %}
+Overviewer on Freenode
+----------------------
+
+Join us on irc.freenode.net in
+[#overviewer](http://webchat.freenode.net/?channels=overviewer).
+
+We have a [bot](bot)!
+
+<iframe src="http://webchat.freenode.net?channels=overviewer" width="647" height="400"></iframe>
+{% endfilter %}
+{% endblock body %}
