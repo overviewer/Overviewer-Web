@@ -13,8 +13,8 @@ def index():
 # Shortcuts...
 def shortcut(paths, destination):
     for path in paths:
-        n1 = 'shortcut' + path.replace('/', '_')
-        n2 = 'shortcut_path' + path.replace('/', '_')
+        n1 = 'shortcut' + path.replace('/', '_').replace('.', '_')
+        n2 = 'shortcut_path' + path.replace('/', '_').replace('.', '_')
         app.add_url_rule(path, n1, lambda: redirect(destination))
         app.add_url_rule(path + '/<path:path>', n2, lambda path: redirect(destination + '/' + path))
 
@@ -24,6 +24,7 @@ shortcut(['/issues'], 'https://github.com/overviewer/Minecraft-Overviewer/issues
 shortcut(['/code', '/git'], 'https://github.com/overviewer/Minecraft-Overviewer')
 shortcut(['/pulls'], 'https://github.com/overviewer/Minecraft-Overviewer/pulls')
 shortcut(['/pull'], 'https://github.com/overviewer/Minecraft-Overviewer/pull')
+shortcut(['/humans.txt'], 'https://raw.githubusercontent.com/overviewer/Minecraft-Overviewer/master/CONTRIBUTORS.rst')
 
 # shortcuts to RTD
 shortcut(['/doc', '/docs'], 'http://docs.overviewer.org/')
