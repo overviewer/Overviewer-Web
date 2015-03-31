@@ -11,11 +11,14 @@ class BlogPost(db.Model):
     title = db.Column(db.String(256))
     slug = db.Column(db.String(128), index=True, unique=True)
     body = db.Column(db.Text())
+
+    def get_url(self, **kwargs):
+        t = self.timestamp
+        return url_for('blog_view', year=t.year, month=t.month, day=t.day, slug=self.slug, **kwargs)
     
     @property
     def url(self):
-        t = self.timestamp
-        return url_for('blog_view', year=t.year, month=t.month, day=t.day, slug=self.slug)
+        return self.get_url()
 
     @property
     def user_url(self):

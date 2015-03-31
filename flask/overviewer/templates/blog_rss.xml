@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+{% set datefmt = "%a, %d %b %Y %H:%M:%S +0000" %}
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Minecraft Overviewer Blog</title>
+    <link>{{ url_for('blog_index', _external=True) }}</link>
+    <description>Blog for the Minecraft Overviewer Project</description>
+    <atom:link href="{{ url_for ('blog_rss', _external=True) }}" rel="self"/>
+    <language>en-us</language>
+    <lastBuildDate>{{ posts[0].timestamp.strftime(datefmt) }}</lastBuildDate>
+    {% for post in posts %}
+    <item>
+      <title>{{ post.title }}</title>
+      <dc:creator>{{ post.user }}</dc:creator>
+      <pubDate>{{ post.timestamp.strftime(datefmt) }}</pubDate>
+      <link>{{ post.get_url(_external=True) }}</link>
+      <guid>{{ post.get_url(_external=True) }}</guid>
+      <description>
+        {{ post.body|markdown|forceescape }}
+      </description>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

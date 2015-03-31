@@ -1,4 +1,4 @@
-from flask import render_template, redirect, flash, url_for, request
+from flask import render_template, redirect, flash, url_for, request, make_response
 from flask.ext.wtf import Form
 from wtforms import StringField, BooleanField, DateTimeField, TextAreaField
 from wtforms.validators import DataRequired
@@ -53,17 +53,35 @@ class PostForm(Form):
     title = StringField('title', validators=[DataRequired()])
     body = TextAreaField('body')
 
-def index_for(query):
+# decorator to set mime types
+def content_type(mime_type, charset=None):
+    def wrapper(f):
+        @functools.wraps(f)
+        def inner(*args, **kwargs):
+            r = make_response(f(*args, **kwargs))
+            r.mimetype = mime_type
+            if charset:
+                r.charset = charset
+            return r
+        return inner
+    return wrapper
+
+def index_for(query, tmpl='blog_index.html'):
     try:
         page = int(request.args.get('page', 1))
     except ValueError:
         page = 1
     posts = query.order_by(BlogPost.timestamp.desc()).paginate(page, per_page=5)
-    return render_blog('blog_index.html', posts=posts.items, page=posts)
+    return render_blog(tmpl, posts=posts.items, page=posts)
 
 @app.route('/blog/')
 def blog_index():
     return index_for(BlogPost.query)
+
+@app.route('/blog/feeds/latest/')
+@content_type('application/rss+xml')
+def blog_rss():
+    return index_for(BlogPost.query, tmpl='blog_rss.xml')
 
 @app.route('/blog/<int:year>/')
 def blog_index_year(year):
