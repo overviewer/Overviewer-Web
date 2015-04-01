@@ -4,9 +4,9 @@ ENV BUILDBOT_COMMIT dd6632af2
 
 #RUN pip install buildbot
 RUN cd /root && git clone https://github.com/buildbot/buildbot.git
-RUN cd /root/buildbot/master && git checkout ${BUILDBOT_COMMIT} && pip install .
+RUN cd /root/buildbot/master && git checkout ${BUILDBOT_COMMIT} && pip install . && pip install psycopg2==2.6
 
-COPY start.sh master.cfg /root/
+COPY start.sh master.cfg confidential.py /root/
 
 CMD /root/start.sh
 VOLUME /data/buildbot

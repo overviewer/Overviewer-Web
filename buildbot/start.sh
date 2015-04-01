@@ -6,6 +6,7 @@ if [ ! -d "master" ]; then
     buildbot create-master master
 fi
 
-cp /root/master.cfg master/master.cfg
+cp /root/master.cfg /root/confidential.py master/
 rm -f master/twistd.pid
+buildbot upgrade-master master
 exec buildbot start --nodaemon master

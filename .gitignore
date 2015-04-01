@@ -1,3 +1,5 @@
 /flask/overviewer/settings/confidential.py
+/buildbot/confidential.py
+/postgres/Dockerfile
 /flask/overviewer.db
 __pycache__

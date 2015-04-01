@@ -1,0 +1,6 @@
+FROM postgres
+# make sure this matches the password in
+# flask/overviewer/settings/confidential.py
+ENV POSTGRES_PASSWORD secret
+
+ADD init-database.sh /docker-entrypoint-initdb.d/

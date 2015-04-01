@@ -10,3 +10,4 @@ pytoml==0.1.2
 Pillow==2.7.0
 requests==2.6.0
 Flask-Cache==0.13.1
+psycopg2==2.6

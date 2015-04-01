@@ -14,8 +14,19 @@ wwwdata:
 
 flask:
   build: flask
+  links:
+    - postgres
   volumes_from:
     - wwwdata
+
+postgres:
+  build: postgres
+  volumes_from:
+    - dbdata
+dbdata:
+  image: busybox
+  volumes:
+    - /var/lib/postgresql/data
 
 bbdata:
   image: busybox
@@ -23,5 +34,7 @@ bbdata:
     - /data/buildbot
 bbmaster:
   build: buildbot
+  links:
+    - postgres
   volumes_from:
     - bbdata
