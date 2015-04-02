@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Uploader - Minecraft Overviewer{% endblock %}
+
+{% block head %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.uploadProgress.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(function() {
+        $('#upload_form').uploadProgress({
+            jqueryPath: "{{ url_for('static', filename='js/jquery.js') }}",
+            progressBar: '#progress_indicator',
+            progressUrl: '{{ url_for('.progress') }}',
+            start: function() {
+                $("#upload_form").hide();
+                filename = $("#file").val().split(/[\/\\]/).pop();
+                $("#progress_filename").html('Uploading ' + filename + "...");
+                $("#progress_container").show();
+            },
+            uploadProgressPath: "{{ url_for('static', filename='js/jquery.uploadProgress.js') }}",
+            uploading: function(upload) {
+                if (upload.percents == 100) {
+                    window.clearTimeout(this.timer);
+                    $("#progress_filename").html('Processing ' + filename + "...");
+                } else {
+                    $("#progress_filename").html('Uploading ' + filename + ': ' + upload.percents + '%');
+                }
+            },
+            interval: 1000
+        });
+    });
+});
+</script>
+{% endblock head %}
+
+{% block body %}
+<h1>Overviewer.org Uploader</h1>
+
+<p>This uploader is here so that people having issues with the Overviewer can provide us with (potentially large) files that are causing the issue.</P>
+
+{% if not session.logged_in %}
+<p>If you want, you can <a href="{{ url_for('login') }}?next={{ url_for('.index') }}">log in via GitHub</a> to attach uploaded files to your name so they're easier for us to find.</p>
+{% endif %}
+
+<form method="POST" action="" enctype="multipart/form-data" id="upload_form">
+  {{ form.hidden_tag() }}
+  <p>File: {{ form.file() }}</p>
+  <input type="submit" value="Upload"/>
+</form>
+
+<div class="quiet" id="progress_container">
+  <div id="progress_filename"></div>
+  <div id="progress_bar">
+    <div id="progress_indicator"></div>
+  </div>
+</div>
+
+{% if files %}
+<h3>Uploaded Files</h3>
+
+<table style="border: 1px solid gray;">
+  <tr>
+    <th>Name</th>
+    <th>Owner</th>
+    <th>Date</th>
+    <th>Size</th>
+    <th>MD5</th>
+    {% if session.logged_in and session.developer %}<th>Delete</th>{% endif %}
+  </tr>
+  {% for file in files.items %}
+  <tr>
+    <td><a href="{{ file.url }}">{{ file.name }}</a></td>
+    <td>{% if file.user %}<a href="https://github.com/{{ file.user }}">{{ file.user }}</a>{% else %}-{% endif %}</td>
+    <td>{{ file.timestamp.strftime('%B %d, %Y, %I:%M %p') }}</td>
+    <td>{{ file.nice_size }}</td>
+    <td><code>{{ file.md5 }}</code></td>
+    {% if session.logged_in and session.developer %}<td><a href="{{ url_for('.delete', id=file.id) }}">delete</a></td>{% endif %}
+  </tr>
+  {% endfor %}
+</table>
+
+<ul class="paginator">
+  <li class="index">
+    Page {{ files.page }} of {{ files.page }}
+  </li>
+  {% for p in files.iter_pages() %}
+  {% if p %}
+  {% if p != files.page %}
+  <li class="page"><a href="?page={{ p }}">{{ p }}</a></li>
+  {% else %}
+  <li class="page current"><strong>{{ p }}</strong></li>
+  {% endif %}
+  {% else %}
+  <span class="ellipsis">...</span>
+  {% endif %}
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock body %}

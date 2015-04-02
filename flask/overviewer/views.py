@@ -5,8 +5,10 @@ from .models import BlogPost
 from .auth import *
 from .blog import *
 from .avatar import *
+from .uploader import *
 
 app.register_blueprint(avatar, url_prefix='/avatar')
+app.register_blueprint(uploader, url_prefix='/uploader')
 
 @app.route('/')
 def index():
@@ -32,6 +34,9 @@ def shortcut(paths, destination):
         n2 = 'shortcut_path' + path.replace('/', '_').replace('.', '_')
         app.add_url_rule(path, n1, lambda: redirect(destination))
         app.add_url_rule(path + '/<path:path>', n2, lambda path: redirect(destination + '/' + path))
+
+# shortcuts to ourselves
+shortcut(['/upload', '/uploads'], '/uploader')
 
 # shortcuts to github!
 shortcut(['/wiki'], 'https://github.com/overviewer/Minecraft-Overviewer/wiki')

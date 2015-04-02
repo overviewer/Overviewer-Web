@@ -38,14 +38,15 @@
       <div class="masthead">
         <h1><a href="/">The Minecraft Overviewer</a></h1>
 		<p class="tagline">a high-resolution Minecraft world renderer with a Google Maps interface</p>
+        {% if session.logged_in %}
+        <p class="tagline">(logged in as {{ session.user }}. <a href="/logout?next={{ request.path }}">log out</a>.)</p>
+        {% endif %}
         {% with messages = get_flashed_messages() %}
         {% for message in messages %}
-        <p class="tagline">{{ message }}</p>
+        <hr />
+        <p style="font-size: large; font-weight: bold;">{{ message }}</p>
         {% endfor %}
         {% endwith %}
-		{% if session.logged_in %}
-		<p class="tagline">(logged in as {{ session.user }}. <a href="/logout">log out</a>.)</p>
-		{% endif %}
       </div>
       <hr />
 	  {% block body %}
@@ -60,7 +61,7 @@
 		
 		<br />
 		
-        <a href="/login">log in via GitHub</a> <span class="divider">|</span>
+        <a href="/login?next={{ request.path }}">log in via GitHub</a> <span class="divider">|</span>
         <a href="/example">example</a> <span class="divider">|</span>
         <a href="/uploader">uploader</a> <span class="divider">|</span>
         <a href="/debian/info">debian repository</a> <span class="divider">|</span>
