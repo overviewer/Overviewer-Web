@@ -43,6 +43,7 @@ def download(id, name):
     return response
 
 @uploader.route('/<int:id>/delete')
+@auth.developer_only
 def delete(id):
     m = UploadedFile.query.get_or_404(id)
     m.delete()

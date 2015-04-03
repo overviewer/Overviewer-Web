@@ -7,10 +7,12 @@ github = GitHub(app)
 
 @app.route('/login')
 def login():
+    next_url = request.args.get('next') or url_for('index')
     if session.get('logged_in', False):
-        next_url = request.args.get('next') or url_for('index')
         return redirect(next_url)
-    return github.authorize()
+    redirect_uri = url_for('authorize', _external=True)
+    redirect_uri += '?next=' + next_url
+    return github.authorize(redirect_uri=redirect_uri)
 
 @app.route('/logout')
 def logout():
@@ -44,12 +46,15 @@ def token_getter():
     if session.get('logged_in', False):
         return session['oauth_token']
 
+def is_logged_in():
+    return session.get('logged_in', False)
+
 def user():
-    if session.get('logged_in', False):
+    if is_logged_in():
         return session['user']
 
 def is_developer():
-    if session.get('logged_in', False):
+    if is_logged_in():
         return session['developer']
     return False
 
@@ -57,7 +62,9 @@ def is_developer():
 def developer_only(f):
     @functools.wraps(f)
     def inner(*args, **kwargs):
-        if not is_developer():
+        if not is_logged_in():
             abort(401)
+        if not is_developer():
+            abort(403)
         return f(*args, **kwargs)
     return inner

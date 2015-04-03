@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Unauthorized{% endblock %}
+
+{% block body %}
+<h1>Unauthorized</h1>
+
+<p>You are not authorized to view this page. You can try <a href="{{ url_for('login') }}?next={{ request.path }}">logging in</a>.</p>
+{% endblock body %}

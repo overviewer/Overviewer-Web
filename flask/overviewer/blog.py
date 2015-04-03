@@ -121,6 +121,7 @@ def blog_view(post):
     return render_blog('blog_view.html', post=post)
 
 @post_route('/edit', methods=['GET', 'POST'])
+@auth.developer_only
 def blog_edit(post):
     form = PostForm(user=post.user, timestamp=post.timestamp, published=post.published, title=post.title, body=post.body)
     if form.validate_on_submit():
@@ -131,6 +132,7 @@ def blog_edit(post):
     return render_blog('blog_edit.html', form=form)
 
 @post_route('/delete')
+@auth.developer_only
 def blog_delete(post):
     db.session.delete(post)
     db.session.commit()

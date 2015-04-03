@@ -15,6 +15,17 @@ def index():
     posts = BlogPost.query.order_by(BlogPost.timestamp.desc()).limit(3).all()
     return render_template('index.html', posts=posts)
 
+# errors
+def error(num, tmpl=None):
+    if tmpl is None:
+        tmpl = str(num) + '.html'
+    app.errorhandler(num)(lambda e: (render_template(tmpl), num))
+
+error(401)
+error(403)
+error(404)
+error(500)
+
 # static pages...
 def static(path, tmpl=None):
     name = 'static' + path.replace('/', '_').replace('.', '_')
