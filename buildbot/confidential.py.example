@@ -1,2 +1,0 @@
-# must be the same as in postgres/Dockerfile
-DOCKER_DB_PASSWORD = 'secret'

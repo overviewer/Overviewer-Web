@@ -34,7 +34,14 @@ bbdata:
     - /data/buildbot
 bbmaster:
   build: buildbot
+  env_file: confidential.env
   links:
     - postgres
   volumes_from:
     - bbdata
+
+bbwheezy64:
+  build: buildbot/wheezy64
+  env_file: confidential.env
+  links:
+    - bbmaster
