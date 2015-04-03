@@ -14,6 +14,7 @@ wwwdata:
 
 flask:
   build: flask
+  env_file: confidential.env
   links:
     - postgres
   volumes_from:
@@ -21,6 +22,7 @@ flask:
 
 postgres:
   build: postgres
+  env_file: confidential.env
   volumes_from:
     - dbdata
 dbdata:

@@ -6,7 +6,6 @@ from .cache import cache
 
 app = Flask(__package__)
 
-app.config.from_object('overviewer.settings.confidential')
 app.config.from_object('overviewer.settings.default')
 if 'OVERVIEWER_SETTINGS' in os.environ:
     app.config.from_envvar('OVERVIEWER_SETTINGS')

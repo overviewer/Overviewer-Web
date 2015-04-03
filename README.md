@@ -6,5 +6,3 @@ But first some confidential files need making. Copy over and modify
 the following example files:
 
  * confidential.env.example
- * flask/overviewer/settings/confidential.py.example
- * postgres/Dockerfile.example

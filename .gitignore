@@ -1,5 +1,3 @@
 /confidential.env
-/flask/overviewer/settings/confidential.py
-/postgres/Dockerfile
 /flask/overviewer.db
 __pycache__

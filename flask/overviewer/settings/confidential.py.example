@@ -1,8 +1,0 @@
-SECRET_KEY = 'R1nwNh+dE8RxEljfBv1waWqAofv2Zv+AufghyK3L8/w'
-
-# you get this from https://github.com/settings/applications/
-GITHUB_CLIENT_ID = 'foo'
-GITHUB_CLIENT_SECRET = 'bar'
-
-# must be the same as in postgres/Dockerfile
-DOCKER_DB_PASSWORD = 'secret'
