@@ -1,3 +1,6 @@
 /confidential.env
 /flask/overviewer.db
 __pycache__
+
+# For us vim users
+*.swp
