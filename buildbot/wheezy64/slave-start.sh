@@ -11,4 +11,4 @@ fi
 
 rm -f slave/twistd.pid slave/twistd.log
 
-exec buildslave start slave
+exec buildslave start --nodaemon slave
