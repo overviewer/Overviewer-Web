@@ -8,5 +8,6 @@ fi
 
 cp /root/master.cfg /root/confidential.py master/
 rm -f master/twistd.pid master/twistd.log
+mkdir -p uploads
 buildbot upgrade-master master
 exec buildbot start --nodaemon master

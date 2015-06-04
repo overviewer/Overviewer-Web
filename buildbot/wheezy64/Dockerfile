@@ -4,7 +4,7 @@ FROM debian:wheezy
 # Probably good to make this match what's in the master Dockerfile
 ENV BUILDBOT_COMMIT dd6632af2
 
-RUN apt-get update && apt-get -y install git curl python-dev && curl -SL 'https://bootstrap.pypa.io/get-pip.py' | python2
+RUN apt-get update && apt-get -y install git curl python-dev python-numpy && curl -SL 'https://bootstrap.pypa.io/get-pip.py' | python2
 
 RUN cd /root && git clone https://github.com/buildbot/buildbot.git
 RUN cd /root/buildbot/slave && git checkout ${BUILDBOT_COMMIT} && pip install .
