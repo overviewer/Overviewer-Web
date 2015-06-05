@@ -6,6 +6,7 @@ from .auth import *
 from .blog import *
 from .avatar import *
 from .uploader import *
+from .downloads import *
 
 app.register_blueprint(avatar, url_prefix='/avatar')
 app.register_blueprint(uploader, url_prefix='/uploader')

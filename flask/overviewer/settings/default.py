@@ -8,6 +8,9 @@ DEBUG = True
 UPLOADER_PATH = None
 UPLOADER_URL = None
 
+BUILDS_URL = None
+BUILDBOT_URL = "http://diax.overviewer.org/build/"
+
 WTF_CSRF_ENABLED = True
 CACHE_TYPE = 'simple'
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.abspath(os.path.join(ovr, '..', 'overviewer.db'))

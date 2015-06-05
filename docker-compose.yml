@@ -5,6 +5,7 @@ nginx:
     - bbmaster
   volumes_from:
     - wwwdata
+    - bbdata
   ports:
     - "8020:80"
 wwwdata:
@@ -17,6 +18,7 @@ flask:
   env_file: confidential.env
   links:
     - postgres
+    - bbmaster
   volumes_from:
     - wwwdata
 
