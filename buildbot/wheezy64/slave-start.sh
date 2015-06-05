@@ -11,4 +11,5 @@ fi
 
 rm -f slave/twistd.pid slave/twistd.log
 
-exec buildslave start --nodaemon slave
+# run in a clean env, don't leak secrets
+exec env -i -- /bin/bash -c "source /etc/profile; exec buildslave start --nodaemon slave"
