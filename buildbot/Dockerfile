@@ -7,6 +7,7 @@ RUN cd /root && git clone https://github.com/buildbot/buildbot.git
 RUN cd /root/buildbot/master && git checkout ${BUILDBOT_COMMIT} && pip install . && pip install psycopg2==2.6 && pip install itsdangerous
 
 COPY start.sh master.cfg /root/
+COPY debian_control_files/all.tar /root/debian.tar
 
 CMD /root/start.sh
 VOLUME /data/buildbot

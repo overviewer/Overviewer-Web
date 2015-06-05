@@ -6,7 +6,7 @@ if [ ! -d "master" ]; then
     buildbot create-master master
 fi
 
-cp /root/master.cfg /root/confidential.py master/
+cp /root/{master.cfg,confidential.py,debian.tar} master/
 rm -f master/twistd.pid master/twistd.log
 mkdir -p uploads
 buildbot upgrade-master master
