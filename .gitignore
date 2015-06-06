@@ -1,4 +1,5 @@
 /confidential.env
+/buildbot/codesign.asc
 /flask/overviewer.db
 __pycache__
 
