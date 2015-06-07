@@ -43,6 +43,8 @@ bbmaster:
     - postgres
   volumes_from:
     - bbdata
+  ports:
+    - "9989:9989"
 
 bbwheezy64:
   build: buildbot/wheezy-64
