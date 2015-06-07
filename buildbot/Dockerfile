@@ -14,6 +14,8 @@ RUN gpg --import /root/codesign.asc && rm /root/codesign.asc
 COPY debian/control/all.tar /root/debian.tar
 COPY debian/repo /root/debian-repo
 
+COPY rpm/control/all.tar /root/rpm.tar
+
 CMD /root/start.sh
 VOLUME /data/buildbot
 EXPOSE 9989

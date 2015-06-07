@@ -45,7 +45,14 @@ bbmaster:
     - bbdata
 
 bbwheezy64:
-  build: buildbot/wheezy64
+  build: buildbot/wheezy-64
   env_file: confidential.env
+  links:
+    - bbmaster
+
+bbfc2164:
+  build: buildbot/fc21-64
+  env_file: confidential.env
+  cap_add: SYS_ADMIN
   links:
     - bbmaster

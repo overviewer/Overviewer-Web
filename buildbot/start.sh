@@ -6,7 +6,7 @@ if [ ! -d "master" ]; then
     buildbot create-master master
 fi
 
-cp /root/{master.cfg,debian.tar} master/
+cp /root/{master.cfg,debian.tar,rpm.tar} master/
 rm -f master/twistd.pid master/twistd.log
 buildbot upgrade-master master
 

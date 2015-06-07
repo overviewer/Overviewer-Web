@@ -11,5 +11,8 @@ fi
 
 rm -f slave/twistd.pid slave/twistd.log
 
+# make sure /sys is rw (I HAVE NO IDEA but it helps rpm builders)
+mount -o remount,rw /sys
+
 # run in a clean env, don't leak secrets
-exec env -i -- /bin/bash -c "source /etc/profile; exec buildslave start --nodaemon slave"
+exec env -i -- /bin/bash -c "source /etc/profile; export HOME=`pwd`; exec buildslave start --nodaemon slave"
