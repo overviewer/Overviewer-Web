@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y gnupg-agent dpkg-sig
 COPY start.sh master.cfg codesign.asc /root/
 RUN gpg --import /root/codesign.asc && rm /root/codesign.asc
 
-COPY debian_control_files/all.tar /root/debian.tar
+COPY debian/control/all.tar /root/debian.tar
+COPY debian/repo /root/debian-repo
 
 CMD /root/start.sh
 VOLUME /data/buildbot

@@ -8,8 +8,12 @@ fi
 
 cp /root/{master.cfg,debian.tar} master/
 rm -f master/twistd.pid master/twistd.log
-mkdir -p uploads
 buildbot upgrade-master master
+
+mkdir -p uploads
+
+mkdir -p repos/debian/files
+cp /root/debian-repo/* repos/debian/
 
 eval $(gpg-agent --daemon --default-cache-ttl 1000000000 --max-cache-ttl 1000000000 --allow-preset-passphrase)
 /usr/lib/gnupg2/gpg-preset-passphrase -P $CODESIGN_PASSPHRASE -c $CODESIGN_KEYGRIP
