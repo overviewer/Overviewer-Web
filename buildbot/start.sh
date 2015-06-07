@@ -14,6 +14,18 @@ mkdir -p uploads
 
 mkdir -p repos/debian/files
 cp /root/debian-repo/* repos/debian/
+make -C repos/debian/
+
+mkdir -p repos/rpm
+cp /root/rpm-repo/* repos/rpm/
+mkdir -p repos/rpm/{16,5,6}/{i386,x86_64}/packages
+ln -fs 16 repos/rpm/17
+ln -fs 16 repos/rpm/18
+ln -fs 16 repos/rpm/19
+ln -fs 16 repos/rpm/20
+ln -fs 16 repos/rpm/21
+ln -fs 21 repos/rpm/latest
+make -C repos/rpm/
 
 eval $(gpg-agent --daemon --default-cache-ttl 1000000000 --max-cache-ttl 1000000000 --allow-preset-passphrase)
 /usr/lib/gnupg2/gpg-preset-passphrase -P $CODESIGN_PASSPHRASE -c $CODESIGN_KEYGRIP

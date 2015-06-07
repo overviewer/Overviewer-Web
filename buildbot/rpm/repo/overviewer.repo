@@ -1,0 +1,6 @@
+[overviewer]
+name=Minecraft-Overviewer - $releasever - $basearch
+baseurl=http://overviewer.org/rpms/$releasever/$basearch
+#this will need to be changed if we start signing the packages
+gpgcheck=0
+enabled=1
