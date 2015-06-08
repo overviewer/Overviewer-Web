@@ -15,7 +15,7 @@ eval $(gpg-agent --daemon --default-cache-ttl 1000000000 --max-cache-ttl 1000000
 unset CODESIGN_PASSPHRASE
 unset CODESIGN_KEYGRIP
 
-mkdir -p uploads
+mkdir -p uploads renders
 
 mkdir -p repos/debian/files
 cp /root/debian-repo/* repos/debian/
