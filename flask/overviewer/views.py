@@ -51,6 +51,7 @@ def shortcut(paths, destination):
 shortcut(['/upload', '/uploads'], '/uploader')
 shortcut(['/download'], '/downloads')
 shortcut(['/download.json'], '/downloads.json')
+shortcut(['/exmaple', '/exmaple/', '/example'], '/example/')
 
 # shortcuts to github!
 shortcut(['/wiki'], 'https://github.com/overviewer/Minecraft-Overviewer/wiki')
