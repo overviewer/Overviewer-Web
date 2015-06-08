@@ -9,7 +9,7 @@ UPLOADER_PATH = None
 UPLOADER_URL = None
 
 BUILDS_URL = None
-BUILDBOT_URL = "http://diax.overviewer.org/build/"
+BUILDBOT_URL = "http://overviewer.org/build/"
 BUILDBOT_PUBLIC_URL = BUILDBOT_URL
 
 WTF_CSRF_ENABLED = True

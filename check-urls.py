@@ -17,7 +17,7 @@ def get_urls(fname):
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
-    p.add_argument('--host', help='host to check', default='diax.overviewer.org')
+    p.add_argument('--host', help='host to check', default='overviewer.org')
     p.add_argument('-f', '--file', help='url file to use', default='urls.txt')
     p.add_argument('-l', '--length', help='length to use for names', type=int, default=60)
     args = p.parse_args()
