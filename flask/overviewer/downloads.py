@@ -57,6 +57,7 @@ def getbuild(builder, buildnum):
 # grabs all release builds until the first success
 # unless it has to go through `limit` builds first
 # discards failed release builds
+@cache.memoize(1800)
 def getreleases(builder, allow_running=True, limit=100):
     releases = []
     for i in range(-1, -limit, -1):
