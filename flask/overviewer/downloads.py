@@ -31,7 +31,7 @@ def getbuild(builder, buildnum):
     r['number'] = r['properties']['buildnumber']
     r['commit'] = r['properties']['got_revision']
     r['commiturl'] = r['properties']['repository'] + '/commit/' + r['properties']['got_revision']
-    r['statusurl'] = current_app.config.get('BUILDBOT_URL') + 'builders/' + r['name'] + '/builds/' + str(r['number'])
+    r['statusurl'] = current_app.config.get('BUILDBOT_PUBLIC_URL') + 'builders/' + r['name'] + '/builds/' + str(r['number'])
     r['project'] = r['properties'].get('project')
     r['release_build'] = r['properties'].get('release_build', False)
     
