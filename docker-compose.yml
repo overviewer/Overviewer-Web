@@ -52,6 +52,12 @@ bbwheezy64:
   links:
     - bbmaster
 
+bbwheezy32:
+  build: buildbot/wheezy-32
+  env_file: confidential.env
+  links:
+    - bbmaster
+
 bbfc2164:
   build: buildbot/fc21-64
   env_file: confidential.env
