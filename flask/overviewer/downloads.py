@@ -153,10 +153,7 @@ def downloads():
     example, choices = choose_releases(DOWNLOADS_BUILDERS, allow_running=True)
     return render_template('downloads.html', example=example, builds=choices, tree=DOWNLOADS_TREE)
 
-@app.route('/builds/<builder>/<int:buildnum>/<slug>.json')
-@content_type('application/json')
-def info(builder, buildnum, slug):
-    b = getbuild(builder, buildnum)
+def info_intern(b):
     b['date'] = b['date'].strftime(JSON_FTIME)
     return json.dumps(b, indent=2)
 
@@ -171,7 +168,35 @@ def download_intern(b):
         return response
     return abort(404)
 
+def get_latest(builder):
+    bs = getreleases(builder, allow_running=False)
+    if not bs:
+        return abort(404)
+    return bs[0]
+
+@app.route('/builds/overviewer-latest.<ext>.json')
+@content_type('application/json')
+def latest_src_info(ext):
+    return info_intern(get_latest('src'))
+
+@app.route('/builds/overviewer-latest.<ext>')
+def latest_src(ext):
+    return download_intern(get_latest('src'))
+
+@app.route('/builds/overviewer-latest-<builder>.<ext>.json')
+@content_type('application/json')
+def latest_info(builder, ext):
+    return info_intern(get_latest(builder))
+
+@app.route('/builds/overviewer-latest-<builder>.<ext>')
+def latest(builder, ext):
+    return download_intern(get_latest(builder))
+
+@app.route('/builds/<builder>/<int:buildnum>/<slug>.json')
+@content_type('application/json')
+def info(builder, buildnum, slug):
+    return info_intern(getbuild(builder, buildnum))
+
 @app.route('/builds/<builder>/<int:buildnum>/<slug>')
 def download(builder, buildnum, slug):
-    b = getbuild(builder, buildnum)
-    return download_intern(b)
+    return download_intern(getbuild(builder, buildnum))
