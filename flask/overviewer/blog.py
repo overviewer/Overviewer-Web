@@ -8,6 +8,7 @@ import functools
 from unidecode import unidecode
 
 from . import auth
+from .content_type import content_type
 from .app import app
 from .models import db, BlogPost
 
@@ -52,19 +53,6 @@ class PostForm(Form):
     published = BooleanField('published', default=True)
     title = StringField('title', validators=[DataRequired()])
     body = TextAreaField('body')
-
-# decorator to set mime types
-def content_type(mime_type, charset=None):
-    def wrapper(f):
-        @functools.wraps(f)
-        def inner(*args, **kwargs):
-            r = make_response(f(*args, **kwargs))
-            r.mimetype = mime_type
-            if charset:
-                r.charset = charset
-            return r
-        return inner
-    return wrapper
 
 def index_for(query, tmpl='blog_index.html'):
     try:
