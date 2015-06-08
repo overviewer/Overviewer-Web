@@ -86,12 +86,26 @@ def collate_releases(builds, keyer=lambda x: x['version']):
             x.append(b)
     return collated
 
+def sort_versions(l):
+    def split_ver(v):
+        return [int(x) for x in v.split('.')]
+    l.sort(key=split_ver)
+
 def choose_releases(builders, allow_running=True):
     rs = get_all_releases(builders, allow_running)
     collated = collate_releases(rs)
     if not collated:
         return {}
-    version, best = max(collated.items(), key=lambda x: len(x[1]))
+
+    most = max([len(l) for l in collated.values()])
+    versions = []
+    for v, xs in collated.items():
+        if len(xs) >= most:
+            versions.append(v)
+
+    sort_versions(versions)
+    version = versions[-1]
+    best = collated[version]
     example = list(best.values())[0][0]
 
     choices = {}
