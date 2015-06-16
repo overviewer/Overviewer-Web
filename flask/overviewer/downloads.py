@@ -18,41 +18,44 @@ def getbb(path, *args, **kwargs):
         return abort(404)
 
 def getbuild(builder, buildnum):
-    d = getbb("json/builders/{0}/builds/{1}", builder, buildnum)
-    r = dict(
-        properties = {k: v for k, v, _ in d['properties']},
-        name = d['builderName'],
-        reason = d['reason'],
-        slave = d['slave'],
-        eta = d.get('eta'),
-    )
-
-    r['version'] = r['properties']['version']
-    r['number'] = r['properties']['buildnumber']
-    r['commit'] = r['properties']['got_revision']
-    r['commiturl'] = r['properties']['repository'] + '/commit/' + r['properties']['got_revision']
-    r['statusurl'] = current_app.config.get('BUILDBOT_PUBLIC_URL') + 'builders/' + r['name'] + '/builds/' + str(r['number'])
-    r['project'] = r['properties'].get('project')
-    r['release_build'] = r['properties'].get('release_build', False)
+    try:
+        d = getbb("json/builders/{0}/builds/{1}", builder, buildnum)
+        r = dict(
+            properties = {k: v for k, v, _ in d['properties']},
+            name = d['builderName'],
+            reason = d['reason'],
+            slave = d['slave'],
+            eta = d.get('eta'),
+        )
     
-    start, end = d.get('times', (None, None))
-    if end:
-        if d.get('results', 0):
-            r['status'] = 'failed'
+        r['version'] = r['properties']['version']
+        r['number'] = r['properties']['buildnumber']
+        r['commit'] = r['properties']['got_revision']
+        r['commiturl'] = r['properties']['repository'] + '/commit/' + r['properties']['got_revision']
+        r['statusurl'] = current_app.config.get('BUILDBOT_PUBLIC_URL') + 'builders/' + r['name'] + '/builds/' + str(r['number'])
+        r['project'] = r['properties'].get('project')
+        r['release_build'] = r['properties'].get('release_build', False)
+        
+        start, end = d.get('times', (None, None))
+        if end:
+            if d.get('results', 0):
+                r['status'] = 'failed'
+            else:
+                r['status'] = 'finished'
         else:
-            r['status'] = 'finished'
-    else:
-        r['status'] = 'running'
-
-    r['date'] = datetime.utcfromtimestamp(start)
-
-    uploads = [x for x in d['steps'] if x['name'] == 'upload']
-    if uploads and uploads[0]['urls']:
-        r['file'], = uploads[0]['urls'].keys()
-        r['url'], = uploads[0]['urls'].values()
-        r['basename'] = r['url'].rsplit('/', 1)[-1]
-
-    return r
+            r['status'] = 'running'
+    
+        r['date'] = datetime.utcfromtimestamp(start)
+    
+        uploads = [x for x in d['steps'] if x['name'] == 'upload']
+        if uploads and uploads[0]['urls']:
+            r['file'], = uploads[0]['urls'].keys()
+            r['url'], = uploads[0]['urls'].values()
+            r['basename'] = r['url'].rsplit('/', 1)[-1]
+    
+        return r
+    except KeyError:
+        return abort(404)
 
 # grabs all release builds until the first success
 # unless it has to go through `limit` builds first
