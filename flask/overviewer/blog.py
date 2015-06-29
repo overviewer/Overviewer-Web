@@ -10,6 +10,7 @@ from unidecode import unidecode
 from . import auth
 from .content_type import content_type
 from .app import app
+from .cache import cache
 from .models import db, BlogPost
 
 _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
@@ -54,12 +55,17 @@ class PostForm(Form):
     title = StringField('title', validators=[DataRequired()])
     body = TextAreaField('body')
 
-def index_for(query, tmpl='blog_index.html'):
+@cache.cached(1800)
+def index_data_for(query):
     try:
         page = int(request.args.get('page', 1))
     except ValueError:
         page = 1
     posts = query.order_by(BlogPost.timestamp.desc()).paginate(page, per_page=5)
+    return posts
+
+def index_for(query, tmpl='blog_index.html'):
+    posts = index_data_for(query)
     return render_blog(tmpl, posts=posts.items, page=posts)
 
 @app.route('/blog/')
