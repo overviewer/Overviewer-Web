@@ -18,9 +18,12 @@ def login():
 def logout():
     if session.get('logged_in', False):
         session['logged_in'] = False
-        del session['oauth_token']
-        del session['user']
-        del session['developer']
+        if 'oauth_token' in session:
+            del session['oauth_token']
+        if 'user' in session:
+            del session['user']
+        if 'developer' in session:
+            del session['developer']
         flash('You have logged out.')
     next_url = request.args.get('next') or url_for('index')
     return redirect(next_url)
@@ -36,7 +39,7 @@ def authorize(oauth_token):
     session['logged_in'] = True
     session['oauth_token'] = oauth_token
     session['user'] = github.get('user')['login']
-    orgs = [d['login'] for d in github.get('user/orgs')]
+    orgs = [d['login'] for d in github.get('users/' + session['user'] + '/orgs')]
     session['developer'] = 'overviewer' in orgs
     flash('You have logged in as ' + session['user'] + '.')
     return redirect(next_url)
