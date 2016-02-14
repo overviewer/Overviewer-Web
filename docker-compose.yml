@@ -1,66 +1,69 @@
-nginx:
-  build: nginx
-  links:
-    - flask
-    - bbmaster
-  volumes_from:
-    - wwwdata
-    - bbdata
-  ports:
-    - "8020:80"
-wwwdata:
-  image: busybox
-  volumes:
-    - /data/www
+version: '2'
+services: 
+  nginx:
+    build: nginx
+    links:
+      - flask
+      - bbmaster
+    volumes_from:
+      - bbdata
+      - wwwdata
+    ports:
+      - "8020:80"
+  wwwdata:
+    image: busybox
+    volumes:
+      - /data/www
 
-flask:
-  build: flask
-  env_file: confidential.env
-  links:
-    - postgres
-    - bbmaster
-  volumes_from:
-    - wwwdata
+  flask:
+    build: flask
+    env_file: confidential.env
+    links:
+      - postgres
+      - bbmaster
+    volumes_from:
+      - wwwdata
 
-postgres:
-  build: postgres
-  env_file: confidential.env
-  volumes_from:
-    - dbdata
-dbdata:
-  image: busybox
-  volumes:
-    - /var/lib/postgresql/data
+  postgres:
+    build: postgres
+    env_file: confidential.env
+    volumes_from:
+      - dbdata
+  dbdata:
+    image: busybox
+    volumes:
+      - /var/lib/postgresql/data
 
-bbdata:
-  image: busybox
-  volumes:
-    - /data/buildbot
-bbmaster:
-  build: buildbot
-  env_file: confidential.env
-  links:
-    - postgres
-  volumes_from:
-    - bbdata
-  ports:
-    - "9989:9989"
+  bbdata:
+    image: busybox
+    volumes:
+      - /data/buildbot
+  bbmaster:
+    build: buildbot
+    env_file: confidential.env
+    links:
+      - postgres
+    volumes_from:
+      - bbdata
+    ports:
+      - "9989:9989"
 
-bbwheezy64:
-  build: buildbot/wheezy-64
-  env_file: confidential.env
-  links:
-    - bbmaster
+  bbwheezy64:
+    build: buildbot/wheezy-64
+    env_file: confidential.env
+    links:
+      - bbmaster
 
-bbwheezy32:
-  build: buildbot/wheezy-32
-  env_file: confidential.env
-  links:
-    - bbmaster
+  bbwheezy32:
+    build: buildbot/wheezy-32
+    env_file: confidential.env
+    links:
+      - bbmaster
 
-bbfc2164:
-  build: buildbot/fc21-64
-  env_file: confidential.env
-  cap_add: SYS_ADMIN
-  links:
-    - bbmaster
+  bbfc2164:
+    build: buildbot/fc21-64
+    env_file: confidential.env
+    cap_add: 
+      - SYS_ADMIN
+    links:
+      - bbmaster
