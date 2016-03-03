@@ -1,30 +1,39 @@
 from flask import Blueprint, abort, make_response
 from io import BytesIO
 import requests
+import json
+import base64
 from PIL import Image
 
 from .cache import cache
 
 avatar = Blueprint('avatar', __name__)
 
+def get_uuid(username):
+    response = requests.get("https://api.mojang.com/users/profiles/minecraft/{}".format(username))
+    if response.status_code == 200:
+        return json.loads(response.content)["id"]
+
+def get_skin_url(uuid):
+    response = requests.get("https://sessionserver.mojang.com/session/minecraft/profile/{}".format(uuid))
+    if response.status_code == 200:
+        profile = json.loads(response.content)
+        properties = profile["properties"]
+        textures = filter(lambda obj: obj["name"] == "textures", properties)[0]
+        textures = base64.b64decode(textures["value"])
+        textures = json.loads(textures)
+        return textures["textures"]["SKIN"]["url"]
+
 def get_from_minecraft(player="__default_img__"):
     "Gets an image from minecraft. Returns a PIL Image object. never caches"
 
-    if player == '__default_img__':
-        response = requests.get("https://s3.amazonaws.com/MinecraftSkins/char.png")
-    else:
-        response = requests.get("https://s3.amazonaws.com/MinecraftSkins/" + player + ".png")
-        if response.status_code != 200:
-            response = requests.get("https://s3.amazonaws.com/MinecraftSkins/char.png")
-
-    try:
-        data = BytesIO(response.content)
-    except IOError:
-        # for some reason we get IOError("cannot identify image file") here
-        if response.status_code != 200:
-            response = requests.get("https://s3.amazonaws.com/MinecraftSkins/char.png")
-        data = BytesIO(response.content)
-
+    defaultSkinURL = "https://s3.amazonaws.com/MinecraftSkins/char.png"
+    skinURL = defaultSkinURL
+    uuid = get_uuid(player)
+    if uuid:
+        skinURL = get_skin_url(uuid) or skinURL
+    response = requests.get(skinURL)
+    data = BytesIO(response.content)
     return Image.open(data)
 
 def paste(dst,src,dst_x,dst_y,src_x,src_y,src_w,src_h):
