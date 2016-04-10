@@ -12,16 +12,16 @@ avatar = Blueprint('avatar', __name__)
 def get_uuid(username):
     response = requests.get("https://api.mojang.com/users/profiles/minecraft/{}".format(username))
     if response.status_code == 200:
-        return json.loads(response.content)["id"]
+        return json.loads(response.content.decode('utf-8', 'ignore'))["id"]
 
 def get_skin_url(uuid):
     response = requests.get("https://sessionserver.mojang.com/session/minecraft/profile/{}".format(uuid))
     if response.status_code == 200:
-        profile = json.loads(response.content)
+        profile = json.loads(response.content.decode('utf-8', 'ignore'))
         properties = profile["properties"]
-        textures = filter(lambda obj: obj["name"] == "textures", properties)[0]
+        textures, *_ = filter(lambda obj: obj["name"] == "textures", properties)
         textures = base64.b64decode(textures["value"])
-        textures = json.loads(textures)
+        textures = json.loads(textures.decode('utf-8', 'ignore'))
         return textures["textures"]["SKIN"]["url"]
 
 def get_from_minecraft(player="__default_img__"):
