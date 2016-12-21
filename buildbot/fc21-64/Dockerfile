@@ -6,7 +6,7 @@ ENV BUILDBOT_COMMIT dd6632af2
 RUN yum install -y git curl wget python-devel mock rpm-build numpy && yum groupinstall -y "Development Tools" && curl -SL 'https://bootstrap.pypa.io/get-pip.py' | python2
 
 RUN cd /root && git clone https://github.com/buildbot/buildbot.git
-RUN cd /root/buildbot/slave && git checkout ${BUILDBOT_COMMIT} && pip install .
+RUN cd /root/buildbot && git checkout ${BUILDBOT_COMMIT} && cd /root/buildbot/slave && pip install .
 
 
 ENV BUILDSLAVE_NAME diax-fc21-64
