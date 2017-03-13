@@ -13,7 +13,7 @@ services:
   wwwdata:
     image: busybox
     volumes:
-      - /data/www
+      - /var/www/overviewer-web-volumes/web:/data/www
 
   flask:
     build: flask
@@ -32,12 +32,12 @@ services:
   dbdata:
     image: busybox
     volumes:
-      - /var/lib/postgresql/data
+      - /var/www/overviewer-web-volumes/database:/var/lib/postgresql/data
 
   bbdata:
     image: busybox
     volumes:
-      - /data/buildbot
+      - /var/www/overviewer-web-volumes/buildbot:/data/buildbot
   bbmaster:
     build: buildbot
     env_file: confidential.env
