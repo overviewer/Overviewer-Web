@@ -21,7 +21,8 @@ def slugify(text, delim=u'-'):
         result.extend(unidecode(word).split())
     return delim.join(result)
 
-def render_blog(tmpl, **kwargs):
+@cache.memoize(1800)
+def get_archives():
     monthnames = 'January February March April May June July August September October November December'.split()
     archives = {}
     for p in BlogPost.query.all():
@@ -45,7 +46,10 @@ def render_blog(tmpl, **kwargs):
             days.sort()
             for d in days:
                 month.append((name + ' ' + str(d), url_for('blog_index_day', year=y, month=m, day=d), []))
+    return archives_nice
 
+def render_blog(tmpl, **kwargs):
+    archives_nice = get_archives()
     return render_template(tmpl, archives=archives_nice, **kwargs)
 
 class PostForm(Form):
@@ -68,25 +72,21 @@ def index_for(query, tmpl='blog_index.html'):
     return render_blog(tmpl, posts=posts.items, page=posts)
 
 @app.route('/blog/')
-@cache.cached(1800)
 def blog_index():
     return index_for(BlogPost.query)
 
 @app.route('/blog/feeds/latest/')
 @content_type('application/rss+xml')
-@cache.cached(1800)
 def blog_rss():
     return index_for(BlogPost.query, tmpl='blog_rss.xml')
 
 @app.route('/blog/<int:year>/')
-@cache.cached(1800)
 def blog_index_year(year):
     start = datetime(year=year, month=1, day=1)
     end = datetime(year=year + 1, month=1, day=1)
     return index_for(BlogPost.query.filter(BlogPost.timestamp.between(start, end)))
 
 @app.route('/blog/<int:year>/<int:month>/')
-@cache.cached(1800)
 def blog_index_month(year, month):
     start = datetime(year=year, month=month, day=1)
     if month == 12:
@@ -96,7 +96,6 @@ def blog_index_month(year, month):
     return index_for(BlogPost.query.filter(BlogPost.timestamp.between(start, end)))
 
 @app.route('/blog/<int:year>/<int:month>/<int:day>/')
-@cache.cached(1800)
 def blog_index_day(year, month, day):
     start = datetime(year=year, month=month, day=day)
     end = start + timedelta(days=1)
