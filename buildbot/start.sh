@@ -32,7 +32,9 @@ ln -fs 16 repos/rpm/21
 ln -fs 16 repos/rpm/22
 ln -fs 16 repos/rpm/23
 ln -fs 16 repos/rpm/24
-ln -fs 24 repos/rpm/latest
+ln -fs 16 repos/rpm/25
+ln -fs 16 repos/rpm/26
+ln -fs 26 repos/rpm/latest
 make -C repos/rpm/
 
 exec buildbot start --nodaemon master
