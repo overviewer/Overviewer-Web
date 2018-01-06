@@ -98,7 +98,7 @@ def choose_releases(builders, allow_running=True):
     rs = get_all_releases(builders, allow_running)
     collated = collate_releases(rs)
     if not collated:
-        return {}
+        return ({"version": "unknown", "commit": "unknown", "date": datetime.now()}, {})
 
     most = max([len(l) for l in collated.values()])
     versions = []
