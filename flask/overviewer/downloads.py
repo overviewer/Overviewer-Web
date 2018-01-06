@@ -62,6 +62,23 @@ def getbuild(builder, buildnum):
 # discards failed release builds
 @cache.memoize(1800)
 def getreleases(builder, allow_running=True, limit=100):
+    # special case for windows -- hardcode the results
+    if builder == 'win64':
+        return [{"status": "finished",
+                 "url": "http://static-backend.overviewer.org/builds/master/861/overviewer-win64-0.12.204.zip",
+                 "basename": "overviewer-win64-0.12.204.zip",
+                 "version": "0.12.204",
+                 "date": datetime.strptime("2017-08-24", "%Y-%m-%d"),
+                 "commit": "22b9ab3f631e854b4932b453e8a1a81b61946174"
+                 }]
+    if builder == 'win32':
+        return [{"status": "finished",
+                 "url": "http://static-backend.overviewer.org/builds/master/861/overviewer-win32-0.12.204.zip",
+                 "basename": "overviewer-win32-0.12.204.zip",
+                 "version": "0.12.204",
+                 "date": datetime.strptime("2017-08-24", "%Y-%m-%d"),
+                 "commit": "22b9ab3f631e854b4932b453e8a1a81b61946174"
+                 }]
     releases = []
     for i in range(-1, -limit, -1):
         try:
