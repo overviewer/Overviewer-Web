@@ -65,7 +65,7 @@ def getreleases(builder, allow_running=True, limit=100):
     # special case for windows -- hardcode the results
     if builder == 'win64':
         return [{"status": "finished",
-                 "url": "http://static-backend.overviewer.org/builds/master/861/overviewer-win64-0.12.204.zip",
+                 "url": "http://static.overviewer.org/builds/master/861/overviewer-win64-0.12.204.zip",
                  "basename": "overviewer-win64-0.12.204.zip",
                  "version": "0.12.204",
                  "date": datetime.strptime("2017-08-24", "%Y-%m-%d"),
@@ -74,7 +74,7 @@ def getreleases(builder, allow_running=True, limit=100):
                  }]
     if builder == 'win32':
         return [{"status": "finished",
-                 "url": "http://static-backend.overviewer.org/builds/master/861/overviewer-win32-0.12.204.zip",
+                 "url": "http://static.overviewer.org/builds/master/861/overviewer-win32-0.12.204.zip",
                  "basename": "overviewer-win32-0.12.204.zip",
                  "version": "0.12.204",
                  "date": datetime.strptime("2017-08-24", "%Y-%m-%d"),
