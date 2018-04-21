@@ -65,21 +65,21 @@ def getreleases(builder, allow_running=True, limit=100):
     # special case for windows -- hardcode the results
     if builder == 'win64':
         return [{"status": "finished",
-                 "url": "http://static.overviewer.org/builds/master/921/overviewer-win64-0.12.210.zip",
-                 "basename": "overviewer-win64-0.12.210.zip",
-                 "version": "0.12.210",
-                 "date": datetime.strptime("2018-02-28", "%Y-%m-%d"),
-                 "commit": "cd11ea31a9f6b0686cdff3998eeb10a964201ba2",
-                 "commiturl": "https://github.com/overviewer/Minecraft-Overviewer/commit/cd11ea31a9f6b0686cdff3998eeb10a964201ba2",
+                 "url": "http://static.overviewer.org/builds/master/1058/overviewer-win64-0.12.215.zip",
+                 "basename": "overviewer-win64-0.12.215.zip",
+                 "version": "0.12.215",
+                 "date": datetime.strptime("2018-04-21", "%Y-%m-%d"),
+                 "commit": "139e22f2f888b289aa296b9028612544adc037b5",
+                 "commiturl": "https://github.com/overviewer/Minecraft-Overviewer/commit/139e22f2f888b289aa296b9028612544adc037b5",
                  }]
     if builder == 'win32':
         return [{"status": "finished",
-                 "url": "http://static.overviewer.org/builds/master/921/overviewer-win32-0.12.210.zip",
-                 "basename": "overviewer-win32-0.12.210.zip",
-                 "version": "0.12.210",
-                 "date": datetime.strptime("2018-02-28", "%Y-%m-%d"),
-                 "commit": "cd11ea31a9f6b0686cdff3998eeb10a964201ba2",
-                 "commiturl": "https://github.com/overviewer/Minecraft-Overviewer/commit/22b9ab3f631e854b4932b453e8a1a81b61946174",
+                 "url": "http://static.overviewer.org/builds/master/1058/overviewer-win32-0.12.215.zip",
+                 "basename": "overviewer-win32-0.12.215.zip",
+                 "version": "0.12.215",
+                 "date": datetime.strptime("2018-04-21", "%Y-%m-%d"),
+                 "commit": "139e22f2f888b289aa296b9028612544adc037b5",
+                 "commiturl": "https://github.com/overviewer/Minecraft-Overviewer/commit/139e22f2f888b289aa296b9028612544adc037b5",
                  }]
     releases = []
     for i in range(-1, -limit, -1):
