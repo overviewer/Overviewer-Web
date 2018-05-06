@@ -38,7 +38,7 @@
     <div class="container">
       <div class="masthead">
         <h1><a href="/">The Minecraft Overviewer</a></h1>
-		<p class="tagline">a high-resolution Minecraft world renderer with a Google Maps interface</p>
+		<p class="tagline">a high-resolution Minecraft world renderer with a LeafletJS interface</p>
         {% if session.logged_in %}
         <p class="tagline">(logged in as {{ session.user }}. <a href="/logout?next={{ request.path }}">log out</a>.)</p>
         {% endif %}
