@@ -152,17 +152,13 @@ DOWNLOADS_TREE = [
         ('32-bit', 'deb32'),
         ('64-bit', 'deb64'),
     ]),
-    ('Fedora 16+', [
-        ('32-bit', 'fc19-32'),
-        ('64-bit', 'fc19-64'),
+    ('CentOS 7+ / Other RPM', [
+        ('32-bit', 'centos7-32'),
+        ('64-bit', 'centos7-64'),
     ]),
-    ('RedHat EL5', [
-        ('32-bit', 'el5-32'),
-        ('64-bit', 'el5-64'),
-    ]),
-    ('RedHat EL6', [
-        ('32-bit', 'el6-32'),
-        ('64-bit', 'el6-64'),
+    ('CentOS 6', [
+        ('32-bit', 'centos6-32'),
+        ('64-bit', 'centos6-64'),
     ]),
 ]
 
