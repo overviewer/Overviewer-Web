@@ -17,6 +17,8 @@ COPY debian/repo /root/debian-repo
 COPY rpm/control/all.tar /root/rpm.tar
 COPY rpm/repo /root/rpm-repo
 
+COPY pyinstaller-windows.spec /root/
+
 CMD /root/start.sh
 VOLUME /data/buildbot
 EXPOSE 9989
