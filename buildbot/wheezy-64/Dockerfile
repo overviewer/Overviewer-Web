@@ -4,6 +4,8 @@ FROM debian:wheezy
 ENV BUILDBOT_COMMIT dd6632af2
 
 RUN apt-get update && apt-get -y install git curl wget python-dev python-numpy devscripts python-all-dev python-imaging && curl -SL 'https://bootstrap.pypa.io/get-pip.py' | python2
+COPY jq /usr/bin/
+RUN chmod +x /usr/bin/jq
 
 RUN cd /root && git clone https://github.com/buildbot/buildbot.git
 RUN cd /root/buildbot && git checkout ${BUILDBOT_COMMIT} && cd /root/buildbot/slave && pip install .
