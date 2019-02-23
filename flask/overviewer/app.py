@@ -1,6 +1,7 @@
 import os
 from flask import Flask
-from flask.ext.markdown import Markdown
+from flaskext.markdown import Markdown
+from flask_debugtoolbar import DebugToolbarExtension
 from .models import db
 from .cache import cache
 
@@ -13,3 +14,4 @@ if 'OVERVIEWER_SETTINGS' in os.environ:
 db.init_app(app)
 cache.init_app(app)
 Markdown(app, extensions=['extra', 'toc', 'codehilite'])
+DebugToolbarExtension(app)

@@ -1,5 +1,5 @@
 from flask import request, url_for, flash, redirect, session, abort
-from flask.ext.github import GitHub
+from flask_github import GitHub
 import functools
 from .app import app
 

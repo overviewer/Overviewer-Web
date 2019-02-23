@@ -1,6 +1,6 @@
 from flask import Blueprint, flash, render_template, redirect, url_for, request, make_response
-from flask.ext.wtf import Form
-from flask.ext.wtf.file import FileField, FileRequired
+from flask_wtf import Form
+from flask_wtf.file import FileField, FileRequired
 
 from . import auth
 from .models import db, UploadedFile

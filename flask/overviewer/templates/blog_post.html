@@ -9,6 +9,7 @@
         on <abbr class="published" title="{{ post.timestamp }}">{{ post.timestamp.strftime('%b. %d, %Y') }}</abbr>
       </p>
     </div>
+    {% cache 600, "blogpost" %}
     <div class="entry-body">
       <div class="entry-content">
         {{ post.body|markdown }}
@@ -17,5 +18,6 @@
         <a href="{{ post.url }}" title="{{ post.title }}">(permalink)</a>
       </p>
     </div>
+    {% endcache %}
   </div>
 </div>

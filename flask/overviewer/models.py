@@ -1,5 +1,5 @@
 from flask import url_for, current_app, session
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from werkzeug import secure_filename
 import os.path
 import os

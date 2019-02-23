@@ -1,5 +1,5 @@
 from flask import render_template, redirect, flash, url_for, request, make_response
-from flask.ext.wtf import Form
+from flask_wtf import Form
 from wtforms import StringField, BooleanField, DateTimeField, TextAreaField
 from wtforms.validators import DataRequired
 from datetime import datetime, timedelta
