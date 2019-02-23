@@ -1,5 +1,5 @@
 from flask import Blueprint, flash, render_template, redirect, url_for, request, make_response
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
 
 from . import auth
@@ -7,7 +7,7 @@ from .models import db, UploadedFile
 
 uploader = Blueprint('uploader', __name__)
 
-class UploadForm(Form):
+class UploadForm(FlaskForm):
     file = FileField('file', validators=[FileRequired()])
 
 @uploader.route('/', methods=['GET', 'POST'])
