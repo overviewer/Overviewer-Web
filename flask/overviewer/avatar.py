@@ -69,7 +69,7 @@ def create_head_from_skin_with_size(size, skin):
         head.paste(hat, (0,0), hat)
     return head.resize(size)
 
-@cache.memoize(1800)
+@cache.memoize(86400)
 def get_avatar(kind, username):
     try:
         skin = get_from_minecraft(username)
@@ -94,22 +94,22 @@ def get_avatar(kind, username):
         abort(503)
 
 @avatar.route('/<username>/')
-@cache.cached(1800)
+@cache.cached(86400)
 def default(username):
     return get_avatar('av', username)
 
 @avatar.route('/<username>/body')
-@cache.cached(1800)
+@cache.cached(86400)
 def body(username):
     return get_avatar('av', username)
 
 @avatar.route('/<username>/head')
-@cache.cached(1800)
+@cache.cached(86400)
 def head(username):
     return get_avatar('head', username)
 
 @avatar.route('/<username>/bighead')
-@cache.cached(1800)
+@cache.cached(86400)
 def bighead(username):
     return get_avatar('bighead', username)
 
