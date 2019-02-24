@@ -1,80 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <title>{% block title %}{% endblock %}</title>
-    <!-- this site uses bootstrap: http://twitter.github.com/bootstrap/ -->
-    <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png" />
-    <link rel="stylesheet" href="/static/css/bootstrap.css" />
-    <link rel="stylesheet" href="/static/css/bootstrap-responsive.css" />
-    <link rel="stylesheet" href="/static/css/custom.css" />
-    <link rel="stylesheet" href="/static/css/codehilite.css" />
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <!-- this site uses bootstrap: http://twitter.github.com/bootstrap/ -->
+  <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png" />
+  <link rel="stylesheet" href="/static/css/bootstrap.css" />
+  <link rel="stylesheet" href="/static/css/bootstrap-responsive.css" />
+  <link rel="stylesheet" href="/static/css/custom.css" />
+  <link rel="stylesheet" href="/static/css/codehilite.css" />
 
-    <link rel="alternate" type="application/rss+xml" title="Blog RSS Feed" href="{{ url_for('blog_rss') }}" />
-    <link rel="author" type="text/plain" href="{{ url_for('shortcut_humans_txt') }}" />
+  <link rel="alternate" type="application/rss+xml" title="Blog RSS Feed" href="{{ url_for('blog_rss') }}" />
+  <link rel="author" type="text/plain" href="{{ url_for('shortcut_humans_txt') }}" />
 
-	<!-- Google Analytics incantation -->
-	<script type="text/javascript">
-	  
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-27756118-1']);
-	  _gaq.push(['_setDomainName', 'overviewer.org']);
-	  _gaq.push(['_trackPageview']);
-	  
-	  (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-	  
-	</script>
-	
-	{% block head %}{% endblock %}
-  </head>
-  
-  <body>
-    <div class="container">
-      <div class="masthead">
-        <h1><a href="/">The Minecraft Overviewer</a></h1>
-		<p class="tagline">a high-resolution Minecraft world renderer with a LeafletJS interface</p>
-        {% if session.logged_in %}
-        <p class="tagline">(logged in as {{ session.user }}. <a href="/logout?next={{ request.path }}">log out</a>.)</p>
-        {% endif %}
-        {% with messages = get_flashed_messages() %}
-        {% for message in messages %}
-        <hr />
-        <p style="font-size: large; font-weight: bold;">{{ message }}</p>
-        {% endfor %}
-        {% endwith %}
-      </div>
+  <!-- Google Analytics incantation -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27756118-1']);
+    _gaq.push(['_setDomainName', 'overviewer.org']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+  {% block head %}{% endblock %}
+</head>
+
+<body>
+  <div class="container">
+    <div class="masthead">
+      <h1><a href="/">The Minecraft Overviewer</a></h1>
+      <p class="tagline">a high-resolution Minecraft world renderer with a LeafletJS interface</p>
+      {% if session.logged_in %}
+      <p class="tagline">(logged in as {{ session.user }}. <a href="/logout?next={{ request.path }}">log out</a>.)</p>
+      {% endif %}
+      {% with messages = get_flashed_messages() %}
+      {% for message in messages %}
       <hr />
-	  {% block body %}
-	  {% endblock body %}
-      <hr />
-      <div class="footer">
-		<a href="/downloads">downloads</a> <span class="divider">|</span>
-		<a href="http://docs.overviewer.org">documentation</a> <span class="divider">|</span>
-		<a href="https://github.com/overviewer/Minecraft-Overviewer/">code</a> <span class="divider">|</span>
-		<a href="https://github.com/overviewer/Minecraft-Overviewer/issues">issues</a> <span class="divider">|</span>
-		<a href="/blog/">blog</a>
-		
-		<br />
-		
-        <a href="/login?next={{ request.path }}">log in via GitHub</a> <span class="divider">|</span>
-        <a href="/example">example</a> <span class="divider">|</span>
-        <a href="/uploader/">uploader</a> <span class="divider">|</span>
-        <a href="/debian/info">debian repository</a> <span class="divider">|</span>
-        <a href="/rpms/info">rpm repository</a> <span class="divider">|</span>
-        <a href="/irc/">#overviewer on freenode</a>
-		
-		<br />
-		<br />
-		
-		<iframe src="//ghbtns.com/github-btn.html?user=overviewer&repo=Minecraft-Overviewer&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="93px" height="20px"></iframe>
-		<iframe src="//ghbtns.com/github-btn.html?user=overviewer&repo=Minecraft-Overviewer&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="93px" height="20px"></iframe>
-	  </div>
+      <p style="font-size: large; font-weight: bold;">{{ message }}</p>
+      {% endfor %}
+      {% endwith %}
     </div>
-  </body>
+    <hr />
+    {% block body %}
+    {% endblock body %}
+    <hr />
+    <div class="footer">
+      <a href="/downloads">downloads</a> <span class="divider">|</span>
+      <a href="http://docs.overviewer.org">documentation</a> <span class="divider">|</span>
+      <a href="https://github.com/overviewer/Minecraft-Overviewer/">code</a> <span class="divider">|</span>
+      <a href="https://github.com/overviewer/Minecraft-Overviewer/issues">issues</a> <span class="divider">|</span>
+      <a href="/blog/">blog</a>
+
+      <br />
+
+      <a href="/login?next={{ request.path }}">log in via GitHub</a> <span class="divider">|</span>
+      <a href="/example">example</a> <span class="divider">|</span>
+      <a href="/uploader/">uploader</a> <span class="divider">|</span>
+      <a href="/debian/info">debian repository</a> <span class="divider">|</span>
+      <a href="/rpms/info">rpm repository</a> <span class="divider">|</span>
+      <a href="/irc/">#overviewer on freenode</a>
+
+      <br />
+      <br />
+
+      <iframe src="//ghbtns.com/github-btn.html?user=overviewer&repo=Minecraft-Overviewer&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="93px" height="20px"></iframe>
+      <iframe src="//ghbtns.com/github-btn.html?user=overviewer&repo=Minecraft-Overviewer&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="93px" height="20px"></iframe>
+    </div>
+  </div>
+</body>
 </html>
