@@ -17,6 +17,7 @@ BUILDBOT_PUBLIC_URL = BUILDBOT_URL
 WTF_CSRF_ENABLED = True
 CACHE_TYPE = 'simple'
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.abspath(os.path.join(ovr, '..', 'overviewer.db'))
+SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # grab confidentials from env
 SECRET_KEY = os.environ.get('FLASK_SECRET', random_string(24))
