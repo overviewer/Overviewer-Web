@@ -22,12 +22,15 @@ def get_skin_url(uuid):
         textures, *_ = filter(lambda obj: obj["name"] == "textures", properties)
         textures = base64.b64decode(textures["value"])
         textures = json.loads(textures.decode('utf-8', 'ignore'))
-        return textures["textures"]["SKIN"]["url"]
+        if "SKIN" in textures["textures"]:
+            return textures["textures"]["SKIN"]["url"]
+        else:
+            return ""
 
 def get_from_minecraft(player="__default_img__"):
     "Gets an image from minecraft. Returns a PIL Image object. never caches"
 
-    defaultSkinURL = "https://s3.amazonaws.com/MinecraftSkins/char.png"
+    defaultSkinURL = "http://assets.mojang.com/SkinTemplates/steve.png"
     skinURL = defaultSkinURL
     uuid = get_uuid(player)
     if uuid:
