@@ -14,4 +14,5 @@ if 'OVERVIEWER_SETTINGS' in os.environ:
 db.init_app(app)
 cache.init_app(app)
 Markdown(app, extensions=['extra', 'toc', 'codehilite'])
+app.jinja_env.add_extension('jinja2.ext.do')
 DebugToolbarExtension(app)

@@ -7,21 +7,7 @@
 {% include "blog_post.html" %}
 {% endfor %}
 
-<ul class="paginator">
-  <li class="index">
-    Page {{ page.page }} of {{ page.pages }}
-  </li>
-  {% for p in page.iter_pages() %}
-  {% if p %}
-  {% if p != page.page %}
-  <li class="page"><a href="?page={{ p }}">{{ p }}</a></li>
-  {% else %}
-  <li class="page current"><strong>{{ p }}</strong></li>
-  {% endif %}
-  {% else %}
-  <span class="ellipsis">...</span>
-  {% endif %}
-  {% endfor %}
-</ul>
+{% from "pagination.html" import render_pagination %}
+{{ render_pagination(page) }}
 {% endblock content %}
 
