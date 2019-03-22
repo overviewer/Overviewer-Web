@@ -9,11 +9,13 @@ from .cache import cache
 
 avatar = Blueprint('avatar', __name__)
 
+@cache.memoize(3600)
 def get_uuid(username):
     response = requests.get("https://api.mojang.com/users/profiles/minecraft/{}".format(username))
     if response.status_code == 200:
         return json.loads(response.content.decode('utf-8', 'ignore'))["id"]
 
+@cache.memoize(3600)
 def get_skin_url(uuid):
     response = requests.get("https://sessionserver.mojang.com/session/minecraft/profile/{}".format(uuid))
     if response.status_code == 200:
@@ -28,7 +30,8 @@ def get_skin_url(uuid):
             return ""
 
 def get_from_minecraft(player="__default_img__"):
-    "Gets an image from minecraft. Returns a PIL Image object. never caches"
+    """Gets an image from minecraft. Returns a PIL Image object. Never caches,
+    but the skin URL and the UUID resolution may be cached."""
 
     defaultSkinURL = "http://assets.mojang.com/SkinTemplates/steve.png"
     skinURL = defaultSkinURL

@@ -7,6 +7,8 @@ import re
 import functools
 from unidecode import unidecode
 
+from flask_caching import make_template_fragment_key
+
 from . import auth
 from .content_type import content_type
 from .app import app
@@ -125,12 +127,18 @@ def blog_edit(post):
         form.populate_obj(post)
         db.session.add(post)
         db.session.commit()
+        # Clear the cached template fragment
+        cache_key = make_template_fragment_key("blogpost_" + str(post.id))
+        cache.delete(cache_key)
         return redirect(post.url)
     return render_blog('blog_edit.html', form=form)
 
 @post_route('/delete')
 @auth.developer_only
 def blog_delete(post):
+    # Clear the cached template fragment
+    cache_key = make_template_fragment_key("blogpost_" + str(post.id))
+    cache.delete(cache_key)
     db.session.delete(post)
     db.session.commit()
     flash('Post `{0}` deleted.'.format(post.title))
