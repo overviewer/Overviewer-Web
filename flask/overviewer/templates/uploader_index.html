@@ -3,34 +3,33 @@
 {% block title %}Uploader - Minecraft Overviewer{% endblock %}
 
 {% block head %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.uploadProgress.js') }}"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-    $(function() {
-        $('#upload_form').uploadProgress({
-            jqueryPath: "{{ url_for('static', filename='js/jquery.js') }}",
-            progressBar: '#progress_indicator',
-            progressUrl: '{{ url_for('.progress') }}',
-            start: function() {
-                $("#upload_form").hide();
-                filename = $("#file").val().split(/[\/\\]/).pop();
-                $("#progress_filename").html('Uploading ' + filename + "...");
-                $("#progress_container").show();
-            },
-            uploadProgressPath: "{{ url_for('static', filename='js/jquery.uploadProgress.js') }}",
-            uploading: function(upload) {
-                if (upload.percents == 100) {
-                    window.clearTimeout(this.timer);
-                    $("#progress_filename").html('Processing ' + filename + "...");
-                } else {
-                    $("#progress_filename").html('Uploading ' + filename + ': ' + upload.percents + '%');
-                }
-            },
-            interval: 1000
-        });
-    });
-});
+function progress_the_bar(ev) {
+  if (ev.lengthComputable) {
+    bar = document.getElementById("progress_bar");
+    bar.value = ev.loaded / ev.total * 100.0;
+  }
+}
+window.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("upload_form").addEventListener("submit", function(ev) {
+    var form = document.getElementById("upload_form");
+    ev.preventDefault();
+    document.getElementById("progress_bar").style.display="";
+    var xhr = new XMLHttpRequest();
+    xhr.upload.addEventListener("progress", progress_the_bar, false);
+    // This is supremely ugly, but basically just finishes the upload by
+    // replacing the document with the endpoint's response.
+    xhr.addEventListener('readystatechange', function(ev) {
+      if (ev.target.readyState == 4 && ev.target.responseText) {
+        var new_document = document.open('text/html', 'replace');
+        new_document.write(ev.target.responseText);
+        new_document.close();
+      }
+    }, false);
+    xhr.open(form.getAttribute('method'), form.getAttribute('action'), true);
+    xhr.send(new FormData(form));
+  }, false);
+}, false);
 </script>
 {% endblock head %}
 
@@ -48,13 +47,7 @@ $(document).ready(function() {
   <p>File: {{ form.file() }}</p>
   <input type="submit" value="Upload"/>
 </form>
-
-<div class="quiet" id="progress_container">
-  <div id="progress_filename"></div>
-  <div id="progress_bar">
-    <div id="progress_indicator"></div>
-  </div>
-</div>
+<progress max="100" id="progress_bar" style="display:none"></progress>
 
 {% if files %}
 <h3>Uploaded Files</h3>
