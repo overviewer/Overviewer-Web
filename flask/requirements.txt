@@ -12,3 +12,4 @@ requests==2.21.0
 Flask-Caching==1.0.0
 psycopg2==2.7.7
 Flask-DebugToolbar==0.10.1
+Flask-Script==2.0.6
