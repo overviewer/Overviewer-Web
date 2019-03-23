@@ -10,7 +10,8 @@ function progress_the_bar(ev) {
     bar.value = ev.loaded / ev.total * 100.0;
   }
 }
-window.addEventListener("DOMContentLoaded", function () {
+
+function loaded () {
   document.getElementById("upload_form").addEventListener("submit", function(ev) {
     var form = document.getElementById("upload_form");
     ev.preventDefault();
@@ -21,15 +22,19 @@ window.addEventListener("DOMContentLoaded", function () {
     // replacing the document with the endpoint's response.
     xhr.addEventListener('readystatechange', function(ev) {
       if (ev.target.readyState == 4 && ev.target.responseText) {
-        var new_document = document.open('text/html', 'replace');
-        new_document.write(ev.target.responseText);
-        new_document.close();
+        var el = document.createElement('html');
+        el.innerHTML = ev.target.responseText;
+        var body = el.getElementsByTagName('body')[0]
+        document.body.innerHTML = body.innerHTML
+        loaded()
       }
     }, false);
     xhr.open(form.getAttribute('method'), form.getAttribute('action'), true);
     xhr.send(new FormData(form));
   }, false);
-}, false);
+};
+
+window.addEventListener("DOMContentLoaded", loaded, false);
 </script>
 {% endblock head %}
 
