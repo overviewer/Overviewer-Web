@@ -78,22 +78,8 @@ window.addEventListener("DOMContentLoaded", loaded, false);
   {% endfor %}
 </table>
 
-<ul class="paginator">
-  <li class="index">
-    Page {{ files.page }} of {{ files.page }}
-  </li>
-  {% for p in files.iter_pages() %}
-  {% if p %}
-  {% if p != files.page %}
-  <li class="page"><a href="?page={{ p }}">{{ p }}</a></li>
-  {% else %}
-  <li class="page current"><strong>{{ p }}</strong></li>
-  {% endif %}
-  {% else %}
-  <span class="ellipsis">...</span>
-  {% endif %}
-  {% endfor %}
-</ul>
+{% from "pagination.html" import render_pagination %}
+{{ render_pagination(files) }}
 {% endif %}
 
 {% endblock body %}
