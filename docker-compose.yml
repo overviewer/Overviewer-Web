@@ -47,23 +47,20 @@ services:
       - bbdata
     ports:
       - "9989:9989"
-
-  bbwheezy64:
-    build: buildbot/wheezy-64
-    env_file: confidential.env
-    links:
-      - bbmaster
-
-  bbwheezy32:
-    build: buildbot/wheezy-32
-    env_file: confidential.env
-    links:
-      - bbmaster
-
   bbcentos764:
     build: buildbot/centos7-64
     env_file: confidential.env
     cap_add: 
       - SYS_ADMIN
+    links:
+      - bbmaster
+  bbstretch64:
+    build: buildbot/stretch-64
+    env_file: confidential.env
+    links:
+      - bbmaster
+  bbstretch32:
+    build: buildbot/stretch-32
+    env_file: confidential.env
     links:
       - bbmaster
