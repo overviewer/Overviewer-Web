@@ -9,7 +9,7 @@ RUN cd /root/buildbot && git checkout ${BUILDBOT_COMMIT} && cd /root/buildbot/ma
 RUN apt-get update && apt-get install -y gnupg-agent dpkg-sig createrepo rpm expect
 
 COPY start.sh rpmsign.sh master.cfg codesign.asc /root/
-RUN gpg --import /root/codesign.asc && rm /root/codesign.asc
+RUN gpg --import --batch /root/codesign.asc && rm /root/codesign.asc
 
 COPY debian/control/all.tar /root/debian.tar
 COPY debian/repo /root/debian-repo
