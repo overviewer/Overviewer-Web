@@ -52,6 +52,8 @@ services:
     env_file: confidential.env
     cap_add: 
       - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
     links:
       - bbmaster
   bbstretch64:
