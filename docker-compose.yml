@@ -45,6 +45,10 @@ services:
       - postgres
     volumes_from:
       - bbdata
+    volumes:
+      - ./buildbot/rpmsign.sh:/root/rpmsign.sh
+      - ./buildbot/start.sh:/root/start.sh
+      - ./buildbot/master:/root/master
     ports:
       - "9989:9989"
   bbcentos764:
