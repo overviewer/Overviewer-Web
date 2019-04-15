@@ -1,13 +1,9 @@
 FROM debian:stretch
 
-# Probably good to make this match what's in the master Dockerfile
-ENV BUILDBOT_COMMIT dd6632af2
-
-RUN apt-get update && apt-get -y install jq git curl wget python-dev python-numpy devscripts python-all-dev python-imaging python-pip
-
-RUN cd /root && git clone https://github.com/buildbot/buildbot.git
-RUN cd /root/buildbot && git checkout ${BUILDBOT_COMMIT} && cd /root/buildbot/slave && pip install .
-
+RUN apt-get update && apt-get -y install \
+jq git curl wget devscripts \
+python3.5 python3.5-dev python3-numpy python3-pil python3-pip \
+&& python3 -m pip install "buildbot[bundle]"
 
 ENV BUILDSLAVE_NAME diax-stretch-64
 ENV BUILDSLAVE_ADMIN Nicolas Frattaroli <ovdev@fratti.ch>

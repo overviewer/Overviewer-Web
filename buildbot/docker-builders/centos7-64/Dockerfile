@@ -1,13 +1,17 @@
 FROM centos:7
 
-# Probably good to make this match what's in the master Dockerfile
-ENV BUILDBOT_COMMIT dd6632af2
+RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm 
 
-RUN yum install -y git curl wget python2 python-devel python-pillow-devel python-sphinx mock rpm-build numpy && yum groupinstall -y "Development Tools" && curl -SL 'https://bootstrap.pypa.io/get-pip.py' | python2
+RUN yum update -y && yum install -y \
+    git curl wget mock rpm-build \
+    python35u python35u-libs python35u-devel python35u-pip \
+    python-pillow-devel \
+    && yum groupinstall -y "Development Tools"
 
-RUN cd /root && git clone https://github.com/buildbot/buildbot.git
-RUN cd /root/buildbot && git checkout ${BUILDBOT_COMMIT} && cd /root/buildbot/slave && pip install .
+RUN ln -s /usr/bin/python3.5 /usr/bin/python3 \
+&& ln -s /usr/bin/pip3.5 /usr/bin/pip3
 
+RUN python3 -m pip install "buildbot[bundle]" numpy sphinx Pillow
 
 ENV BUILDSLAVE_NAME diax-centos7-64
 ENV BUILDSLAVE_ADMIN Andrew Chin <andrew@andrewchin.net>
