@@ -24,7 +24,7 @@ def getbuild(builder, buildnum):
             properties = {k: v for k, v, _ in d['properties']},
             name = d['builderName'],
             reason = d['reason'],
-            slave = d['slave'],
+            worker = d['worker'],
             eta = d.get('eta'),
         )
     

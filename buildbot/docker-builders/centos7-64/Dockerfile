@@ -13,8 +13,8 @@ RUN ln -s /usr/bin/python3.5 /usr/bin/python3 \
 
 RUN python3 -m pip install "buildbot[bundle]" numpy sphinx Pillow
 
-ENV BUILDSLAVE_NAME diax-centos7-64
-ENV BUILDSLAVE_ADMIN Andrew Chin <andrew@andrewchin.net>
-ENV BUILDSLAVE_INFO CentOS 7 64-bit
-COPY slave-start.sh /root/
-CMD /root/slave-start.sh
+ENV WORKER_NAME diax-centos7-64
+ENV WORKER_ADMIN Andrew Chin <andrew@andrewchin.net>
+ENV WORKER_INFO CentOS 7 64-bit
+COPY worker-start.sh /root/
+CMD /root/worker-start.sh
