@@ -39,4 +39,13 @@ ln -fs 7 repos/rpm/repo/28
 ln -fs 7 repos/rpm/repo/latest
 make -C repos/rpm/repo
 
+# build control tar files to be transferred to builders in master.cfg
+pushd repos/rpm/control
+tar  -cvf all.tar */*.spec
+popd
+
+pushd repos/debian/control
+tar -cvf all.tar * --exclude=changelog
+popd
+
 exec buildbot start --nodaemon master
