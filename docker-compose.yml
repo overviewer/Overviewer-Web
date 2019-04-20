@@ -49,6 +49,7 @@ services:
       - ./buildbot/rpmsign.sh:/root/rpmsign.sh
       - ./buildbot/start.sh:/root/start.sh
       - ./buildbot/master:/root/master
+      - ./buildbot/repos:/root/repos
     ports:
       - "9989:9989"
   bbcentos764:
