@@ -2,12 +2,12 @@ Source: minecraft-overviewer
 Maintainer: Aaron Griffith <agrif@overviewer.org>
 Section: python
 Priority: optional
-Build-Depends: python-all-dev (>= 2.6), debhelper (>= 7.4.3), python-pil | python-imaging, python-numpy
+Build-Depends: python3-all-dev (>= 3.4), debhelper (>= 7.4.3), python3-pil, python3-numpy
 Standards-Version: 3.9.1
 
 Package: minecraft-overviewer
 Architecture: any
 Homepage: http://overviewer.org/
-XB-Python-Version: ${python:Versions}
-Depends: ${misc:Depends}, python2.7 | python2.6, python (>= 2.6), python (<< 2.8), python-pil | python-imaging, python-numpy, ${shlibs:Depends}
+X-Python3-Version: >= 3.4 
+Depends: ${misc:Depends}, python3, python (>= 3.4), python3-pil, python3-numpy, ${shlibs:Depends}
 Description: Generates large resolution images of a Minecraft map.
