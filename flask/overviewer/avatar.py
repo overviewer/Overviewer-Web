@@ -100,6 +100,7 @@ def get_avatar(kind, username):
         abort(503)
 
 @avatar.route('/<username>/')
+@avatar.route('/<username>')
 @cache.cached(86400)
 def default(username):
     return get_avatar('av', username)
