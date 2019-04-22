@@ -2,8 +2,9 @@ FROM debian:stretch
 
 RUN apt-get update && apt-get -y install \
 jq git curl wget devscripts \
-python3.5 python3-all-dev python3-numpy python3-pil python3-pip \
-&& python3 -m pip install "buildbot[bundle]"
+python3.5 python3-all-dev python3-numpy python3-pil python3-pip
+
+RUN python3 -m pip install "buildbot[bundle]==2.*"
 
 ENV WORKER_NAME diax-stretch-64
 ENV WORKER_ADMIN Nicolas Frattaroli <ovdev@fratti.ch>

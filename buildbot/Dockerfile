@@ -1,6 +1,7 @@
 FROM python:3.5
 
-RUN pip install "buildbot[bundle]" itsdangerous psycopg2 boto3 requests
+COPY requirements.txt /root/requirements.txt
+RUN pip install -r /root/requirements.txt
 
 RUN apt-get update && apt-get install -y gnupg-agent dpkg-sig createrepo rpm expect
 
