@@ -7,9 +7,11 @@ from .blog import *
 from .avatar import *
 from .uploader import *
 from .downloads import *
+from .textures import *
 
 app.register_blueprint(avatar, url_prefix='/avatar')
 app.register_blueprint(uploader, url_prefix='/uploader')
+app.register_blueprint(textures, url_prefix='/textures')
 
 @app.route('/')
 def index():
