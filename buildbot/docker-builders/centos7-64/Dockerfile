@@ -1,17 +1,13 @@
 FROM centos:7
-
-RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm 
-
+RUN yum install -y epel-release
 RUN yum update -y && yum install -y \
     git curl wget mock rpm-build \
-    python35u python35u-libs python35u-devel python35u-pip \
-    python-pillow-devel \
+    python36 python36-libs python36-devel python36-pip python36-numpy python3-pillow \
     && yum groupinstall -y "Development Tools"
+RUN ln -sf /usr/bin/python3.6 /usr/bin/python3 \
+    && ln -sf /usr/bin/pip3.6 /usr/bin/pip3
 
-RUN ln -s /usr/bin/python3.5 /usr/bin/python3 \
-&& ln -s /usr/bin/pip3.5 /usr/bin/pip3
-
-RUN python3 -m pip install "buildbot[bundle]" numpy sphinx Pillow
+RUN python3 -m pip install "buildbot[bundle]" sphinx
 
 ENV WORKER_NAME diax-centos7-64
 ENV WORKER_ADMIN Andrew Chin <andrew@andrewchin.net>
