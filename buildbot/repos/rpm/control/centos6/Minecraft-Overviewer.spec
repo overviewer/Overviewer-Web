@@ -8,8 +8,8 @@ Group: Development/Libraries
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Vendor: Andrew Brown <brownan@gmail.com>
 Url: http://overviewer.org/
-Requires: epel-release python3-pillow, python36-numpy
-BuildRequires: epel-release python36-devel, python3-pillow-devel, python36-numpy
+Requires: epel-release python3-pillow python34-numpy
+BuildRequires: epel-release git python34-devel python34-numpy
 
 %description
 The Minecraft Overviewer is a command-line tool for rendering high-resolution
@@ -17,10 +17,11 @@ maps of Minecraft worlds. It generates a set of static html and image files and
 uses the Google Maps API to display a nice interactive map.
 
 %prep
+git clone https://github.com/python-pillow/Pillow.git %{_tmppath}/Pillow
 %setup -n %{name}
 
 %build
-env CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
+env CFLAGS="$RPM_OPT_FLAGS" PIL_INCLUDE_DIR=%{_tmppath}/Pillow/src/libImaging %{__python3} setup.py build
 
 %install
 %{__python3} setup.py install -O1 --root=%{buildroot}
