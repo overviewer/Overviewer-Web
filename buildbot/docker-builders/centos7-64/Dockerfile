@@ -1,8 +1,9 @@
 FROM centos:7
 RUN yum install -y epel-release
-RUN yum update -y && yum install -y \
+RUN yum --exclude=iputils update -y && yum install -y \
     git curl wget mock rpm-build \
     python36 python36-libs python36-devel python36-pip python36-numpy python3-pillow \
+    redhat-rpm-config gcc libffi-devel openssl-devel \
     && yum groupinstall -y "Development Tools"
 RUN ln -sf /usr/bin/python3.6 /usr/bin/python3 \
     && ln -sf /usr/bin/pip3.6 /usr/bin/pip3
