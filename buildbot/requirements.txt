@@ -2,3 +2,4 @@ buildbot[bundle]==2.*
 psycopg2==2.*
 boto3==1.9.*
 requests==2.*
+itsdangerous==1.*
