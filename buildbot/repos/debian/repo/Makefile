@@ -14,7 +14,7 @@ Release : Release.header Packages Packages.bz2 Packages.gz Sources Sources.bz2 S
 
 Release.gpg : Release
 	rm -f Release.gpg
-	gpg --use-agent --batch --no-tty --digest-algo SHA512 --output Release.gpg -a --detach-sig Release < /dev/null
+	gpg --batch --digest-algo SHA512 --output Release.gpg -a --detach-sig Release < /dev/null
 	chmod a+r Release.gpg
 
 Packages :

@@ -45,22 +45,29 @@ services:
       - postgres
     volumes_from:
       - bbdata
+    volumes:
+      - ./buildbot/rpmsign.sh:/root/rpmsign.sh
+      - ./buildbot/start.sh:/root/start.sh
+      - ./buildbot/master:/root/master
+      - ./buildbot/repos:/root/repos
     ports:
       - "9989:9989"
   bbcentos764:
-    build: buildbot/centos7-64
+    build: buildbot/docker-builders/centos7-64
     env_file: confidential.env
     cap_add: 
       - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
     links:
       - bbmaster
   bbstretch64:
-    build: buildbot/stretch-64
+    build: buildbot/docker-builders/stretch-64
     env_file: confidential.env
     links:
       - bbmaster
   bbstretch32:
-    build: buildbot/stretch-32
+    build: buildbot/docker-builders/stretch-32
     env_file: confidential.env
     links:
       - bbmaster
