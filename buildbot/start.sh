@@ -10,6 +10,7 @@ cp /root/master/* master/
 rm -f master/twistd.pid master/twistd.log
 buildbot upgrade-master master
 
+gpgconf --kill gpg-agent
 eval $(gpg-agent --batch --daemon --default-cache-ttl 1000000000 --max-cache-ttl 1000000000 --allow-preset-passphrase)
 /usr/lib/gnupg2/gpg-preset-passphrase -P $CODESIGN_PASSPHRASE -c $CODESIGN_KEYGRIP
 unset CODESIGN_PASSPHRASE
