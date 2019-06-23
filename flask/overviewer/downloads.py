@@ -29,7 +29,7 @@ def getbuild(builder, buildnum):
     
         r['version'] = r['properties']['version']
         r['name'] = r['properties']['buildername']
-        r['reason'] = r['properties']['reason']
+        r['reason'] = r['properties'].get('reason')
         r['worker'] = r['properties']['workername']
         r['number'] = r['properties']['buildnumber']
         r['commit'] = r['properties']['got_revision']
@@ -62,8 +62,11 @@ def getbuild(builder, buildnum):
 # discards failed release builds
 @cache.memoize(1800)
 def getreleases(builder, allow_running=True, limit=100):
+    d = getbb("api/v2/builders/{0}/builds?property=release_build", builder)
+    numbers = [build['number'] for build in d['builds'] if build['properties'].get('release_build', [False])[0]]
+    numbers.sort(reverse=True)
     releases = []
-    for i in range(-1, -limit, -1):
+    for i in numbers:
         try:
             b = getbuild(builder, i)
         except HTTPException:
@@ -134,13 +137,13 @@ DOWNLOADS_TREE = [
         ('64-bit', 'deb64'),
     ]),
     ('CentOS 7+ / Other RPM', [
-        ('32-bit', 'centos7-32'),
+    #    ('32-bit', 'centos7-32'),
         ('64-bit', 'centos7-64'),
     ]),
-    ('CentOS 6', [
-        ('32-bit', 'centos6-32'),
-        ('64-bit', 'centos6-64'),
-    ]),
+    #('CentOS 6', [
+    #    ('32-bit', 'centos6-32'),
+    #    ('64-bit', 'centos6-64'),
+    #]),
 ]
 
 DOWNLOADS_BUILDERS = []
