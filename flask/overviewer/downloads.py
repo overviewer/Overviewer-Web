@@ -19,38 +19,38 @@ def getbb(path, *args, **kwargs):
 
 def getbuild(builder, buildnum):
     try:
-        d = getbb("json/builders/{0}/builds/{1}", builder, buildnum)
+        d = getbb("api/v2/builders/{0}/builds/{1}?property=*", builder, buildnum)
+        d = d['builds'][0]
+        dsteps = getbb("api/v2/builders/{0}/builds/{1}/steps", builder, buildnum)
         r = dict(
-            properties = {k: v for k, v, _ in d['properties']},
-            name = d['builderName'],
-            reason = d['reason'],
-            worker = d['worker'],
+            properties = {k: v for k, (v, _), in d['properties'].items()},
             eta = d.get('eta'),
         )
     
         r['version'] = r['properties']['version']
+        r['name'] = r['properties']['buildername']
+        r['reason'] = r['properties']['reason']
+        r['worker'] = r['properties']['workername']
         r['number'] = r['properties']['buildnumber']
         r['commit'] = r['properties']['got_revision']
         r['commiturl'] = r['properties']['repository'] + '/commit/' + r['properties']['got_revision']
-        r['statusurl'] = current_app.config.get('BUILDBOT_PUBLIC_URL') + 'builders/' + r['name'] + '/builds/' + str(r['number'])
+        r['statusurl'] = current_app.config.get('BUILDBOT_PUBLIC_URL') + '#/builders/' + r['name'] + '/builds/' + str(r['number'])
         r['project'] = r['properties'].get('project')
         r['release_build'] = r['properties'].get('release_build', False)
         
-        start, end = d.get('times', (None, None))
-        if end:
-            if d.get('results', 0):
-                r['status'] = 'failed'
-            else:
-                r['status'] = 'finished'
+        if d['state_string'] == 'build successful' and d['complete']:
+            r['status'] = 'finished'
+        elif d['complete']:
+            r['status'] = 'failed'
         else:
             r['status'] = 'running'
     
-        r['date'] = datetime.utcfromtimestamp(start)
+        r['date'] = datetime.utcfromtimestamp(d['started_at'])
     
-        uploads = [x for x in d['steps'] if x['name'] == 'upload']
+        uploads = [x for x in dsteps['steps'] if x['name'] == 'upload']
         if uploads and uploads[0]['urls']:
-            r['file'], = uploads[0]['urls'].keys()
-            r['url'], = uploads[0]['urls'].values()
+            r['file'] = uploads[0]['urls'][0]['name']
+            r['url'] = uploads[0]['urls'][0]['url']
             r['basename'] = r['url'].rsplit('/', 1)[-1]
     
         return r
