@@ -13,7 +13,11 @@ def get_overviewer_pkgname():
 a = Analysis(['overviewer.py'],
              binaries=None,
              datas=[("overviewer_core/data", "overviewer_core/data")],
-             hiddenimports=['overviewer_core.aux_files.genPOI'],
+             hiddenimports=[
+                 'overviewer_core.aux_files.genPOI',
+                 # https://github.com/pypa/setuptools/issues/1963
+                 'pkg_resources.py2_warn',
+             ],
              hookspath=[],
              runtime_hooks=[],
              excludes=['FixTk', 'tcl', 'tk', '_tkinter', 'tkinter', 'Tkinter'],
