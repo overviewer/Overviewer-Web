@@ -1,7 +1,7 @@
 
 .PHONY : all
 
-all : 6/i386.repo 6/x86_64.repo 7/i386.repo 7/x86_64.repo
+all : 6/i386.repo 6/x86_64.repo 7/i386.repo 7/x86_64.repo 8/x86_64.repo
 
 %.repo :
 	createrepo -s sha $*

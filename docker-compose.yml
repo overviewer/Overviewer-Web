@@ -61,6 +61,15 @@ services:
       - apparmor:unconfined
     links:
       - bbmaster
+  bbcentos864:
+    build: buildbot/docker-builders/centos8-64
+    env_file: confidential.env
+    cap_add: 
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    links:
+      - bbmaster
   bbstretch64:
     build: buildbot/docker-builders/stretch-64
     env_file: confidential.env
