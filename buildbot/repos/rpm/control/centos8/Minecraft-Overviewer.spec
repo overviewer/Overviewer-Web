@@ -14,7 +14,7 @@ BuildRequires: epel-release git python36-devel python3-numpy
 %description
 The Minecraft Overviewer is a command-line tool for rendering high-resolution
 maps of Minecraft worlds. It generates a set of static html and image files and
-uses the Google Maps API to display a nice interactive map.
+uses the Leaflet javascript library to display a nice interactive map.
 
 %prep
 git clone https://github.com/python-pillow/Pillow.git %{_tmppath}/Pillow
