@@ -7,7 +7,7 @@ License: GNU General Public License v3
 Group: Development/Libraries
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Vendor: Andrew Brown <brownan@gmail.com>
-Url: http://overviewer.org/
+Url: https://overviewer.org/
 Requires: epel-release python3-pillow python3-numpy
 BuildRequires: epel-release git python36-devel python3-numpy
 
