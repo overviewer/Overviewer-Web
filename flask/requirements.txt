@@ -3,13 +3,13 @@ gunicorn==19.9.0
 Flask-SQLAlchemy==2.3.2
 Flask-Migrate==2.4.0
 GitHub-Flask==3.2.0
-Flask-WTF==0.14.2
+Flask-WTF==0.14.3
 unidecode==0.04.1
 Flask-Markdown==0.3
 pytoml==0.1.20
 Pillow==6.2.0
 requests==2.21.0
-Flask-Caching==1.0.0
+Flask-Caching==1.8.0
 psycopg2==2.7.7
 Flask-DebugToolbar==0.10.1
 Flask-Script==2.0.6
