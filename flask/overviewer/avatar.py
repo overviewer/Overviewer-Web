@@ -21,7 +21,9 @@ def get_skin_url(uuid):
     if response.status_code == 200:
         profile = json.loads(response.content.decode('utf-8', 'ignore'))
         properties = profile["properties"]
-        textures, *_ = filter(lambda obj: obj["name"] == "textures", properties)
+        textures = next(filter(lambda obj: obj["name"] == "textures", properties), None)
+        if textures == None:
+            return ""
         textures = base64.b64decode(textures["value"])
         textures = json.loads(textures.decode('utf-8', 'ignore'))
         if "SKIN" in textures["textures"]:
