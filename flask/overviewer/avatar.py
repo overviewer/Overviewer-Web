@@ -22,7 +22,7 @@ def get_skin_url(uuid):
         profile = json.loads(response.content.decode('utf-8', 'ignore'))
         properties = profile["properties"]
         textures = next(filter(lambda obj: obj["name"] == "textures", properties), None)
-        if textures == None:
+        if textures is None:
             return ""
         textures = base64.b64decode(textures["value"])
         textures = json.loads(textures.decode('utf-8', 'ignore'))
