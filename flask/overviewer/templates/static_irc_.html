@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}Overviewer on Freenode{% endblock %}
+{% block title %}Overviewer on Libera.Chat{% endblock %}
 
 {% block body %}
 {% filter markdown %}
-Overviewer on Freenode
-----------------------
+Overviewer on Libera.Chat
+-------------------------
 
-Join us on irc.freenode.net in
-[#overviewer](https://webchat.freenode.net/?channels=overviewer).
+Join us on irc.libera.chat in
+[#overviewer](ircs://irc.libera.chat:6697/#overviewer).
 
 We have a [bot](bot)!
 
-<iframe src="https://webchat.freenode.net?channels=overviewer" width="100%" height="600"></iframe>
+<iframe src="https://kiwiirc.com/nextclient/#ircs://irc.libera.chat:6697/#overviewer" width="100%" height="600"></iframe>
 {% endfilter %}
 {% endblock body %}
