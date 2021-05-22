@@ -1,6 +1,6 @@
 from flask import url_for, current_app, session
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 import os.path
 import os
 import hashlib
