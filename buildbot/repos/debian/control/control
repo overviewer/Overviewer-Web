@@ -9,5 +9,5 @@ Package: minecraft-overviewer
 Architecture: any
 Homepage: http://overviewer.org/
 X-Python3-Version: >= 3.4 
-Depends: ${misc:Depends}, python3 (>= 3.4), python3-pil, python3-numpy, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${python3:Depends}, python3-pil, python3-numpy, ${shlibs:Depends}
 Description: Generates large resolution images of a Minecraft map.
