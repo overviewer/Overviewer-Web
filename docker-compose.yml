@@ -71,3 +71,13 @@ services:
     env_file: confidential.env
     links:
       - bbmaster
+  bbbuster64:
+    build: buildbot/docker-builders/buster-64
+    env_file: confidential.env
+    links:
+      - bbmaster
+  bbbuster32:
+    build: buildbot/docker-builders/buster-32
+    env_file: confidential.env
+    links:
+      - bbmaster
