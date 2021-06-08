@@ -18,9 +18,11 @@ unset CODESIGN_KEYGRIP
 
 mkdir -p uploads renders
 
-mkdir -p repos/debian/repo/files
+mkdir -p repos/debian/repo/buster/files
+mkdir -p repos/debian/repo/stretch/files
 cp -r /root/repos/debian repos/
-make -C repos/debian/repo
+make -C repos/debian/repo/buster
+make -C repos/debian/repo/stretch
 
 cp -r /root/repos/rpm repos/
 mkdir -p repos/rpm/repo/{6,7}/{i386,x86_64}/packages
