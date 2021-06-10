@@ -5,7 +5,7 @@ jq git curl wget devscripts \
 python3.5 python3-all-dev python3-numpy python3-pil python3-pip \
 build-essential libssl-dev libffi-dev
 
-RUN python3 -m pip install -U pip
+RUN python3 -m pip install -U pip==20.3.4
 RUN python3 -m pip install "buildbot[bundle]==2.*"
 
 ENV WORKER_NAME diax-stretch-64
