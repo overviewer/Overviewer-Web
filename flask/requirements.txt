@@ -7,7 +7,7 @@ Flask-WTF==0.14.3
 unidecode==0.04.1
 Flask-Markdown==0.3
 pytoml==0.1.21
-Pillow==8.2.0
+Pillow==9.0.1
 requests==2.25.1
 Flask-Caching==1.10.1
 psycopg2==2.8.6
