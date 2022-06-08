@@ -60,7 +60,7 @@ def getbuild(builder, buildnum):
 # grabs all release builds until the first success
 # unless it has to go through `limit` builds first
 # discards failed release builds
-@cache.memoize(1800)
+@cache.memoize(600)
 def getreleases(builder, allow_running=True, limit=100):
     d = getbb("api/v2/builders/{0}/builds?property=release_build", builder)
     numbers = [build['number'] for build in d['builds'] if build['properties'].get('release_build', [False])[0]]
