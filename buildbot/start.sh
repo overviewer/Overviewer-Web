@@ -18,11 +18,17 @@ unset CODESIGN_KEYGRIP
 
 mkdir -p uploads renders
 
-mkdir -p repos/debian/repo/buster/files
-mkdir -p repos/debian/repo/stretch/files
+mkdir -p repos/debian/repo/dists/buster/main/binary-amd64
+mkdir -p repos/debian/repo/dists/buster/main/binary-i386
+mkdir -p repos/debian/repo/dists/buster/main/source
+mkdir -p repos/debian/repo/dists/bullseye/main/binary-amd64
+mkdir -p repos/debian/repo/dists/bullseye/main/source
+mkdir -p repos/debian/repo/dists/jammy/main/binary-amd64
+mkdir -p repos/debian/repo/dists/jammy/main/source
 cp -r /root/repos/debian repos/
-make -C repos/debian/repo/buster
-make -C repos/debian/repo/stretch
+make -C repos/debian/repo/dists/buster
+make -C repos/debian/repo/dists/bullseye
+make -C repos/debian/repo/dists/jammy
 
 cp -r /root/repos/rpm repos/
 mkdir -p repos/rpm/repo/{6,7}/{i386,x86_64}/packages
@@ -48,7 +54,7 @@ tar  -cvf all.tar */*.spec
 popd
 
 pushd repos/debian/control
-tar -cvf all.tar * --exclude=changelog
+tar --exclude=changelog -cvf all.tar *
 popd
 
 exec buildbot start --nodaemon master
