@@ -1,0 +1,8 @@
+Origin: Overviewer.org (Minecraft Overviewer)
+Label: overviewer.org
+Suite: stable
+Version: 11.0
+Codename: bullseye
+Architectures: amd64
+Components: main
+Description: a repository for debian builds of Minecraft Overviewer

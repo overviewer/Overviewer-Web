@@ -140,7 +140,11 @@ DOWNLOADS_TREE = [
         ('32-bit', 'deb10-32'),
         ('64-bit', 'deb10-64'),
     ]),
-    ('CentOS 7+ / Other RPM', [
+    ('Debian 11 \'bullseye\'', [
+        # No 32-bit builds, python-cryptography fails building, idk why
+        ('64-bit', 'deb11-64'),
+    ]),
+    ('CentOS 7', [
     #    ('32-bit', 'centos7-32'),
         ('64-bit', 'centos7-64'),
     ]),

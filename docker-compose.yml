@@ -81,3 +81,8 @@ services:
     env_file: confidential.env
     links:
       - bbmaster
+  bbbullseye64:
+    build: buildbot/docker-builders/bullseye-64
+    env_file: confidential.env
+    links:
+      - bbmaster
