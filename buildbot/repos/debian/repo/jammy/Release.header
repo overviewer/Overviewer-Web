@@ -1,0 +1,8 @@
+Origin: Overviewer.org (Minecraft Overviewer)
+Label: overviewer.org
+Suite: stable
+Version: 22.04
+Codename: jammy
+Architectures: amd64
+Components: main
+Description: a repository for Ubuntu builds of Minecraft Overviewer

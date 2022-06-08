@@ -76,3 +76,8 @@ services:
     env_file: confidential.env
     links:
       - bbmaster
+  bbjammy64:
+    build: buildbot/docker-builders/jammy-64
+    env_file: confidential.env
+    links:
+      - bbmaster

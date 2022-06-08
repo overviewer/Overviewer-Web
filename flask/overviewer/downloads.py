@@ -140,6 +140,9 @@ DOWNLOADS_TREE = [
         # No 32-bit builds, python-cryptography fails building, idk why
         ('64-bit', 'deb11-64'),
     ]),
+    ('Ubuntu 22.04 \'jammy\'', [
+        ('64-bit', 'ubuntu2204-64'),
+    ]),
     ('CentOS 7', [
     #    ('32-bit', 'centos7-32'),
         ('64-bit', 'centos7-64'),
