@@ -1,5 +1,5 @@
 buildbot[bundle]==2.*
 psycopg2==2.*
-boto3==1.9.*
+boto3==1.24.*
 requests==2.*
-itsdangerous==1.*
+itsdangerous==2.*
