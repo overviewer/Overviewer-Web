@@ -1,8 +1,0 @@
-Origin: Overviewer.org (Minecraft Overviewer)
-Label: overviewer.org
-Suite: stable
-Version: 1.0
-Codename: overviewer.org
-Architectures: i386 amd64
-Components: main
-Description: a repository for debian builds of Minecraft Overviewer

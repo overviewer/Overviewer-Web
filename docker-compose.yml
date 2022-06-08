@@ -61,16 +61,6 @@ services:
       - apparmor:unconfined
     links:
       - bbmaster
-  bbstretch64:
-    build: buildbot/docker-builders/stretch-64
-    env_file: confidential.env
-    links:
-      - bbmaster
-  bbstretch32:
-    build: buildbot/docker-builders/stretch-32
-    env_file: confidential.env
-    links:
-      - bbmaster
   bbbuster64:
     build: buildbot/docker-builders/buster-64
     env_file: confidential.env
