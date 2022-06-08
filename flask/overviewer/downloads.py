@@ -132,9 +132,13 @@ DOWNLOADS_TREE = [
         ('32-bit', 'win32'),
         ('64-bit', 'win64'),
     ]),
-    ('Debian/Ubuntu', [
-        ('32-bit', 'deb32'),
-        ('64-bit', 'deb64'),
+    ('Debian 9 \'stretch\'', [
+        ('32-bit', 'deb9-32'),
+        ('64-bit', 'deb9-64'),
+    ]),
+    ('Debian 10 \'buster\'', [
+        ('32-bit', 'deb10-32'),
+        ('64-bit', 'deb10-64'),
     ]),
     ('CentOS 7+ / Other RPM', [
     #    ('32-bit', 'centos7-32'),
