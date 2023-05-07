@@ -12,21 +12,31 @@ class UploadForm(FlaskForm):
 
 @uploader.route('/', methods=['GET', 'POST'])
 def index():
-    form = UploadForm()
-    if form.validate_on_submit():
-        m = UploadedFile.upload(form.file.data)
-        flash('File {0} ({1}) uploaded successfully. MD5: {2}'.format(m.name, m.nice_size, m.md5))
-        return redirect(url_for('.index'))
-
     files = None
     if auth.is_developer():
         try:
-            page = int(request.args.get('page', 1))
+             page = int(request.args.get('page', 1))
         except ValueError:
             page = 1
         files = UploadedFile.query.order_by(UploadedFile.timestamp.desc()).paginate(page, per_page=50)
 
-    return render_template('uploader_index.html', form=form, files=files)
+    return render_template('uploader_index_disabled.html', files=files)
+
+    # form = UploadForm()
+    # if form.validate_on_submit():
+    #     m = UploadedFile.upload(form.file.data)
+    #     flash('File {0} ({1}) uploaded successfully. MD5: {2}'.format(m.name, m.nice_size, m.md5))
+    #     return redirect(url_for('.index'))
+    #
+    # files = None
+    # if auth.is_developer():
+    #     try:
+    #         page = int(request.args.get('page', 1))
+    #     except ValueError:
+    #         page = 1
+    #     files = UploadedFile.query.order_by(UploadedFile.timestamp.desc()).paginate(page, per_page=50)
+    #
+    # return render_template('uploader_index.html', form=form, files=files)
 
 @uploader.route('/progress')
 def progress():

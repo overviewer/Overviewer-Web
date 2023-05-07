@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Uploader - Minecraft Overviewer{% endblock %}
+
+{% block body %}
+<h1>Overviewer.org Uploader</h1>
+
+<p>This uploader was here so that people having issues with the Overviewer could provide us with (potentially large) files that were causing the issue.</P>
+
+<p>We disabled it as the Overviewer project has wound down.<p>
+
+{% if files %}
+<h3>Uploaded Files</h3>
+
+<table style="border: 1px solid gray;">
+  <tr>
+    <th>Name</th>
+    <th>Owner</th>
+    <th>Date</th>
+    <th>Size</th>
+    <th>MD5</th>
+    {% if session.logged_in and session.developer %}<th>Delete</th>{% endif %}
+  </tr>
+  {% for file in files.items %}
+  <tr>
+    <td><a href="{{ file.url }}">{{ file.name }}</a></td>
+    <td>{% if file.user %}<a href="https://github.com/{{ file.user }}">{{ file.user }}</a>{% else %}-{% endif %}</td>
+    <td>{{ file.timestamp.strftime('%B %d, %Y, %I:%M %p') }}</td>
+    <td>{{ file.nice_size }}</td>
+    <td><code>{{ file.md5 }}</code></td>
+    {% if session.logged_in and session.developer %}<td><a href="{{ url_for('.delete', id=file.id) }}">delete</a></td>{% endif %}
+  </tr>
+  {% endfor %}
+</table>
+
+{% from "pagination.html" import render_pagination %}
+{{ render_pagination(files) }}
+{% endif %}
+
+{% endblock body %}
