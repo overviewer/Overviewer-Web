@@ -66,7 +66,7 @@ def index_data_for(query):
         page = int(request.args.get('page', 1))
     except ValueError:
         page = 1
-    posts = query.order_by(BlogPost.timestamp.desc()).paginate(page, per_page=5)
+    posts = query.order_by(BlogPost.timestamp.desc()).paginate(page=page, per_page=5)
     return posts
 
 def index_for(query, tmpl='blog_index.html'):
