@@ -18,7 +18,7 @@ def index():
              page = int(request.args.get('page', 1))
         except ValueError:
             page = 1
-        files = UploadedFile.query.order_by(UploadedFile.timestamp.desc()).paginate(page, per_page=50)
+        files = UploadedFile.query.order_by(UploadedFile.timestamp.desc()).paginate(page=page, per_page=50)
 
     return render_template('uploader_index_disabled.html', files=files)
 
