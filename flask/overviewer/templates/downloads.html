@@ -7,11 +7,14 @@
 <h1>Downloads</h1>
 
 <p>
-  The Overviewer team provides automated builds of Overviewer for many
+  {# The Overviewer team provides automated builds of Overviewer for many
   systems. These builds are updated often, and are all based on the
   git master branch. To download Overviewer, find your operating
   system (Windows, Debian, ...) and then select a 32 or 64 bit
-  package. In our documentation you can find more information
+  package. #}
+  To download Overviewer, select an appropriate operating system and a 32 or
+  64 bit package for it.
+  In our documentation you can find more information
   about <a href="http://docs.overviewer.org/en/latest/installing/">Installing
   Overviewer</a>
   and <a href="http://docs.overviewer.org/en/latest/running/">Running
@@ -20,9 +23,9 @@
   Overviewer from source</a>, which is easier than it sounds.
 </p>
 
-<h2>Repositories</h2>
+{# <h2>Repositories</h2>
 
-<p>If you are running Debian or an RPM-based distribution of Linux, the preferred installation method is via our <a href="/debian/info">Debian repository</a> and a <a href="/rpms/info">Yum repository</a>.</p>
+<p>If you are running Debian or an RPM-based distribution of Linux, the preferred installation method is via our <a href="/debian/info">Debian repository</a> and a <a href="/rpms/info">Yum repository</a>.</p> #}
 
 <hr/>
 
@@ -35,9 +38,31 @@
     <th colspan="2" style="padding: 5px;">Type</th>
     <th style="padding: 5px;">Download</th>
   </tr>
+
   {% for oslabel, archs in tree %}
   <tr style="border-top: 1px solid black;">
     <td rowspan="{{ archs|length }}" style="vertical-align: top; padding: 5px;">{{ oslabel }}</td>
+    {% for archlabel, release_key in archs %}
+    {% with release = releases.get(release_key) %}
+    {% if release %}
+    {% if not loop.first %}
+    </tr><tr style="{{ loop.cycle('', 'background-color: white;') }}">
+    {% endif %}
+    <td style="padding: 5px;">{{ archlabel }}</td>
+    <td style="padding: 5px;"><a href="{{ release.url }}">{{ release.url.rsplit('/', 1)[-1].split('?', 1)[0] }}</a></td>
+    {% else %}
+    <td style="padding: 5px;">--</td>
+    {% endif %}
+    {% endwith %}
+    {% endfor %}
+  </tr>
+  {% endfor %}
+
+  {# Buildbot stuff #}
+  {# {% for oslabel, archs in tree %}
+  <tr style="border-top: 1px solid black;">
+    <td rowspan="{{ archs|length }}" style="vertical-align: top; padding: 5px;">{{ oslabel }}</td>
+
     {% for archlabel, builder in archs %}
     {% if not loop.first %}
     </tr><tr style="{{ loop.cycle('', 'background-color: white;') }}">
@@ -56,7 +81,7 @@
     {% endwith %}
     {% endfor %}
   </tr>
-  {% endfor %}
+  {% endfor %} #}
 </table>
 
 {% endblock body %}

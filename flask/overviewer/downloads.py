@@ -10,6 +10,34 @@ from .content_type import content_type
 
 JSON_FTIME = "%a, %d %b %Y %H:%M:%S +0000"
 
+DOWNLOADS_TREE = [
+    ('Source', [('', 'src')]),
+    ('Windows', [
+        ('32-bit', 'win32'),
+        ('64-bit', 'win64'),
+    ]),
+]
+
+@app.route('/downloads.json')
+@content_type('application/json')
+def downloads_json():
+    def simplify(b):
+        return dict(
+            version = b['version'],
+            url = b['url'],
+            date = b['date'].strftime(JSON_FTIME),
+            commit = b['commit'],
+            commiturl = b['commiturl'],
+        )
+    return json.dumps({k: simplify(v) for k, v in app.config['RELEASE_DOWNLOADS'].items()}, indent=2)
+
+@app.route('/downloads')
+def downloads():
+    releases = app.config['RELEASE_DOWNLOADS']
+    return render_template('downloads.html', example=releases['src'], tree=DOWNLOADS_TREE, releases=releases)
+
+# Buildbot stuff
+'''
 def getbb(path, *args, **kwargs):
     try:
         base = current_app.config.get('BUILDBOT_URL')
@@ -26,7 +54,7 @@ def getbuild(builder, buildnum):
             properties = {k: v for k, (v, _), in d['properties'].items()},
             eta = d.get('eta'),
         )
-    
+
         r['version'] = r['properties']['version']
         r['name'] = r['properties']['buildername']
         r['reason'] = r['properties'].get('reason')
@@ -37,22 +65,22 @@ def getbuild(builder, buildnum):
         r['statusurl'] = current_app.config.get('BUILDBOT_PUBLIC_URL') + '#/builders/' + str(d['builderid']) + '/builds/' + str(r['number'])
         r['project'] = r['properties'].get('project')
         r['release_build'] = r['properties'].get('release_build', False)
-        
+
         if d['state_string'] == 'build successful' and d['complete']:
             r['status'] = 'finished'
         elif d['complete']:
             r['status'] = 'failed'
         else:
             r['status'] = 'running'
-    
+
         r['date'] = datetime.utcfromtimestamp(d['started_at'])
-    
+
         uploads = [x for x in dsteps['steps'] if x['name'] == 'upload']
         if uploads and uploads[0]['urls']:
             r['file'] = uploads[0]['urls'][0]['name']
             r['url'] = uploads[0]['urls'][0]['url']
             r['basename'] = r['url'].rsplit('/', 1)[-1]
-    
+
         return r
     except KeyError:
         return abort(404)
@@ -73,7 +101,7 @@ def getreleases(builder, allow_running=True, limit=100):
             break
         if not b['release_build']:
             continue
-        
+
         if b['status'] != 'failed' and (allow_running or b['status'] != 'running'):
             releases.append(b)
         if b['status'] == 'finished':
@@ -217,3 +245,5 @@ def info(builder, buildnum, slug):
 @app.route('/builds/<builder>/<int:buildnum>/<slug>')
 def download(builder, buildnum, slug):
     return download_intern(getbuild(builder, buildnum))
+
+'''
