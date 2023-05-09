@@ -1,5 +1,5 @@
 from flask import render_template, redirect, flash, url_for, request, make_response
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, DateTimeField, TextAreaField
 from wtforms.validators import DataRequired
 from datetime import datetime, timedelta
@@ -54,7 +54,7 @@ def render_blog(tmpl, **kwargs):
     archives_nice = get_archives()
     return render_template(tmpl, archives=archives_nice, **kwargs)
 
-class PostForm(Form):
+class PostForm(FlaskForm):
     user = StringField('user', validators=[DataRequired()])
     timestamp = DateTimeField('timestamp', validators=[DataRequired()])
     published = BooleanField('published', default=True)
