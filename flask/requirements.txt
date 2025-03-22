@@ -1,6 +1,6 @@
 flask==2.3.2
 Werkzeug>=2.2,<3.0 # 3.0 removes deprecated stuff flask 2.3.2 uses
-gunicorn==22.0.0
+gunicorn==23.0.0
 Flask-SQLAlchemy==3.0.2
 Flask-Migrate==3.1.0
 GitHub-Flask==3.2.0
