@@ -10,6 +10,7 @@ services:
       - wwwdata
     ports:
       - "8020:80"
+    restart: unless-stopped
   wwwdata:
     image: busybox
     volumes:
@@ -23,12 +24,14 @@ services:
       # - bbmaster
     volumes_from:
       - wwwdata
+    restart: unless-stopped
 
   postgres:
     build: postgres
     env_file: confidential.env
     volumes_from:
       - dbdata
+    restart: unless-stopped
   dbdata:
     image: busybox
     volumes:
@@ -52,6 +55,7 @@ services:
   #     - ./buildbot/repos:/root/repos
   #   ports:
   #     - "9989:9989"
+  #   restart: unless-stopped
   # bbcentos764:
   #   build: buildbot/docker-builders/centos7-64
   #   env_file: confidential.env
@@ -61,13 +65,16 @@ services:
   #     - apparmor:unconfined
   #   links:
   #     - bbmaster
+  #   restart: unless-stopped
   # bbstretch64:
   #   build: buildbot/docker-builders/stretch-64
   #   env_file: confidential.env
   #   links:
   #     - bbmaster
+  #   restart: unless-stopped
   # bbstretch32:
   #   build: buildbot/docker-builders/stretch-32
   #   env_file: confidential.env
   #   links:
   #     - bbmaster
+  #   restart: unless-stopped
